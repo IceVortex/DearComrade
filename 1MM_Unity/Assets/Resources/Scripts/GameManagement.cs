@@ -13,6 +13,7 @@ public class GameManagement : MonoBehaviour {
         buildings.Add(new ExecutiveBuilding());
         buildings.Add(new House());
         buildings.Add(new Factory());
+        buildings.Add(new Farm());
         Debug.Log(turnIndex);
         Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials); 
 	}
