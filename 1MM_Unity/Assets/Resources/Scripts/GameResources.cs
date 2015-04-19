@@ -5,7 +5,7 @@ public class GameResources : MonoBehaviour
 {
     //Here is a private reference only this class can access
     private static GameResources _instance;
-    public float food, money, buildingMaterials, approval;
+    public float food, money, buildingMaterials, approval, citizens, maximumCitizens;
  
     //This is the public reference that other classes will use
     public static GameResources instance
@@ -18,11 +18,6 @@ public class GameResources : MonoBehaviour
                 _instance = GameObject.FindObjectOfType<GameResources>();
             return _instance;
         }
-    }
- 
-    public void Play()
-    {
-        //Play some audio!
     }
 
 }

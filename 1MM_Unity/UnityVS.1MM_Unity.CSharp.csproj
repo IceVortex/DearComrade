@@ -57,7 +57,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\Buildings\ABuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\EducationalBuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\ExecutiveBuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Factory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Farm.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Hospital.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\House.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Laboratory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\PoliceStation.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\PublicSpace.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\WTC.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Workplace.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraControl.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement.cs" />
     <Compile Include="Assets\Resources\Scripts\GameResources.cs" />
     <Compile Include="Assets\Resources\Scripts\KeyBindingManager.cs" />
     <Compile Include="Assets\Resources\Scripts\MainMenu.cs" />
@@ -68,7 +81,6 @@
     <Compile Include="Assets\Resources\Scripts\gameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\keyboardInput.cs" />
     <Compile Include="Assets\Resources\Scripts\testBuildingGeneration.cs" />
-    <Compile Include="Assets\RobertTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\Story.xml" />
