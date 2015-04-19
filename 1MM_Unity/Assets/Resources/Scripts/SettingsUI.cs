@@ -18,7 +18,7 @@ public class SettingsUI : MonoBehaviour
 
     public KeyCode pressed, lastPressedKey;
     public GameObject obj;
-    public bool keyPressed, holyGrenadeChange, BlindChange, FrenzyChange, HolySmiteChange, MPChange, HPChange, InventoryChange;
+    public bool keyPressed, endTurnChange;
     
 
     public CanvasGroup menuCG, settingsCG;
@@ -56,128 +56,34 @@ public class SettingsUI : MonoBehaviour
         
         lastPressedKey = pressed;
 
-        setting[0].text = KeyBindingManager.instance.HolyGrenade.ToString();
-        setting[1].text = KeyBindingManager.instance.BlindingFlashLight.ToString();
-        setting[2].text = KeyBindingManager.instance.Frenzy.ToString();
-        setting[3].text = KeyBindingManager.instance.HolySmite.ToString();
-        setting[4].text = KeyBindingManager.instance.Inventory.ToString();
-        setting[5].text = KeyBindingManager.instance.HealthPotion.ToString();
-        setting[6].text = KeyBindingManager.instance.ManaPotion.ToString();
+        setting[0].text = KeyBindingManager.Instance.endTurn.ToString();
+        
 
         windowed = wind.isOn;
         resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
         quality.text = QualitySettings.names[(int)graphicSlider.value];
 
-        if (Input.GetKeyUp(lastPressedKey) && holyGrenadeChange)
+        if (Input.GetKeyUp(lastPressedKey) && endTurnChange)
         {
-            if (KeyBindingManager.instance.check(lastPressedKey))
+            if (KeyBindingManager.Instance.check(lastPressedKey))
             {
-                KeyBindingManager.instance.HolyGrenade = lastPressedKey;
+                KeyBindingManager.Instance.endTurn = lastPressedKey;
                 keyPressed = false;
-                holyGrenadeChange = false;
+                endTurnChange = false;
             }
         }
 
-        if (Input.GetKeyUp(lastPressedKey) && BlindChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.BlindingFlashLight = lastPressedKey;
-                keyPressed = false;
-                BlindChange = false;
-            }
-        }
-
-        if (Input.GetKeyUp(lastPressedKey) && FrenzyChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.Frenzy = lastPressedKey;
-                keyPressed = false;
-                FrenzyChange = false;
-            }
-        }
-
-        if (Input.GetKeyUp(lastPressedKey) && HolySmiteChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.HolySmite = lastPressedKey;
-                keyPressed = false;
-                HolySmiteChange = false;
-            }
-        }
-
-        if (Input.GetKeyUp(lastPressedKey) && MPChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.ManaPotion = lastPressedKey;
-                keyPressed = false;
-                MPChange = false;
-            }
-        }
-
-        if (Input.GetKeyUp(lastPressedKey) && HPChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.HealthPotion = lastPressedKey;
-                keyPressed = false;
-                HPChange = false;
-            }
-        }
-
-        if (Input.GetKeyUp(lastPressedKey) && InventoryChange)
-        {
-            if (KeyBindingManager.instance.check(lastPressedKey))
-            {
-                KeyBindingManager.instance.Inventory = lastPressedKey;
-                keyPressed = false;
-                InventoryChange = false;
-            }
-        }
 
     }
 
-    public void UpdateHolyGrenade()
+    public void UpdateEndTurn()
     {
-        holyGrenadeChange = true;
-    }
-
-    public void UpdateInventory()
-    {
-        InventoryChange = true;
-    }
-
-    public void UpdateBlindingFlashlight()
-    {
-        BlindChange = true;
-    }
-
-    public void UpdateFrenzy()
-    {
-        FrenzyChange = true;
-    }
-
-    public void UpdateHolySmite()
-    {
-        HolySmiteChange = true;
-    }
-
-    public void UpdateHealthPotion()
-    {
-        HPChange = true;
-    }
-
-    public void UpdateManaPotion()
-    {
-        MPChange = true;
+        endTurnChange = true;
     }
 
     public void resetToDefaults()
     {
-        KeyBindingManager.instance.reset();
+        KeyBindingManager.Instance.reset();
     }
 
     public void mainMenu()

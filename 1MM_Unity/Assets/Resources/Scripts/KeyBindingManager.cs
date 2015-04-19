@@ -3,48 +3,34 @@ using System.Collections;
 
 public class KeyBindingManager : MonoBehaviour {
 
-    private static KeyBindingManager _instance;
+    private static KeyBindingManager instance;
 
-    public static KeyBindingManager instance
+    public static KeyBindingManager Instance
     {
-        get
-        {
-            if (_instance == null)
-                _instance = GameObject.FindObjectOfType<KeyBindingManager>();
-            return _instance;
-        }
+        get { return instance ?? (instance = new GameObject("KeyBindingManager").AddComponent<KeyBindingManager>()); }
     }
 
-    public KeyCode HolyGrenade, BlindingFlashLight, Frenzy, HolySmite, Inventory, ManaPotion, HealthPotion;
-
+    public KeyCode endTurn;
+    public bool scrollEnabled;
 
 
 	void Awake () {
         reset();
+        scrollEnabled = false;
 	}
 
     public void reset()
     {
-        HolyGrenade = KeyCode.A;
-        BlindingFlashLight = KeyCode.S;
-        Frenzy = KeyCode.D;
-        HolySmite = KeyCode.F;
-        ManaPotion = KeyCode.Alpha2;
-        HealthPotion = KeyCode.Alpha1;
-        Inventory = KeyCode.I;
+        endTurn = KeyCode.Space;
     }
 
     public bool check(KeyCode lastPressedKey)
     {
-        if (lastPressedKey != KeyBindingManager.instance.BlindingFlashLight &&
-                lastPressedKey != Frenzy &&
-                lastPressedKey != HolySmite &&
-                lastPressedKey != Inventory &&
-                lastPressedKey != HealthPotion &&
-                lastPressedKey != ManaPotion && lastPressedKey!=KeyCode.Escape)
+        if (lastPressedKey != endTurn)
             return true;
         else
             return false;
     }
+
 
 }
