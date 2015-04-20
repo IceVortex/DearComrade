@@ -3,7 +3,6 @@ using System.Collections;
 
 public class House : ABuilding {
 
-
     public House()
     {
         name = "House";
@@ -13,8 +12,14 @@ public class House : ABuilding {
         buildingMaterialsCost = 30;
     }
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        GameResources.instance.maximumCitizens += 300;
+    }
+
     public override void Effect()
     {
-        GameResources.instance.maximumCitizens += 300;
+
     }
 }
