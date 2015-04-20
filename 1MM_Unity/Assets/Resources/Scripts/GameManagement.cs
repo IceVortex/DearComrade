@@ -20,16 +20,13 @@ public class GameManagement : MonoBehaviour {
     {   
         if (Input.GetKeyDown(KeyBindingManager.Instance.endTurn))
         {
-<<<<<<< HEAD
             nextTurn();
-=======
             turnIndex++;
             foreach(ABuilding building in buildings)
             {
                 building.Effect();
             }
             Debug.Log(turnIndex);
->>>>>>> 299f092aedb3a7ce3d17babcf67b0043ed962430
         }
 	}
 
