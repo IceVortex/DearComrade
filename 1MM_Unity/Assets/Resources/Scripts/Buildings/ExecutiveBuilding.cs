@@ -4,8 +4,9 @@ using System.Collections;
 public class ExecutiveBuilding : ABuilding
 {
     public int taxes = 1, cdFestival = 0, cdPublicSpeech = 0;
-    private float festivalFoodCost = 100, festivalMoneyCost = 75;
-    private float publicSpeechMoneyCost = 75;
+    private int festivalFoodCost = 100, festivalMoneyCost = 75;
+    private int publicSpeechMoneyCost = 75;
+    private int numberOfCitizens = 400; 
 
     public ExecutiveBuilding()
     {
@@ -14,6 +15,12 @@ public class ExecutiveBuilding : ABuilding
         foodCost = 0;
         moneyCost = 0;
         buildingMaterialsCost = 0;
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        GameResources.instance.maximumCitizens = numberOfCitizens;
     }
 
     public override void Effect()

@@ -11,23 +11,14 @@ public class GameManagement : MonoBehaviour {
 	void Start () 
     {
         buildings.Add(new ExecutiveBuilding());
-        ((ExecutiveBuilding)buildings[0]).buyFestival();
+        buildings[0].Initialize();
         
 	}
 	
 
 	void Update () 
     {   
-        if (Input.GetKeyDown(KeyBindingManager.Instance.endTurn))
-        {
-            nextTurn();
-            turnIndex++;
-            foreach(ABuilding building in buildings)
-            {
-                building.Effect();
-            }
-            Debug.Log(turnIndex);
-        }
+
 	}
 
     public void nextTurn()
@@ -37,8 +28,6 @@ public class GameManagement : MonoBehaviour {
         {
             building.Effect();
         }
-        Debug.Log(turnIndex);
-        Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials);
 
 
     }

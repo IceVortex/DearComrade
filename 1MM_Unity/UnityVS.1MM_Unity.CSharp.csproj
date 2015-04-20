@@ -82,6 +82,7 @@
     <Compile Include="Assets\Resources\Scripts\keyboardInput.cs" />
     <Compile Include="Assets\Resources\Scripts\resourcesUI.cs" />
     <Compile Include="Assets\Resources\Scripts\testBuildingGeneration.cs" />
+    <Compile Include="Assets\UpdateApproval.cs" />
     <Compile Include="Assets\hide.cs" />
     <Compile Include="Assets\nextTurn.cs" />
   </ItemGroup>
