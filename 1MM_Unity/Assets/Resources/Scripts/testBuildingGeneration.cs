@@ -12,13 +12,13 @@ public class testBuildingGeneration : MonoBehaviour {
 	
 	}
 
-    void OnGUI()
+    /*void OnGUI()
     {
         if (GUILayout.Button("Generate Random Building"))
         {
             generate();
         }
-    }
+    }*/
 
     void generate() 
     {

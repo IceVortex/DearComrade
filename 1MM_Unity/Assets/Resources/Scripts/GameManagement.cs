@@ -11,16 +11,13 @@ public class GameManagement : MonoBehaviour {
 	void Start () 
     {
         buildings.Add(new ExecutiveBuilding());
-        buildings.Add(new House());
-        buildings.Add(new Factory());
-        buildings.Add(new Farm());
-        Debug.Log(turnIndex);
-        Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials); 
+        ((ExecutiveBuilding)buildings[0]).buyFestival();
+        
 	}
 	
 
 	void Update () 
-    {
+    {   
         if (Input.GetKeyDown(KeyBindingManager.Instance.endTurn))
         {
             turnIndex++;
@@ -29,7 +26,6 @@ public class GameManagement : MonoBehaviour {
                 building.Effect();
             }
             Debug.Log(turnIndex);
-            Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials); 
         }
 	}
 }
