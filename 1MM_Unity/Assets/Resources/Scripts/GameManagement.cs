@@ -23,13 +23,21 @@ public class GameManagement : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyBindingManager.Instance.endTurn))
         {
-            turnIndex++;
-            foreach(ABuilding building in buildings)
-            {
-                building.Effect();
-            }
-            Debug.Log(turnIndex);
-            Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials); 
+            nextTurn();
         }
 	}
+
+    public void nextTurn()
+    {
+        turnIndex++;
+        foreach (ABuilding building in buildings)
+        {
+            building.Effect();
+        }
+        Debug.Log(turnIndex);
+        Debug.Log(GameResources.instance.food + " " + GameResources.instance.money + " " + GameResources.instance.buildingMaterials);
+
+
+    }
+
 }
