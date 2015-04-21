@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Factory : ABuilding
 {
+    public float factoryPower;
 
     public Factory()
     {
@@ -11,10 +12,11 @@ public class Factory : ABuilding
         foodCost = 0;
         moneyCost = 10;
         buildingMaterialsCost = 30;
+        factoryPower = GameResources.instance.factoryMaterialsT;
     }
 
     public override void Effect()
     {
-        GameResources.instance.buildingMaterials += 10;
+        GameResources.instance.buildingMaterials += factoryPower;
     }
 }

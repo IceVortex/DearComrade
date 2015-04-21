@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Farm : ABuilding
 {
-
+    public float farmPower; 
+    
     public Farm()
     {
         name = "Farm";
@@ -11,10 +12,11 @@ public class Farm : ABuilding
         foodCost = 30;
         moneyCost = 10;
         buildingMaterialsCost = 30;
+        farmPower = GameResources.instance.farmFoodT;
     }
 
     public override void Effect()
     {
-        GameResources.instance.food += 10;
+        GameResources.instance.food += farmPower;
     }
 }

@@ -6,7 +6,8 @@ public class ExecutiveBuilding : ABuilding
     public int taxes = 1, cdFestival = 0, cdPublicSpeech = 0;
     private int festivalFoodCost = 100, festivalMoneyCost = 75;
     private int publicSpeechMoneyCost = 75;
-    private int numberOfCitizens = 400; 
+    private int numberOfCitizens = 400;
+    public float goldPerTurn;
 
     public ExecutiveBuilding()
     {
@@ -32,7 +33,7 @@ public class ExecutiveBuilding : ABuilding
         
         if(GameResources.instance.citizens - GameResources.instance.maximumCitizens < 200)
             GameResources.instance.citizens += 100;
-        GameResources.instance.money += 0.01f * GameResources.instance.citizens;
+        GameResources.instance.money += goldPerTurn * GameResources.instance.citizens;
         GameResources.instance.approval -= 1;
     }
 

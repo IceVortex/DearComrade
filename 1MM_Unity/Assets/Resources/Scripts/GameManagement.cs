@@ -12,13 +12,25 @@ public class GameManagement : MonoBehaviour {
     {
         buildings.Add(new ExecutiveBuilding());
         buildings[0].Initialize();
+        buildings.Add(new Farm());
+        buildings[1].Initialize();
+        buildings.Add(new Laboratory());
+        buildings[2].Initialize();
         
 	}
 	
 
 	void Update () 
     {   
-
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ((Laboratory)buildings[2]).researchFertility();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            buildings.Add(new Farm());
+            buildings[3].Initialize();
+        }
 	}
 
     public void nextTurn()

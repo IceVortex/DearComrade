@@ -6,6 +6,7 @@ public class GameResources : MonoBehaviour
     //Here is a private reference only this class can access
     private static GameResources _instance;
     public float food, money, buildingMaterials, approval, citizens, maximumCitizens;
+    public float farmFoodT = 10, houseCitizensT = 300, factoryMaterialsT = 10;
  
     //This is the public reference that other classes will use
     public static GameResources instance
