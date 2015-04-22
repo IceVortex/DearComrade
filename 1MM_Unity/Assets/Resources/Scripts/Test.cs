@@ -6,21 +6,27 @@ using System.IO;
 
 public class Test : MonoBehaviour {
 
-    public Canvas UI, StoryUI;
-    public Text reply;
-    public XmlReader reader;
-    public XmlReaderSettings settings;
+    public Canvas UI, eventsUI;
+    XmlReader reader;
+    XmlReaderSettings settings;
     public string source;
     public TextAsset text;
-    public bool pressed = false, triggerScene2, triggerScene1, triggerScene3;
+    public int eventNumber;
+    public bool trigger;
 
-    public CanvasGroup p1, p2, p3;
+    public struct gameEvent{
+
+        public int nr;
+        public string description, n, required, resource, type;
+        public float modifier;
+
+    };
+
+    public gameEvent thisEvent;
 
     void Awake()
     {
-        Camera.main.GetComponent<keyboardInput>().inStory = true;
-        triggerScene1 = true;
-
+        Camera.main.GetComponent<keyboardInput>().events = true;
         disableUI();
 
         settings = new XmlReaderSettings();
@@ -32,186 +38,101 @@ public class Test : MonoBehaviour {
 
     void Start()
     {
-        getToFirstLine();
         UI.enabled = false;
-    
     }
 
     public void disableUI()
     {
-        StoryUI.enabled = true;
+        eventsUI.enabled = true;
         UI.enabled = false;
         Time.timeScale = 0;
     }
 
-    public void getToFirstLine()
+    void getRandomEvent()
+    {
+        int x = Random.Range(1, 20);
+        getToEvent(x);
+    }
+
+    public void getToEvent(int x)
     {
         while (reader.Read())
         {
-            if (reader.Name == "jeebus" || reader.Name == "bb")
+            if (reader.Name == "nr")
             {
-                if (reader.Name == "jeebus")
-                {
-                    p1.alpha = 1;
-                    p2.alpha = 0;
-                    p3.alpha = 0;
-                }
-                else
-                {
-                    p1.alpha = 0;
-                    p2.alpha = 0;
-                    p3.alpha = 1;
-                }
-
                 break;
             }
 
         }
         reader.Read();
-        reply.text = reader.Value;
-        Camera.main.GetComponent<keyboardInput>().inStory = true;
+        int.TryParse(reader.Value, out eventNumber);
+        if (eventNumber != x)
+            getToEvent(x);
+        else
+        {
+            thisEvent.nr = eventNumber; 
+            trigger = true;
+            interpretData();
+        }
+        Camera.main.GetComponent<keyboardInput>().events = true;
+    }
+
+    void interpretData()
+    { 
+        
     }
 
 	void Update () {
 
-
-        if (triggerScene1 && Input.GetKeyDown(KeyCode.Space) && StoryUI.enabled == true)
+        if (trigger && Input.GetKeyDown(KeyCode.Space) && eventsUI.enabled == true)
         {
-            Camera.main.GetComponent<keyboardInput>().inStory = true;
+            Camera.main.GetComponent<keyboardInput>().events = true;
             while(reader.Read())
             {
-                if (reader.Name == "scene2")
+                if (reader.Name == "event" && reader.NodeType == XmlNodeType.EndElement)
                 {
-                    triggerScene1 = false;
-                    Camera.main.GetComponent<keyboardInput>().inStory = false;
+                    trigger = false;
+                    Camera.main.GetComponent<keyboardInput>().events = false;
                     UI.enabled = true;
-                    StoryUI.enabled = false;
+                    eventsUI.enabled = false;
                     Time.timeScale = 1;
                     break;
                 }
 
 
-                if (reader.NodeType != XmlNodeType.EndElement && (reader.Name == "jeebus" || reader.Name =="god"))
+                if (reader.NodeType != XmlNodeType.EndElement)
                 {
                     switch (reader.Name)
                     { 
-                        case "jeebus":
-                            p1.alpha = 1;
-                            p2.alpha = 0;
-                            p3.alpha = 0;
+                        case "required":
                             reader.Read();
-
-                            reply.text = reader.Value;
-
+                            thisEvent.required = reader.Value;
+                            break;
+                        case "name":
+                            reader.Read();
+                            thisEvent.n = reader.Value;
+                            break;
+                        case "description":
+                            reader.Read();
+                            thisEvent.description = reader.Value;
+                            break;
+                        case "resource":
+                            reader.Read();
+                            thisEvent.resource = reader.Value;
+                            break;
+                        case "type":
+                            reader.Read();
+                            thisEvent.type = reader.Value;
+                            break;
+                        case "modifer":
+                            reader.Read();
+                            float.TryParse(reader.Value, out thisEvent.modifier);
                             break;
 
-                        case "god":
-                            p1.alpha = 0;
-                            p2.alpha = 1;
-                            p3.alpha = 0;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-
-                            break;
                     }
                     break;
                 }
                 
-            }
-        }
-
-        if (triggerScene2 && Input.GetKeyDown(KeyCode.Space))
-        {
-            Camera.main.GetComponent<keyboardInput>().inStory = true;
-            while (reader.Read())
-            {
-                if (reader.Name == "scene2" && reader.NodeType == XmlNodeType.EndElement)
-                {
-                    triggerScene2 = false;
-                    Camera.main.GetComponent<keyboardInput>().inStory = false;
-                    UI.enabled = true;
-                    StoryUI.enabled = false;
-                    Time.timeScale = 1;
-                    break;
-                }
-
-                if (reader.NodeType != XmlNodeType.EndElement && (reader.Name == "jeebus" || reader.Name =="bb"))
-                {
-                    switch (reader.Name)
-                    { 
-                        case "jeebus":
-                            p1.alpha = 1;
-                            p2.alpha = 0;
-                            p3.alpha = 0;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-
-                            break;
-
-                        case "bb":
-                            p1.alpha = 0;
-                            p2.alpha = 0;
-                            p3.alpha = 1;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-
-                            break;
-                    }
-                    break;
-                }
-            }
-
-        }
-
-        if (triggerScene3 && Input.GetKeyDown(KeyCode.Space))
-        {
-            Camera.main.GetComponent<keyboardInput>().inStory = true;
-            while (reader.Read())
-            {
-                if (reader.Name == "scene3" && reader.NodeType == XmlNodeType.EndElement)
-                {
-                    Application.LoadLevel("Main Menu");
-                    break;
-                }
-
-                if (reader.NodeType != XmlNodeType.EndElement && (reader.Name == "jeebus" || reader.Name == "god" || reader.Name == "end"))
-                {
-                    switch (reader.Name)
-                    {
-                        case "jeebus":
-                            p1.alpha = 1;
-                            p2.alpha = 0;
-                            p3.alpha = 0;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-
-                            break;
-
-                        case "god":
-                            p1.alpha = 0;
-                            p2.alpha = 1;
-                            p3.alpha = 0;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-
-                            break;
-                        case "end":
-                            p1.alpha = 0;
-                            p2.alpha = 0;
-                            p3.alpha = 0;
-                            reader.Read();
-
-                            reply.text = reader.Value;
-                            break;
-                    }
-                    break;
-                }
-
             }
         }
         

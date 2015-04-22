@@ -3,17 +3,16 @@ using System.Collections;
 
 public class keyboardInput : MonoBehaviour {
 
-    public bool showInventory,toggled,toggled3;
+    public bool toggled,toggled3;
     public UIControl ui;
     public string inv;
     public float rawFps,fps,maxFps,minFps,avgFps;
-    public bool showFPS, toggled2, showMenu, inStory;
+    public bool showFPS, toggled2, showMenu, events;
     public int qty;
 	
 	void Start () {
         minFps = 60;
         maxFps = 0;
-        showInventory = false;
         InvokeRepeating("updateFps", 0.0F, 1.0F);
         
 	}
@@ -62,12 +61,12 @@ public class keyboardInput : MonoBehaviour {
             avgFps += (rawFps - avgFps) / qty;
         }
 
-        if (showMenu == true && !inStory)
+        if (showMenu == true && !events)
         {
             ui.ShowMenu();
         }
 
-        if (showMenu == false && !inStory)
+        if (showMenu == false && !events)
         {
             ui.settings.GetComponent<SettingsUI>().resume();
             
