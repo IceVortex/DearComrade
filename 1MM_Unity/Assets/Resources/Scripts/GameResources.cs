@@ -29,8 +29,9 @@ public class GameResources : MonoBehaviour
     public float foodRatioApproval = 0.01f;
 
 
-    //The list of buildings and the index
+    //The list of buildings, links and the index
     public List<ABuilding> buildings = new List<ABuilding>();
+    public Dictionary<int, int> links = new Dictionary<int, int>();
     public int currentIndex = 0;
 
     public GameObject obj;
@@ -80,4 +81,14 @@ public class GameResources : MonoBehaviour
         return cost;
     }
 
+    public void linkBuildings(int indexStart, int indexDestination)
+    {
+        GameResources.instance.buildings[indexStart].comradeIndex = GameResources.instance.buildings[indexDestination].listIndex;
+        links.Add(indexStart, indexDestination);
+    }
+
+    public void linkEffect(int indexStart, int indexDestination)
+    {
+        
+    }
 }
