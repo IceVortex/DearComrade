@@ -59,7 +59,7 @@ public class Laboratory : ABuilding
     public void researchFertility()
     {
         substractResources(fertilityFoodCost, fertilityMoneyCost, fertilityMaterialsCost);
-        foreach(ABuilding building in gameManager.buildings)
+        foreach(ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "Farm")
                 ((Farm)building).farmPower += 5;
@@ -71,7 +71,7 @@ public class Laboratory : ABuilding
     public void researchIndustrialRevolution()
     {
         substractResources(industrialRevolutionFoodCost, industrialRevolutionMoneyCost, industrialRevolutionMaterialsCost);
-        foreach (ABuilding building in gameManager.buildings)
+        foreach (ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "Factory")
                 ((Factory)building).factoryPower += 5;
@@ -83,7 +83,7 @@ public class Laboratory : ABuilding
     public void researchSpaceConservation()
     {
         substractResources(spaceConservationFoodCost, spaceConservationMoneyCost, spaceConservationMaterialsCost);
-        foreach (ABuilding building in gameManager.buildings)
+        foreach (ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "House")
                 GameResources.instance.maximumCitizens += 50;
@@ -95,51 +95,46 @@ public class Laboratory : ABuilding
     public void researchTheProletariat()
     {
         substractResources(theProletariatFoodCost, theProletariatMoneyCost, theProletariatMaterialsCost);
-        ((ExecutiveBuilding)(gameManager.buildings[0])).goldPerTurn += 0.01f;
+        ((ExecutiveBuilding)(GameResources.instance.buildings[0])).goldPerTurn += 0.01f;
     }
 
     public void researchNanocarbonMaterials()
     {
         substractResources(nanocarbonMaterialsFoodCost, nanocarbonMaterialsMoneyCost, 
                             nanocarbonMaterialsMaterialsCost);
-        //To Add Effect
-        //The resources cost of buildings is reduced by 20%.
+        GameResources.instance.buildingCostRate -= 20;
     }
 
     public void researchBargaining()
     {
         substractResources(bargainingFoodCost, bargainingMoneyCost, bargainingMaterialsCost);
-        //To Add Effect
-        //Cost of buying resources at market is reduced by 30% and the number of resources gained from buying is also increased by 30%. 
-
+        GameResources.instance.buyRate += 30;
+        GameResources.instance.sellRate -= GameResources.instance.sellRate * (30 / 100);
     }
 
     public void researchShelters()
     {
         substractResources(spaceConservationFoodCost, spaceConservationMoneyCost, spaceConservationMaterialsCost);
-        //To Add Effect
-        //The maximum number of homeless citizens is increased to 300.
+        GameResources.instance.maxHomelessCitizens = 300;
     }
 
     public void researchSocialGatherings()
     {
         substractResources(socialGatheringsFoodCost, socialGatheringsMoneyCost, socialGatheringsMaterialsCost);
-        //To Add Effect
-        //The cost of triggered events is reduced by 20%.
+        GameResources.instance.triggeredEventCostRate -= 20;
     }
 
     public void researchOratory()
     {
         substractResources(oratoryFoodCost, oratoryMoneyCost, oratoryMaterialsCost);
-        //To Add Effect
-        //The maximum approval gained from triggered events (Public speech and Festival) is increased by 1.
+        GameResources.instance.festivalApproval += 1;
+        GameResources.instance.publichSpeechApproval += 1;
 
     }
 
     public void researchFoodFeast()
     {
         substractResources(foodFeastFoodCost, foodFeastMoneyCost, foodFeastMaterialsCost);
-        //To Add Effect
-        //The approval gained from the “Increased food ratio” is increased by 0.01 per food exchanged.
+        GameResources.instance.foodRatioApproval += 0.01f;
     }
 }

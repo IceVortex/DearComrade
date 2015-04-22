@@ -5,38 +5,33 @@ using System.Collections.Generic;
 public class GameManagement : MonoBehaviour {
 
     public int turnIndex = 0;
-    public List<ABuilding> buildings = new List<ABuilding>();
+    
+    public GameObject prefab;
+    private GameObject obj;
 
 
 	void Start () 
     {
-        buildings.Add(new ExecutiveBuilding());
-        buildings[0].Initialize();
-        buildings.Add(new Farm());
-        buildings[1].Initialize();
-        buildings.Add(new Laboratory());
-        buildings[2].Initialize();
+
+        GameResources.instance.createBuilding<ExecutiveBuilding>(prefab, new Vector3(2, 2, 0));
+
+        if (GameResources.instance.canBuy<House>())
+            GameResources.instance.createBuilding<House>(prefab, new Vector3(4, 4, 0));
+        else
+            Debug.Log("can't buy");
+
         
 	}
-	
+
 
 	void Update () 
     {   
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ((Laboratory)buildings[2]).researchFertility();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            buildings.Add(new Farm());
-            buildings[3].Initialize();
-        }
 	}
 
     public void nextTurn()
     {
         turnIndex++;
-        foreach (ABuilding building in buildings)
+        foreach (ABuilding building in GameResources.instance.buildings)
         {
             building.Effect();
         }

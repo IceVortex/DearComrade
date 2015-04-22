@@ -15,9 +15,9 @@ public class House : ABuilding {
         housePower = GameResources.instance.houseCitizensT;
     }
 
-    public override void Initialize()
+    public override void Initialize(int i)
     {
-        base.Initialize();
+        base.Initialize(i);
         GameResources.instance.maximumCitizens += housePower;
     }
 
