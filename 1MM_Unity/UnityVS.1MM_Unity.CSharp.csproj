@@ -84,8 +84,12 @@
     <Compile Include="Assets\Resources\Scripts\resourcesUI.cs" />
     <Compile Include="Assets\Resources\Scripts\testBuildingGeneration.cs" />
     <Compile Include="Assets\UpdateApproval.cs" />
+    <Compile Include="Assets\build.cs" />
+    <Compile Include="Assets\buildingComponent.cs" />
+    <Compile Include="Assets\canBuild.cs" />
     <Compile Include="Assets\hide.cs" />
     <Compile Include="Assets\nextTurn.cs" />
+    <Compile Include="Assets\windowValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\Story.xml" />
