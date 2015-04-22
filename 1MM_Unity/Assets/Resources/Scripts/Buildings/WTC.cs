@@ -16,4 +16,28 @@ public class WTC : ABuilding
     public override void Effect()
     {
     }
+
+    public void buyFood(int money)
+    {
+        GameResources.instance.money -= money;
+        GameResources.instance.food += money * (GameResources.instance.buyRate / 100);
+    }
+
+    public void buyMaterials(int money)
+    {
+        GameResources.instance.money -= money;
+        GameResources.instance.buildingMaterials += money * (GameResources.instance.buyRate / 100);
+    }
+
+    public void sellFood(int food)
+    {
+        GameResources.instance.food -= food;
+        GameResources.instance.money += food * (GameResources.instance.sellRate / 100);
+    }
+
+    public void sellMaterials(int materials)
+    {
+        GameResources.instance.buildingMaterials -= materials;
+        GameResources.instance.money += materials * (GameResources.instance.sellRate / 100);
+    }
 }
