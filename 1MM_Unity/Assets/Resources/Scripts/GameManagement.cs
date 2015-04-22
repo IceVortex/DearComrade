@@ -15,10 +15,7 @@ public class GameManagement : MonoBehaviour {
 
         GameResources.instance.createBuilding<ExecutiveBuilding>(prefab, new Vector3(2, 2, 0));
 
-        if (GameResources.instance.canBuy<House>())
-            GameResources.instance.createBuilding<House>(prefab, new Vector3(4, 4, 0));
-        else
-            Debug.Log("can't buy");
+        Debug.Log(GameResources.instance.cost<House>());
 
         
 	}

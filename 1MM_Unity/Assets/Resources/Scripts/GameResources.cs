@@ -70,4 +70,14 @@ public class GameResources : MonoBehaviour
 
     }
 
+    public Vector3 cost<building>() where building : ABuilding, new()
+    {
+        Vector3 cost;
+        building x = new building();
+        cost.x = x.foodCost;
+        cost.y = x.buildingMaterialsCost;
+        cost.z = x.moneyCost;
+        return cost;
+    }
+
 }
