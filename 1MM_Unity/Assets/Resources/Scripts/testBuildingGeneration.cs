@@ -20,7 +20,7 @@ public class testBuildingGeneration : MonoBehaviour {
         }
     }*/
 
-    void generate() 
+    public Vector3 generate() 
     {
         float xPos, yPos;
         xPos = Random.Range(-radius, radius);
@@ -29,11 +29,11 @@ public class testBuildingGeneration : MonoBehaviour {
         if (Physics2D.OverlapArea(new Vector2(xPos - 0.75F, yPos - 0.75F),
             new Vector2(xPos + 0.75F, yPos + 0.75F)))
         {
-            generate();
+            return generate();
         }
         else
         {
-            GameObject.Instantiate(source, new Vector3(xPos + hub.transform.position.x, yPos + hub.transform.position.y, 0), Quaternion.identity);
+            return new Vector3(xPos, yPos, 0);
         }
 
     }
