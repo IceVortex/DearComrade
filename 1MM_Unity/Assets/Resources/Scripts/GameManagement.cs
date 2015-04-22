@@ -15,7 +15,8 @@ public class GameManagement : MonoBehaviour {
 
         GameResources.instance.createBuilding<ExecutiveBuilding>(prefab, new Vector3(2, 2, 0));
         GameResources.instance.createBuilding<House>(prefab, new Vector3(2, 2, 0));
-        Debug.Log(GameResources.instance.buildings[1].GetType().ToString());
+        GameResources.instance.createBuilding<Farm>(prefab, new Vector3(2, 2, 0));
+        GameResources.instance.linkBuildings(1, 2);
 
         
 	}
@@ -31,6 +32,11 @@ public class GameManagement : MonoBehaviour {
         foreach (ABuilding building in GameResources.instance.buildings)
         {
             building.Effect();
+        }
+
+        foreach(var entry in GameResources.instance.links)
+        {
+            GameResources.instance.linkEffect(entry.Key, entry.Value);
         }
 
 

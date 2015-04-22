@@ -88,6 +88,7 @@
     <Compile Include="Assets\UpdateApproval.cs" />
     <Compile Include="Assets\build.cs" />
     <Compile Include="Assets\buildingComponent.cs" />
+    <Compile Include="Assets\buildingValues.cs" />
     <Compile Include="Assets\canBuild.cs" />
     <Compile Include="Assets\hide.cs" />
     <Compile Include="Assets\nextTurn.cs" />

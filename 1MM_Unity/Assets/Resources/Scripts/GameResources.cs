@@ -87,8 +87,22 @@ public class GameResources : MonoBehaviour
         links.Add(indexStart, indexDestination);
     }
 
+    public bool isLinkable(int index)
+    {
+        //To do
+        return false;
+    }
+
+    public bool canLink(int indexStart, int indexDestination)
+    {
+        //To Do
+        return false;
+    }
+
     public void linkEffect(int indexStart, int indexDestination)
     {
-        
+        if (GameResources.instance.buildings[indexStart].GetType().ToString() == "House" &&
+            GameResources.instance.buildings[indexDestination].GetType().ToString() == "Farm")
+            GameResources.instance.food += 5;
     }
 }
