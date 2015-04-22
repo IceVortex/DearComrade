@@ -9,49 +9,12 @@ public class canBuild : MonoBehaviour {
     public string buildingName;
     public Vector3 costs;
     public Text bName, details;
+    public buildingValues buildingValues = new buildingValues();
+
 
     void Start()
     {
-        if (buildingName == "House")
-        {
-            costs = GameResources.instance.cost<House>();
-        }
-        if (buildingName == "Farm")
-        {
-            costs = GameResources.instance.cost<Farm>();
-        }
-        if (buildingName == "Factory")
-        {
-            costs = GameResources.instance.cost<Factory>();
-        }
-        if (buildingName == "Hospital")
-        {
-            costs = GameResources.instance.cost<Hospital>();
-        }
-        if (buildingName == "WTC")
-        {
-            costs = GameResources.instance.cost<WTC>();
-        }
-        if (buildingName == "Laboratory")
-        {
-            costs = GameResources.instance.cost<Laboratory>();
-        }
-        if (buildingName == "Police Station")
-        {
-            costs = GameResources.instance.cost<PoliceStation>();
-        }
-        if (buildingName == "Public Space")
-        {
-            costs = GameResources.instance.cost<PublicSpace>();
-        }
-        if (buildingName == "Workplace")
-        {
-            costs = GameResources.instance.cost<Workplace>();
-        }
-        if (buildingName == "Educational Building")
-        {
-            costs = GameResources.instance.cost<EducationalBuilding>();
-        }
+        costs = buildingValues.buildingCost(buildingName);
 
         if (costs.x != 0)
         {

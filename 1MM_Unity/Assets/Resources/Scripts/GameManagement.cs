@@ -15,7 +15,6 @@ public class GameManagement : MonoBehaviour {
 
         GameResources.instance.createBuilding<ExecutiveBuilding>(prefab, new Vector3(2, 2, 0));
         GameResources.instance.createBuilding<House>(prefab, new Vector3(2, 2, 0));
-        Debug.Log(GameResources.instance.buildings[1].GetType().ToString());
 
         
 	}
