@@ -13,9 +13,11 @@ public class Hospital : ABuilding
         buildingMaterialsCost = 700;
     }
 
-    public override void Effect()
+    public override void Initialize(int index)
     {
+        base.Initialize(index);
         GameResources.instance.approval += 40;
-        //GameResources.instance.maximumApprovalDecay -= 0.4f;
+        GameResources.instance.approvalDecayRate -= 10f;
     }
+
 }

@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameManagement : MonoBehaviour {
-
-    public int turnIndex = 0;
     
     public GameObject prefab;
     private GameObject obj;
@@ -18,18 +16,18 @@ public class GameManagement : MonoBehaviour {
 
 	void Start () 
     {
-        GameResources.instance.createBuilding<House>((GameObject)Resources.Load("Prefabs/Buildings/House"), gen.generate());
-        GameResources.instance.createBuilding<Farm>((GameObject)Resources.Load("Prefabs/Buildings/Farm"), gen.generate());
-        GameResources.instance.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/Buildings/Factory"), gen.generate());
+        //GameResources.instance.createBuilding<House>((GameObject)Resources.Load("Prefabs/Buildings/House"), gen.generate());
+        //GameResources.instance.createBuilding<Farm>((GameObject)Resources.Load("Prefabs/Buildings/Farm"), gen.generate());
+        //GameResources.instance.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/Buildings/Factory"), gen.generate());
 
-        GameResources.instance.linkBuildings(1, 2);
+        //GameResources.instance.linkBuildings(1, 2);
 	}
 
 
 
     public void nextTurn()
     {
-        turnIndex++;
+        GameResources.instance.turnIndex++;
         foreach (ABuilding building in GameResources.instance.buildings)
         {
             building.Effect();

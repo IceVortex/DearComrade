@@ -13,9 +13,11 @@ public class EducationalBuilding : ABuilding
         buildingMaterialsCost = 250;
     }
 
-    public override void Effect()
+    public override void Initialize(int index)
     {
+        base.Initialize(index);
         GameResources.instance.approval += 10;
-        //GameResources.instance.maximumApprovalDecay -= 0.1f;
+        GameResources.instance.approvalDecayRate -= 10f;
     }
+
 }

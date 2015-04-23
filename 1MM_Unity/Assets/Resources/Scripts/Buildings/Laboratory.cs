@@ -95,7 +95,7 @@ public class Laboratory : ABuilding
     public void researchTheProletariat()
     {
         substractResources(theProletariatFoodCost, theProletariatMoneyCost, theProletariatMaterialsCost);
-        ((ExecutiveBuilding)(GameResources.instance.buildings[0])).goldPerTurn += 0.01f;
+        GameResources.instance.goldPerTurn += 0.01f;
     }
 
     public void researchNanocarbonMaterials()

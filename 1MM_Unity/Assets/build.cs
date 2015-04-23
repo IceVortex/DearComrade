@@ -40,7 +40,6 @@ public class build : MonoBehaviour {
             }
             if (GetComponent<canBuild>().buildingName == "Public Space")
             {
-                print("stuff");
                 GameResources.instance.createBuilding<PublicSpace>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Workplace")

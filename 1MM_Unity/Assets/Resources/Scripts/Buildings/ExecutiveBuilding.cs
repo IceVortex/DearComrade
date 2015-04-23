@@ -7,7 +7,6 @@ public class ExecutiveBuilding : ABuilding
     private int festivalFoodCost = 100, festivalMoneyCost = 75;
     private int publicSpeechMoneyCost = 75;
     private int numberOfCitizens = 400;
-    public float goldPerTurn;
 
     public ExecutiveBuilding()
     {
@@ -16,7 +15,6 @@ public class ExecutiveBuilding : ABuilding
         foodCost = 0;
         moneyCost = 0;
         buildingMaterialsCost = 0;
-        goldPerTurn = 0.01f;
     }
 
     public override void Initialize(int i)
@@ -34,8 +32,8 @@ public class ExecutiveBuilding : ABuilding
         
         if(GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
             GameResources.instance.citizens += 100;
-        GameResources.instance.money += goldPerTurn * GameResources.instance.citizens;
-        GameResources.instance.approval -= 1;
+        GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens;
+        GameResources.instance.approval -= GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
     }
 
     public bool canBuyFestival()

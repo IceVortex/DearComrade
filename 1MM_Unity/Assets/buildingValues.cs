@@ -8,6 +8,84 @@ public class buildingValues
     public buildingValues()
     { }
 
+    public string buildingName(string building)
+    {
+        if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.name;
+        }
+
+        if (building == "House")
+        {
+            House x = new House();
+            return x.name;
+        }
+
+        else if (building == "Farm")
+        {
+            Farm x = new Farm();
+            return x.name;
+        }
+
+        else if (building == "Factory")
+        {
+            Factory x = new Factory();
+            return x.name;
+        }
+
+        else if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.name;
+        }
+
+        else if (building == "Educational Building")
+        {
+            EducationalBuilding x = new EducationalBuilding();
+            return x.name;
+        }
+
+        else if (building == "Hospital")
+        {
+            Hospital x = new Hospital();
+            return x.name;
+        }
+
+        else if (building == "Laboratory")
+        {
+            Laboratory x = new Laboratory();
+            return x.name;
+        }
+
+        else if (building == "Police Station")
+        {
+            PoliceStation x = new PoliceStation();
+            return x.name;
+        }
+
+        else if (building == "Workplace")
+        {
+            Workplace x = new Workplace();
+            return x.name;
+        }
+
+        else if (building == "Public Space")
+        {
+            PublicSpace x = new PublicSpace();
+            return x.name;
+        }
+
+        else if (building == "World Trade Center")
+        {
+            WTC x = new WTC();
+            return x.name;
+        }
+
+        else
+            return "";
+    }
+
     public string buildingDescription(string building)
     {
         if (building == "Executive Building")
