@@ -115,7 +115,7 @@ public class Laboratory : ABuilding
     public void researchShelters()
     {
         substractResources(spaceConservationFoodCost, spaceConservationMoneyCost, spaceConservationMaterialsCost);
-        GameResources.instance.maxHomelessCitizens = 300;
+        GameResources.instance.maxHomelessCitizens += 200;
     }
 
     public void researchSocialGatherings()

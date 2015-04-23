@@ -36,7 +36,7 @@ public class GameManagement : MonoBehaviour {
 
         foreach(var entry in GameResources.instance.links)
         {
-            GameResources.instance.linkEffect(entry.Key, entry.Value);
+            GameResources.instance.linkEffectTurn(entry.Key, entry.Value);
         }
 
 

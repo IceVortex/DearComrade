@@ -16,8 +16,9 @@ public class GameResources : MonoBehaviour
     //Number of resources gained per turn or at initialization for farm, house and factories.
     public float farmFoodT = 10, houseCitizensT = 300, factoryMaterialsT = 10;
 
-    //Rates of building cost and buy/sell rate.
+    //Rates of building cost, buy/sell rate, gold gain and approval decay.
     public float buildingCostRate = 100, buyRate = 100, sellRate = 50;
+    public float approvalDecay = 100, goldRate = 0.01f;
 
     //Rate of triggered event cost.
     public float triggeredEventCostRate = 100;
@@ -89,20 +90,57 @@ public class GameResources : MonoBehaviour
 
     public bool isLinkable(int index)
     {
-        //To do
-        return false;
+        if (GameResources.instance.buildings[index].comradeIndex != 0)
+            return false;
+        else
+            return true;
     }
 
     public bool canLink(int indexStart, int indexDestination)
     {
-        //To Do
-        return false;
+        string typeStart = GameResources.instance.buildings[indexStart].GetType().ToString();
+        string typeDestination = GameResources.instance.buildings[indexDestination].GetType().ToString();
+
+        if ((typeStart == "House" || typeStart == "Farm" || typeStart == "Factory") &&
+            (typeDestination != "ExecutivebBuilding" || typeDestination != "Laboratory"))
+            return true;
+        else
+            return false;
     }
 
-    public void linkEffect(int indexStart, int indexDestination)
+    public void linkInitialize(int indexStart, int indexDestination)
     {
-        if (GameResources.instance.buildings[indexStart].GetType().ToString() == "House" &&
-            GameResources.instance.buildings[indexDestination].GetType().ToString() == "Farm")
+        string typeStart = GameResources.instance.buildings[indexStart].GetType().ToString();
+        string typeDestination = GameResources.instance.buildings[indexDestination].GetType().ToString();
+
+        if (typeStart == "House" && typeDestination == "House")
+            GameResources.instance.maximumCitizens += 150;
+        else if (typeStart == "House" && typeDestination == "WTC")
+            GameResources.instance.sellRate += 2;
+        else if (typeStart == "Farm" && typeDestination == "WTC")
+            GameResources.instance.buyRate += 2;
+        else if (typeStart == "House" && typeDestination == "Hospital")
+            GameResources.instance.maxHomelessCitizens += 50;
+        else if (typeStart == "House" && typeDestination == "EducationalBuilding")
+            GameResources.instance.buildingCostRate -= 2;
+        else if (typeStart == "House" && typeDestination == "PoliceStation")
+            GameResources.instance.approvalDecay -= 1;
+        else if (typeStart == "House" && typeDestination == "Workplace")
+            GameResources.instance.goldRate += 0.001f;
+        else if (typeStart == "House" && typeDestination == "PublicSpace")
+            GameResources.instance.approval += 0.5f;
+    }
+
+    public void linkEffectTurn(int indexStart, int indexDestination)
+    {
+        string typeStart = GameResources.instance.buildings[indexStart].GetType().ToString();
+        string typeDestination = GameResources.instance.buildings[indexDestination].GetType().ToString();
+
+        if ((typeStart == "House" && typeDestination == "Farm") ||
+            (typeStart == "Farm" && typeDestination == "House"))
             GameResources.instance.food += 5;
+        if ((typeStart == "House" && typeDestination == "Factory") ||
+            (typeStart == "Factory" && typeDestination == "House"))
+            GameResources.instance.buildingMaterials += 5;
     }
 }

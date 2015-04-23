@@ -4,7 +4,7 @@ using System.Collections;
 public class ABuilding {
     
     public string name, description;
-    public int listIndex, comradeIndex;
+    public int listIndex, comradeIndex = 0;
     public float foodCost, moneyCost, buildingMaterialsCost;
 
     public virtual void Effect()
