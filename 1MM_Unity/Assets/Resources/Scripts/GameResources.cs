@@ -86,6 +86,7 @@ public class GameResources : MonoBehaviour
     {
         GameResources.instance.buildings[indexStart].comradeIndex = GameResources.instance.buildings[indexDestination].listIndex;
         links.Add(indexStart, indexDestination);
+        linkInitialize(indexStart, indexDestination);
     }
 
     public bool isLinkable(int index)
