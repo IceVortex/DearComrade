@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExecutiveBuilding : ABuilding
 {
-    public int taxes = 1, cdFestival = 0, cdPublicSpeech = 0;
+    public int cdFestival = 0, cdPublicSpeech = 0;
     private int festivalFoodCost = 100, festivalMoneyCost = 75;
     private int publicSpeechMoneyCost = 75;
     private int numberOfCitizens = 400;
@@ -32,7 +32,7 @@ public class ExecutiveBuilding : ABuilding
         
         if(GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
             GameResources.instance.citizens += 100;
-        GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens;
+        GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
         GameResources.instance.approval -= GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
     }
 

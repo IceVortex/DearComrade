@@ -6,7 +6,7 @@ public class EducationalBuilding : ABuilding
 
     public EducationalBuilding()
     {
-        name = "Educational Buildings";
+        name = "Educational Building";
         description = "mutherfuckin' eb";
         foodCost = 0;
         moneyCost = 125;

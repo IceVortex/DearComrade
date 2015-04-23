@@ -6,7 +6,7 @@ public class PoliceStation : ABuilding
 
     public PoliceStation()
     {
-        name = "Police Stations";
+        name = "Police Station";
         description = "mutherfuckin' ps";
         foodCost = 0;
         moneyCost = 200;

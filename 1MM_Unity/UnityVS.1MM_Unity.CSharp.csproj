@@ -88,8 +88,11 @@
     <Compile Include="Assets\buildingComponent.cs" />
     <Compile Include="Assets\buildingValues.cs" />
     <Compile Include="Assets\canBuild.cs" />
+    <Compile Include="Assets\currentTab.cs" />
     <Compile Include="Assets\hide.cs" />
     <Compile Include="Assets\nextTurn.cs" />
+    <Compile Include="Assets\researchFrontEnd.cs" />
+    <Compile Include="Assets\taxesFrontEnd.cs" />
     <Compile Include="Assets\windowValues.cs" />
   </ItemGroup>
   <ItemGroup>

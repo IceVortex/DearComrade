@@ -13,14 +13,21 @@ public class hide : MonoBehaviour {
 
     //-1690,-832
 
-    void Awake()
-    {
-  
-    }
-
     void Start()
     {
         hideTab = true;
+    }
+
+    public void setFalse()
+    {
+        hideTab = false;
+        startTime = Time.time;
+    }
+
+    public void setTrue()
+    {
+        hideTab = true;
+        startTime = Time.time;
     }
 
     public void toggle()

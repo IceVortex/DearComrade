@@ -10,6 +10,9 @@ public class GameResources : MonoBehaviour
     //Main Resources
     public float food, money, buildingMaterials, approval, citizens, maximumCitizens;
 
+    //Tax Rate
+    public float taxRate = 100;
+
     //Maximum number of homeless citizens you can have.
     public float maxHomelessCitizens = 200;
 

@@ -37,7 +37,7 @@ public class Laboratory : ABuilding
 
     public Laboratory()
     {
-        name = "Laboratories";
+        name = "Laboratory";
         description = "mutherfuckin' lab";
         foodCost = 0;
         moneyCost = 75;

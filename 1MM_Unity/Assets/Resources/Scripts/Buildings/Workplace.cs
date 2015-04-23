@@ -6,7 +6,7 @@ public class Workplace : ABuilding
 
     public Workplace()
     {
-        name = "Workplaces";
+        name = "Workplace";
         description = "mutherfuckin' work";
         foodCost = 0;
         moneyCost = 275;

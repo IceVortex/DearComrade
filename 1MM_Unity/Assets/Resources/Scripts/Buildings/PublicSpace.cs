@@ -6,7 +6,7 @@ public class PublicSpace : ABuilding
 
     public PublicSpace()
     {
-        name = "PublicSpaces";
+        name = "Public Space";
         description = "mutherfuckin' ps";
         foodCost = 0;
         moneyCost = 50;

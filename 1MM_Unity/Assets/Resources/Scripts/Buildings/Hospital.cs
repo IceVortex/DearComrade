@@ -6,7 +6,7 @@ public class Hospital : ABuilding
 
     public Hospital()
     {
-        name = "Hospitals";
+        name = "Hospital";
         description = "mutherfuckin' hospital";
         foodCost = 0;
         moneyCost = 350;

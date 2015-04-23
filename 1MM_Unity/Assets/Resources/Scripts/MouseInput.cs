@@ -4,7 +4,7 @@ using System.Collections;
 public class MouseInput : MonoBehaviour {
 
     public Vector2 inputWorldPosition;
-    public GameObject window;
+    public GameObject window, build;
     private Ray2D ray;
     public Collider2D clickedOn;
     public Camera cam;
@@ -21,6 +21,7 @@ public class MouseInput : MonoBehaviour {
                 clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
                 if (window.GetComponent<hide>().hideTab == true)
                     window.GetComponent<hide>().toggle();
+
                 window.GetComponentInChildren<windowValues>().clicked(clickedOn.gameObject);
             }
             else
@@ -29,12 +30,18 @@ public class MouseInput : MonoBehaviour {
                 if (window.GetComponent<hide>().hideTab == false)
                     window.GetComponent<hide>().toggle();
             }
+
+            if (build.GetComponent<hide>().hideTab == false)
+                build.GetComponent<hide>().toggle();
+
         }
 
         if (Input.GetMouseButtonDown(1))
         {
             if (window.GetComponent<hide>().hideTab == false)
                 window.GetComponent<hide>().toggle();
+            if (build.GetComponent<hide>().hideTab == false)
+                build.GetComponent<hide>().toggle();
         }
 
 	}
