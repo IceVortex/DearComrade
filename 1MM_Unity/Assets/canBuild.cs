@@ -15,17 +15,19 @@ public class canBuild : MonoBehaviour {
     void Start()
     {
         costs = buildingValues.buildingCost(buildingName);
-
-        if (costs.x != 0)
-        {
-            details.text = "Costs: Food - " + costs.x.ToString() + " Materials - " + costs.y.ToString() + " Money - " + costs.z.ToString() + "\n";
-        }
-        else
-            details.text = "Costs: Materials - " + costs.y.ToString() + " Money - " + costs.z.ToString();
-
     }
 
 	void Update () {
+
+        if (costs.x != 0)
+        {
+            details.text = "Costs: Food - " + costs.x.ToString() + " Materials - " + costs.y.ToString() + " Money - " + costs.z.ToString() + "\n" + "Owned amount: " + buildingValues.numberOf(buildingName).ToString() + "\n" + buildingValues.buildingDescription(buildingName);
+        }
+        else
+            details.text = "Costs: Materials - " + costs.y.ToString() + " Money - " + costs.z.ToString() + "\n" + "Owned amount: " + buildingValues.numberOf(buildingName).ToString() + "\n" + buildingValues.buildingDescription(buildingName);
+
+
+        requirementsMet = false;
 
         if (buildingName == "House")
         {
@@ -58,12 +60,12 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<Laboratory>())
                 requirementsMet = true;
         }
-        if (buildingName == "Police Station")
+        if (buildingName == "PoliceStation")
         {
             if (GameResources.instance.canBuy<PoliceStation>())
                 requirementsMet = true;
         }
-        if (buildingName == "Public Space")
+        if (buildingName == "PublicSpace")
         {
             if (GameResources.instance.canBuy<PublicSpace>())
                 requirementsMet = true;
@@ -73,7 +75,7 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<Workplace>())
                 requirementsMet = true;
         }
-        if (buildingName == "Educational Building")
+        if (buildingName == "EducationalBuilding")
         {
             if (GameResources.instance.canBuy<EducationalBuilding>())
                 requirementsMet = true;

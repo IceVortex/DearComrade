@@ -107,7 +107,7 @@ public class CameraControl : MonoBehaviour {
             isMoving = true;
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             zoom = -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;
             lastChange = Time.time;

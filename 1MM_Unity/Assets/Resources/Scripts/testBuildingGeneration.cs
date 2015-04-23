@@ -6,11 +6,7 @@ public class testBuildingGeneration : MonoBehaviour {
 
     public GameObject hub, source;
     public float radius;
-
-	
-	void Update () {
-	
-	}
+    public int steps, modifier;
 
     /*void OnGUI()
     {
@@ -22,18 +18,25 @@ public class testBuildingGeneration : MonoBehaviour {
 
     public Vector3 generate() 
     {
+        steps++;
         float xPos, yPos;
         xPos = Random.Range(-radius, radius);
         yPos = Random.Range(-radius, radius);
 
-        if (Physics2D.OverlapArea(new Vector2(xPos - 0.75F, yPos - 0.75F),
-            new Vector2(xPos + 0.75F, yPos + 0.75F)))
+        if (Physics2D.OverlapArea(new Vector2(xPos - 1F, yPos - 1F),
+            new Vector2(xPos + 1F, yPos + 1F)))
         {
+            if (steps >= 20)
+            {
+                steps = 0;
+                radius += 5;
+            }
             return generate();
         }
         else
         {
-            return new Vector3(xPos, yPos, 0);
+            steps = 0;
+            return new Vector3(xPos + hub.transform.position.x, yPos + hub.transform.position.x, 0);
         }
 
     }

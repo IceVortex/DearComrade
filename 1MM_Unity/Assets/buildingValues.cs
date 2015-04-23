@@ -29,13 +29,13 @@ public class buildingValues
             return x.description;
         }
 
-        else if(building == "Executive Building")
+        else if(building == "ExecutiveBuilding")
         {
             ExecutiveBuilding x = new ExecutiveBuilding();
             return x.description;
         }
 
-        else if(building == "Educational Building")
+        else if(building == "EducationalBuilding")
         {
             EducationalBuilding x = new EducationalBuilding();
             return x.description;
@@ -53,19 +53,25 @@ public class buildingValues
             return x.description;
         }
 
-        else if(building == "Police Station")
+        else if(building == "PoliceStation")
         {
             PoliceStation x = new PoliceStation();
             return x.description;
         }
 
-        else if(building == "Public Spaces")
+        else if (building == "Workplace")
+        {
+            Workplace x = new Workplace();
+            return x.description;
+        }
+
+        else if(building == "PublicSpace")
         {
             PublicSpace x = new PublicSpace();
             return x.description;
         }
 
-        else if(building == "World Trade Center")
+        else if(building == "WTC")
         {
             WTC x = new WTC();
             return x.description;
@@ -93,12 +99,12 @@ public class buildingValues
             return GameResources.instance.cost<Factory>();
         }
 
-        else if(building == "Executive Building")
+        else if(building == "ExecutiveBuilding")
         {
             return GameResources.instance.cost<ExecutiveBuilding>();
         }
 
-        else if(building == "Educational Building")
+        else if(building == "EducationalBuilding")
         {
             return GameResources.instance.cost<EducationalBuilding>();
         }
@@ -113,17 +119,22 @@ public class buildingValues
             return GameResources.instance.cost<Laboratory>();
         }
 
-        else if(building == "Police Station")
+        else if(building == "PoliceStation")
         {
             return GameResources.instance.cost<PoliceStation>();
         }
 
-        else if(building == "Public Spaces")
+        else if (building == "Workplace")
+        {
+            return GameResources.instance.cost<Workplace>();
+        }
+
+        else if(building == "PublicSpace")
         {
             return GameResources.instance.cost<PublicSpace>();
         }
 
-        else if(building == "World Trade Center")
+        else if(building == "WTC")
         {
             return GameResources.instance.cost<WTC>();
         }

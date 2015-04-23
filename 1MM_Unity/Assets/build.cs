@@ -10,43 +10,44 @@ public class build : MonoBehaviour {
     {
         if (GetComponent<canBuild>().requirementsMet)
         {
-            if (GetComponent<canBuild>().name == "House")
+            if (GetComponent<canBuild>().buildingName == "House")
             {
                 GameResources.instance.createBuilding<House>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Farm")
+            if (GetComponent<canBuild>().buildingName == "Farm")
             {
                 GameResources.instance.createBuilding<Farm>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Factory")
+            if (GetComponent<canBuild>().buildingName == "Factory")
             {
                 GameResources.instance.createBuilding<Factory>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Hospital")
+            if (GetComponent<canBuild>().buildingName == "Hospital")
             {
                 GameResources.instance.createBuilding<Hospital>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "WTC")
+            if (GetComponent<canBuild>().buildingName == "WTC")
             {
                 GameResources.instance.createBuilding<WTC>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Laboratory")
+            if (GetComponent<canBuild>().buildingName == "Laboratory")
             {
                 GameResources.instance.createBuilding<Laboratory>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Police Station")
+            if (GetComponent<canBuild>().buildingName == "PoliceStation")
             {
                 GameResources.instance.createBuilding<PoliceStation>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Public Space")
+            if (GetComponent<canBuild>().buildingName == "PublicSpace")
             {
+                print("stuff");
                 GameResources.instance.createBuilding<PublicSpace>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Workplace")
+            if (GetComponent<canBuild>().buildingName == "Workplace")
             {
                 GameResources.instance.createBuilding<Workplace>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().name == "Educational Building")
+            if (GetComponent<canBuild>().buildingName == "EducationalBuilding")
             {
                 GameResources.instance.createBuilding<EducationalBuilding>(prefab, gen.generate());
             }

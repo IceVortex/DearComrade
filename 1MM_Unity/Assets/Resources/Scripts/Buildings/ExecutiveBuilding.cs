@@ -16,6 +16,7 @@ public class ExecutiveBuilding : ABuilding
         foodCost = 0;
         moneyCost = 0;
         buildingMaterialsCost = 0;
+        goldPerTurn = 0.01f;
     }
 
     public override void Initialize(int i)

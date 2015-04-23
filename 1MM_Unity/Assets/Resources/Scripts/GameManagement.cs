@@ -8,23 +8,24 @@ public class GameManagement : MonoBehaviour {
     
     public GameObject prefab;
     private GameObject obj;
+    public testBuildingGeneration gen;
 
+    void Awake()
+    {
+        GameResources.instance.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/Buildings/Executive Building"), new Vector3(0, 0, 0));
+        gen.hub = GameObject.FindGameObjectWithTag("Executive");
+    }
 
 	void Start () 
     {
+        GameResources.instance.createBuilding<House>((GameObject)Resources.Load("Prefabs/Buildings/House"), gen.generate());
+        GameResources.instance.createBuilding<Farm>((GameObject)Resources.Load("Prefabs/Buildings/Farm"), gen.generate());
+        GameResources.instance.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/Buildings/Factory"), gen.generate());
 
-        GameResources.instance.createBuilding<ExecutiveBuilding>(prefab, new Vector3(2, 2, 0));
-        GameResources.instance.createBuilding<House>(prefab, new Vector3(2, 2, 0));
-        GameResources.instance.createBuilding<Farm>(prefab, new Vector3(2, 2, 0));
         GameResources.instance.linkBuildings(1, 2);
-
-        
 	}
 
 
-	void Update () 
-    {   
-	}
 
     public void nextTurn()
     {
