@@ -13,9 +13,11 @@ public class PoliceStation : ABuilding
         buildingMaterialsCost = 400;
     }
 
-    public override void Effect()
+    public override void Initialize(int index)
     {
+        base.Initialize(index);
         GameResources.instance.approval += 20;
-        //GameResources.instance.maximumApprovalDecay -= 0.1f;
+        GameResources.instance.approvalDecayRate -= 10f;
     }
+
 }

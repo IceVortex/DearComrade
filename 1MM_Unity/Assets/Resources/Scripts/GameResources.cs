@@ -18,7 +18,8 @@ public class GameResources : MonoBehaviour
 
     //Rates of building cost, buy/sell rate, gold gain and approval decay.
     public float buildingCostRate = 100, buyRate = 100, sellRate = 50;
-    public float approvalDecay = 100, goldRate = 0.01f;
+    public float approvalDecayRate = 100, goldPerTurn = 0.01f;
+    public float flatApproval = 1f;
 
     //Rate of triggered event cost.
     public float triggeredEventCostRate = 100;
@@ -28,6 +29,9 @@ public class GameResources : MonoBehaviour
 
     //Approval gained from trading food at exec. building
     public float foodRatioApproval = 0.01f;
+
+    //The current turn index
+    public int turnIndex = 0;
 
 
     //The list of buildings, links and the index
@@ -125,9 +129,9 @@ public class GameResources : MonoBehaviour
         else if (typeStart == "House" && typeDestination == "EducationalBuilding")
             GameResources.instance.buildingCostRate -= 2;
         else if (typeStart == "House" && typeDestination == "PoliceStation")
-            GameResources.instance.approvalDecay -= 1;
+            GameResources.instance.approvalDecayRate -= 1;
         else if (typeStart == "House" && typeDestination == "Workplace")
-            GameResources.instance.goldRate += 0.001f;
+            GameResources.instance.goldPerTurn += 0.001f;
         else if (typeStart == "House" && typeDestination == "PublicSpace")
             GameResources.instance.approval += 0.5f;
     }
