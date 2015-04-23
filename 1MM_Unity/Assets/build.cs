@@ -26,7 +26,7 @@ public class build : MonoBehaviour {
             {
                 GameResources.instance.createBuilding<Hospital>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().buildingName == "WTC")
+            if (GetComponent<canBuild>().buildingName == "World Trade Center")
             {
                 GameResources.instance.createBuilding<WTC>(prefab, gen.generate());
             }
@@ -34,11 +34,11 @@ public class build : MonoBehaviour {
             {
                 GameResources.instance.createBuilding<Laboratory>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().buildingName == "PoliceStation")
+            if (GetComponent<canBuild>().buildingName == "Police Station")
             {
                 GameResources.instance.createBuilding<PoliceStation>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().buildingName == "PublicSpace")
+            if (GetComponent<canBuild>().buildingName == "Public Space")
             {
                 print("stuff");
                 GameResources.instance.createBuilding<PublicSpace>(prefab, gen.generate());
@@ -47,7 +47,7 @@ public class build : MonoBehaviour {
             {
                 GameResources.instance.createBuilding<Workplace>(prefab, gen.generate());
             }
-            if (GetComponent<canBuild>().buildingName == "EducationalBuilding")
+            if (GetComponent<canBuild>().buildingName == "Educational Building")
             {
                 GameResources.instance.createBuilding<EducationalBuilding>(prefab, gen.generate());
             }

@@ -10,6 +10,14 @@ public class windowValues : MonoBehaviour {
     public CanvasGroup[] buttonSet;
     public bool showExtraTab;
     public CanvasGroup extraTab;
+    public string buildingName;
+
+    public buildingValues values = new buildingValues();
+
+    public void clicked(GameObject clickedBy)
+    {
+        updateValues(clickedBy.name, values.buildingDescription(clickedBy.name), values.numberOf(clickedBy.name), "Flavor Text.");
+    }
 
     public void changeButtonSet(CanvasGroup active)
     {
@@ -31,28 +39,28 @@ public class windowValues : MonoBehaviour {
         bMax.text = max.ToString();
         bFlavorText.text = flavorText;
 
-        if (n == "Executive Buildings")
+        if (n == "Executive Building")
         {
             bIcon.sprite = icons[0];
-            changeButtonSet(buttonSet[0]);
+            changeButtonSet(buttonSet[1]);
         }
 
         if (n == "Houses")
         {
             bIcon.sprite = icons[1];
-            changeButtonSet(buttonSet[1]);
+            changeButtonSet(buttonSet[0]);
         }
 
         if (n == "Farms")
         {
             bIcon.sprite = icons[2];
-            changeButtonSet(buttonSet[1]);
+            changeButtonSet(buttonSet[0]);
         }
 
-        if (n == "Factories")
+        if (n == "Factory")
         {
             bIcon.sprite = icons[3];
-            changeButtonSet(buttonSet[1]);
+            changeButtonSet(buttonSet[0]);
         }
 
         if (n == "World Trade Center")
@@ -61,37 +69,37 @@ public class windowValues : MonoBehaviour {
             changeButtonSet(buttonSet[2]);
         }
 
-        if (n == "Hospitals")
+        if (n == "Hospital")
         {
             bIcon.sprite = icons[5];
             changeButtonSet(buttonSet[4]);
         }
 
-        if (n == "Public Spaces")
+        if (n == "Public Space")
         {
             bIcon.sprite = icons[6];
             changeButtonSet(buttonSet[4]);
         }
 
-        if (n == "Educational Buildings")
+        if (n == "Educational Building")
         {
             bIcon.sprite = icons[7];
             changeButtonSet(buttonSet[4]);
         }
 
-        if (n == "Police Stations")
+        if (n == "Police Station")
         {
             bIcon.sprite = icons[8];
             changeButtonSet(buttonSet[4]);
         }
 
-        if (n == "Workplaces")
+        if (n == "Workplace")
         {
             bIcon.sprite = icons[9];
             changeButtonSet(buttonSet[4]);
         }
 
-        if (n == "Laboratories")
+        if (n == "Laboratory")
         {
             bIcon.sprite = icons[10];
             changeButtonSet(buttonSet[3]);

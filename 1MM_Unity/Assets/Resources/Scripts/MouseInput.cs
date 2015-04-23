@@ -21,6 +21,7 @@ public class MouseInput : MonoBehaviour {
                 clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
                 if (window.GetComponent<hide>().hideTab == true)
                     window.GetComponent<hide>().toggle();
+                window.GetComponentInChildren<windowValues>().clicked(clickedOn.gameObject);
             }
             else
             {

@@ -50,7 +50,7 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<Hospital>())
                 requirementsMet = true;
         }
-        if (buildingName == "WTC")
+        if (buildingName == "World Trade Center")
         {
             if (GameResources.instance.canBuy<WTC>())
                 requirementsMet = true;
@@ -60,12 +60,12 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<Laboratory>())
                 requirementsMet = true;
         }
-        if (buildingName == "PoliceStation")
+        if (buildingName == "Police Station")
         {
             if (GameResources.instance.canBuy<PoliceStation>())
                 requirementsMet = true;
         }
-        if (buildingName == "PublicSpace")
+        if (buildingName == "Public Space")
         {
             if (GameResources.instance.canBuy<PublicSpace>())
                 requirementsMet = true;
@@ -75,7 +75,7 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<Workplace>())
                 requirementsMet = true;
         }
-        if (buildingName == "EducationalBuilding")
+        if (buildingName == "Educational Building")
         {
             if (GameResources.instance.canBuy<EducationalBuilding>())
                 requirementsMet = true;
