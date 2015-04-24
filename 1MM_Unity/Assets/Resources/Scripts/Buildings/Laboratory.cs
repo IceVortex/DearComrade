@@ -35,6 +35,8 @@ public class Laboratory : ABuilding
                                     "The maximum approval gained from triggered events (Public speech and Festival) is increased by 1.",
                                     "The approval gained from the “Increased food ratio” is increased by 0.01 per food exchanged."};
 
+    public Vector3[] costs;
+
     public Laboratory()
     {
         name = "Laboratory";
@@ -43,6 +45,20 @@ public class Laboratory : ABuilding
         moneyCost = 75;
         buildingMaterialsCost = 150;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagement>();
+
+        costs = new Vector3[10];
+
+        costs[0].Set(150, 0, 0);
+        costs[1].Set(0, 0, 150);
+        costs[2].Set(0, 100, 150);
+        costs[3].Set(0, 200, 0);
+        costs[4].Set(0, 200, 300);
+        costs[5].Set(0, 300, 0);
+        costs[6].Set(0, 50, 100);
+        costs[7].Set(200, 200, 200);
+        costs[8].Set(0, 400, 0);
+        costs[9].Set(200, 0, 0);
+        
     }
 
     public override void Effect()
