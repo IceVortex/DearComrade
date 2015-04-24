@@ -47,37 +47,37 @@ public class canBuild : MonoBehaviour {
         }
         if (buildingName == "Hospital")
         {
-            if (GameResources.instance.canBuy<Hospital>())
+            if (GameResources.instance.canBuy<Hospital>() && buildingValues.numberOf(buildingName)<1)
                 requirementsMet = true;
         }
         if (buildingName == "World Trade Center")
         {
-            if (GameResources.instance.canBuy<WTC>())
+            if (GameResources.instance.canBuy<WTC>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Laboratory")
         {
-            if (GameResources.instance.canBuy<Laboratory>())
+            if (GameResources.instance.canBuy<Laboratory>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Police Station")
         {
-            if (GameResources.instance.canBuy<PoliceStation>())
+            if (GameResources.instance.canBuy<PoliceStation>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Public Space")
         {
-            if (GameResources.instance.canBuy<PublicSpace>())
+            if (GameResources.instance.canBuy<PublicSpace>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Workplace")
         {
-            if (GameResources.instance.canBuy<Workplace>())
+            if (GameResources.instance.canBuy<Workplace>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Educational Building")
         {
-            if (GameResources.instance.canBuy<EducationalBuilding>())
+            if (GameResources.instance.canBuy<EducationalBuilding>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
 

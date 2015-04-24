@@ -226,12 +226,12 @@ public class buildingValues
             return Vector3.zero;
     }
 
-    public int numberOf(string type)
+    public int numberOf(string n)
     {
         int count = 0;
         foreach(ABuilding building in GameResources.instance.buildings)
         {
-            if (building.GetType().ToString() == type)
+            if (building.name == n)
                 count++;
         }
 
