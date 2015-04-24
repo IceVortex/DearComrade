@@ -30,9 +30,9 @@ public class ExecutiveBuilding : ABuilding
         if (cdPublicSpeech > 0)
             cdPublicSpeech--;
         
-        if(GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
-            GameResources.instance.citizens += 100;
         GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
+        if (GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
+            GameResources.instance.citizens += 100;
         GameResources.instance.approval -= GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
     }
 
