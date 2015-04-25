@@ -18,5 +18,6 @@ public class Factory : ABuilding
     public override void Effect()
     {
         GameResources.instance.buildingMaterials += factoryPower;
+        LoggingSystem.Instance.materialsGained += factoryPower;
     }
 }

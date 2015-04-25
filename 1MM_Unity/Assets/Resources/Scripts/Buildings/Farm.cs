@@ -18,5 +18,6 @@ public class Farm : ABuilding
     public override void Effect()
     {
         GameResources.instance.food += farmPower;
+        LoggingSystem.Instance.foodGained += farmPower;
     }
 }

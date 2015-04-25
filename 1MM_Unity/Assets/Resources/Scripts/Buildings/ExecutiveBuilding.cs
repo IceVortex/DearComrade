@@ -31,9 +31,18 @@ public class ExecutiveBuilding : ABuilding
             cdPublicSpeech--;
         
         GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
+        LoggingSystem.Instance.moneyGained += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
         if (GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
             GameResources.instance.citizens += 100;
         GameResources.instance.approval -= GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
+
+        //Log the citizens, money and approval gained/lost
+        
+        LoggingSystem.Instance.citizensGained += 100;
+        LoggingSystem.Instance.baseApprovalLost = GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
+
+
+        GameResources.instance.flatApproval += 0.1f;
     }
 
     public bool canBuyFestival()

@@ -146,9 +146,15 @@ public class GameResources : MonoBehaviour
 
         if ((typeStart == "House" && typeDestination == "Farm") ||
             (typeStart == "Farm" && typeDestination == "House"))
+        { 
             GameResources.instance.food += 5;
+            LoggingSystem.Instance.foodGained += 5;
+        }
         if ((typeStart == "House" && typeDestination == "Factory") ||
             (typeStart == "Factory" && typeDestination == "House"))
+        { 
             GameResources.instance.buildingMaterials += 5;
+            LoggingSystem.Instance.materialsGained += 5;
+        }
     }
 }
