@@ -9,25 +9,25 @@ public class tradingOverview : MonoBehaviour {
 
     public void buyFood()
     {
-        if(GameResources.instance.food>=100)
+        if(GameResources.instance.money>=100)
             wtc.buyFood(100);
     }
 
     public void buyMaterials()
     {
-        if (GameResources.instance.buildingMaterials >= 100)
+        if (GameResources.instance.money >= 100)
             wtc.buyMaterials(100);
     }
 
     public void sellFood()
     {
-        if (GameResources.instance.money >= 100)
+        if (GameResources.instance.food >= 100)
             wtc.sellFood(100);
     }
 
     public void sellMaterials()
     {
-        if (GameResources.instance.money >= 100)
+        if (GameResources.instance.buildingMaterials >= 100)
             wtc.sellMaterials(100);
     }
 
