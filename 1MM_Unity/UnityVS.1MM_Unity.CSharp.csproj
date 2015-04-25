@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\IdManager.cs" />
+    <Compile Include="Assets\LoggingSystem.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\ABuilding.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\EducationalBuilding.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\ExecutiveBuilding.cs" />
