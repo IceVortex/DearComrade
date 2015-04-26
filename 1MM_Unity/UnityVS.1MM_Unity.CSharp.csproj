@@ -67,6 +67,7 @@
     <Compile Include="Assets\Resources\Scripts\Buildings\Hospital.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\House.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\Laboratory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\MilitaryOutpost.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\PoliceStation.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\PublicSpace.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\WTC.cs" />

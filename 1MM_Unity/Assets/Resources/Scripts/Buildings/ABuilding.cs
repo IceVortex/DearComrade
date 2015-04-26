@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ABuilding {
     
-    public string name, description;
+    public string name, shortDescription, longDescription, flavorText;
     public int listIndex, comradeIndex = 0;
     public float foodCost, moneyCost, buildingMaterialsCost;
 

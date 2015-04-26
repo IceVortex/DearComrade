@@ -86,78 +86,234 @@ public class buildingValues
             return "";
     }
 
-    public string buildingDescription(string building)
+    public string buildingShortDescription(string building)
     {
         if (building == "Executive Building")
         {
             ExecutiveBuilding x = new ExecutiveBuilding();
-            return x.description;
+            return x.shortDescription;
         }
 
         if(building == "House")
         {
             House x = new House();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Farm")
         {
             Farm x = new Farm();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Factory")
         {
             Factory x = new Factory();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Executive Building")
         {
             ExecutiveBuilding x = new ExecutiveBuilding();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Educational Building")
         {
             EducationalBuilding x = new EducationalBuilding();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Hospital")
         {
             Hospital x = new Hospital();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Laboratory")
         {
             Laboratory x = new Laboratory();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Police Station")
         {
             PoliceStation x = new PoliceStation();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if (building == "Workplace")
         {
             Workplace x = new Workplace();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "Public Space")
         {
             PublicSpace x = new PublicSpace();
-            return x.description;
+            return x.shortDescription;
         }
 
         else if(building == "World Trade Center")
         {
             WTC x = new WTC();
-            return x.description;
+            return x.shortDescription;
+        }
+
+        else
+            return "";
+    }
+
+    public string buildingLongDescription(string building)
+    {
+        if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.longDescription;
+        }
+
+        if (building == "House")
+        {
+            House x = new House();
+            return x.longDescription;
+        }
+
+        else if (building == "Farm")
+        {
+            Farm x = new Farm();
+            return x.longDescription;
+        }
+
+        else if (building == "Factory")
+        {
+            Factory x = new Factory();
+            return x.longDescription;
+        }
+
+        else if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.longDescription;
+        }
+
+        else if (building == "Educational Building")
+        {
+            EducationalBuilding x = new EducationalBuilding();
+            return x.longDescription;
+        }
+
+        else if (building == "Hospital")
+        {
+            Hospital x = new Hospital();
+            return x.longDescription;
+        }
+
+        else if (building == "Laboratory")
+        {
+            Laboratory x = new Laboratory();
+            return x.longDescription;
+        }
+
+        else if (building == "Police Station")
+        {
+            PoliceStation x = new PoliceStation();
+            return x.longDescription;
+        }
+
+        else if (building == "Workplace")
+        {
+            Workplace x = new Workplace();
+            return x.longDescription;
+        }
+
+        else if (building == "Public Space")
+        {
+            PublicSpace x = new PublicSpace();
+            return x.longDescription;
+        }
+
+        else if (building == "World Trade Center")
+        {
+            WTC x = new WTC();
+            return x.longDescription;
+        }
+
+        else
+            return "";
+    }
+
+    public string buildingFlavorText(string building)
+    {
+        if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.flavorText;
+        }
+
+        if (building == "House")
+        {
+            House x = new House();
+            return x.flavorText;
+        }
+
+        else if (building == "Farm")
+        {
+            Farm x = new Farm();
+            return x.flavorText;
+        }
+
+        else if (building == "Factory")
+        {
+            Factory x = new Factory();
+            return x.flavorText;
+        }
+
+        else if (building == "Executive Building")
+        {
+            ExecutiveBuilding x = new ExecutiveBuilding();
+            return x.flavorText;
+        }
+
+        else if (building == "Educational Building")
+        {
+            EducationalBuilding x = new EducationalBuilding();
+            return x.flavorText;
+        }
+
+        else if (building == "Hospital")
+        {
+            Hospital x = new Hospital();
+            return x.flavorText;
+        }
+
+        else if (building == "Laboratory")
+        {
+            Laboratory x = new Laboratory();
+            return x.flavorText;
+        }
+
+        else if (building == "Police Station")
+        {
+            PoliceStation x = new PoliceStation();
+            return x.flavorText;
+        }
+
+        else if (building == "Workplace")
+        {
+            Workplace x = new Workplace();
+            return x.flavorText;
+        }
+
+        else if (building == "Public Space")
+        {
+            PublicSpace x = new PublicSpace();
+            return x.flavorText;
+        }
+
+        else if (building == "World Trade Center")
+        {
+            WTC x = new WTC();
+            return x.flavorText;
         }
 
         else

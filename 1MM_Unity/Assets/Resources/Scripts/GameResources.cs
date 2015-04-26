@@ -8,7 +8,11 @@ public class GameResources : MonoBehaviour
     private static GameResources _instance;
 
     //Main Resources
-    public float food, money, buildingMaterials, approval, citizens, maximumCitizens;
+    public float food, money, buildingMaterials;
+    public float approval;
+    public float citizens, maximumCitizens;
+    public float troops, maximumTroops;
+    public float researchPoints;
 
     //Tax Rate
     public float taxRate = 100;
@@ -137,6 +141,22 @@ public class GameResources : MonoBehaviour
             GameResources.instance.goldPerTurn += 0.001f;
         else if (typeStart == "House" && typeDestination == "PublicSpace")
             GameResources.instance.approval += 0.5f;
+        else if (typeStart == "House" && typeDestination == "MilitaryOutpost")
+            {
+                GameResources.instance.maximumCitizens -= houseCitizensT;
+                GameResources.instance.maximumTroops += houseCitizensT;
+
+                if (GameResources.instance.citizens >= houseCitizensT)
+                {
+                    GameResources.instance.citizens -= houseCitizensT;
+                    GameResources.instance.troops += houseCitizensT;
+                }
+                else
+                {
+                    GameResources.instance.troops += GameResources.instance.citizens;
+                    GameResources.instance.citizens = 0;
+                }
+            }
     }
 
     public void linkEffectTurn(int indexStart, int indexDestination)

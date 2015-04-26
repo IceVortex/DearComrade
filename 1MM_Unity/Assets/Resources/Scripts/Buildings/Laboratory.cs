@@ -5,6 +5,9 @@ public class Laboratory : ABuilding
 {
     public GameManagement gameManager;
 
+    public int researchPointCount;
+    public int researchPointInterval = 7;
+
     public bool fertility, industrialRevolution, spaceConservation,
         theProletariat, nanocarbonMaterials, bargaining, improvedShelters,
         socialGatherings, oratory, foodFeast;
@@ -39,8 +42,10 @@ public class Laboratory : ABuilding
 
     public Laboratory()
     {
-        name = "Laboratory";
-        description = "mutherfuckin' lab";
+        name = "Laboratories";
+        shortDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " months, which you can assign to a particular research.";
+        longDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " months, which you can assign to a particular research.";
+        flavorText = "Jet fuel can't melt steel beams.";
         foodCost = 0;
         moneyCost = 75;
         buildingMaterialsCost = 150;
@@ -61,8 +66,17 @@ public class Laboratory : ABuilding
         
     }
 
+    public override void Initialize(int index)
+    {
+        base.Initialize(index);
+        GameResources.instance.researchPoints++;
+    }
+
     public override void Effect()
     {
+        researchPointCount++;
+        if (researchPointCount % researchPointInterval == 0)
+            GameResources.instance.researchPoints++;
     }
 
     private void substractResources(float food, float money, float materials)
@@ -74,7 +88,7 @@ public class Laboratory : ABuilding
 
     public void researchFertility()
     {
-        substractResources(fertilityFoodCost, fertilityMoneyCost, fertilityMaterialsCost);
+        GameResources.instance.researchPoints--;
         foreach(ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "Farm")
@@ -86,7 +100,7 @@ public class Laboratory : ABuilding
 
     public void researchIndustrialRevolution()
     {
-        substractResources(industrialRevolutionFoodCost, industrialRevolutionMoneyCost, industrialRevolutionMaterialsCost);
+        GameResources.instance.researchPoints--;
         foreach (ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "Factory")
@@ -98,7 +112,7 @@ public class Laboratory : ABuilding
 
     public void researchSpaceConservation()
     {
-        substractResources(spaceConservationFoodCost, spaceConservationMoneyCost, spaceConservationMaterialsCost);
+        GameResources.instance.researchPoints--;
         foreach (ABuilding building in GameResources.instance.buildings)
         {
             if (building.GetType().ToString() == "House")
@@ -110,39 +124,38 @@ public class Laboratory : ABuilding
 
     public void researchTheProletariat()
     {
-        substractResources(theProletariatFoodCost, theProletariatMoneyCost, theProletariatMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.goldPerTurn += 0.01f;
     }
 
     public void researchNanocarbonMaterials()
     {
-        substractResources(nanocarbonMaterialsFoodCost, nanocarbonMaterialsMoneyCost, 
-                            nanocarbonMaterialsMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.buildingCostRate -= 20;
     }
 
     public void researchBargaining()
     {
-        substractResources(bargainingFoodCost, bargainingMoneyCost, bargainingMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.buyRate += 30;
         GameResources.instance.sellRate -= GameResources.instance.sellRate * (30 / 100);
     }
 
     public void researchShelters()
     {
-        substractResources(spaceConservationFoodCost, spaceConservationMoneyCost, spaceConservationMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.maxHomelessCitizens += 200;
     }
 
     public void researchSocialGatherings()
     {
-        substractResources(socialGatheringsFoodCost, socialGatheringsMoneyCost, socialGatheringsMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.triggeredEventCostRate -= 20;
     }
 
     public void researchOratory()
     {
-        substractResources(oratoryFoodCost, oratoryMoneyCost, oratoryMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.festivalApproval += 1;
         GameResources.instance.publichSpeechApproval += 1;
 
@@ -150,7 +163,7 @@ public class Laboratory : ABuilding
 
     public void researchFoodFeast()
     {
-        substractResources(foodFeastFoodCost, foodFeastMoneyCost, foodFeastMaterialsCost);
+        GameResources.instance.researchPoints--;
         GameResources.instance.foodRatioApproval += 0.01f;
     }
 }
