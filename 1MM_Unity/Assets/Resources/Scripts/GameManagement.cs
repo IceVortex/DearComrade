@@ -8,6 +8,7 @@ public class GameManagement : MonoBehaviour {
     private GameObject obj;
     public testBuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
+    public date d;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class GameManagement : MonoBehaviour {
     public void nextTurn()
     {
         GetComponent<Test>().getRandomEvent();
+        d.updateDate();
         LoggingSystem.Instance.reset();
         GameResources.instance.turnIndex++;
         foreach (ABuilding building in GameResources.instance.buildings)

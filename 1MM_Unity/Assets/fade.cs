@@ -24,7 +24,7 @@ public class fade : MonoBehaviour {
         textZone.alpha = 1;
         cg.interactable = false;
         cg.blocksRaycasts = false;
-        fadeAllTo0 = false;
+        
         loggingScreen.alpha = 0;
         loggingScreen.interactable = false;
         loggingScreen.blocksRaycasts = false;
@@ -104,6 +104,9 @@ public class fade : MonoBehaviour {
         {
             cg.alpha = Mathf.Lerp(0, 1, t);
         }
+
+        if(cg.alpha == 0)
+            fadeAllTo0 = false;
 
         if (fadeAllTo0)
         {
