@@ -17,8 +17,9 @@ public class canBuild : MonoBehaviour {
         costs = buildingValues.buildingCost(buildingName);
     }
 
-	void Update () {
 
+	void Update () {
+        costs = buildingValues.buildingCost(buildingName);
         if (costs.x != 0)
         {
             details.text = "Costs: Food - " + costs.x.ToString() + " Materials - " + costs.y.ToString() + " Money - " + costs.z.ToString() + "\n" + "Owned amount: " + buildingValues.numberOf(buildingName).ToString() + "\n" + buildingValues.buildingShortDescription(buildingName);

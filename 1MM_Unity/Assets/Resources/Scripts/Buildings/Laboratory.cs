@@ -132,6 +132,7 @@ public class Laboratory : ABuilding
     {
         GameResources.instance.researchPoints--;
         GameResources.instance.buildingCostRate -= 20;
+        Debug.Log("researched + " + GameResources.instance.buildingCostRate);
     }
 
     public void researchBargaining()

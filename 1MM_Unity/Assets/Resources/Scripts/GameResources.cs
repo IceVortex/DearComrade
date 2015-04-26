@@ -87,9 +87,9 @@ public class GameResources : MonoBehaviour
     {
         Vector3 cost;
         building x = new building();
-        cost.x = x.foodCost;
-        cost.y = x.buildingMaterialsCost;
-        cost.z = x.moneyCost;
+        cost.x = x.foodCost * (GameResources.instance.buildingCostRate / 100);
+        cost.y = x.buildingMaterialsCost * (GameResources.instance.buildingCostRate / 100);
+        cost.z = x.moneyCost * (GameResources.instance.buildingCostRate / 100);
         return cost;
     }
 
