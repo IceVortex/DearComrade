@@ -94,6 +94,7 @@
     <Compile Include="Assets\currentTab.cs" />
     <Compile Include="Assets\fade.cs" />
     <Compile Include="Assets\hide.cs" />
+    <Compile Include="Assets\loggingFrontend.cs" />
     <Compile Include="Assets\nextTurn.cs" />
     <Compile Include="Assets\organiseEventOverview.cs" />
     <Compile Include="Assets\researchFrontEnd.cs" />
