@@ -11,7 +11,10 @@ public class ExecutiveBuilding : ABuilding
     public ExecutiveBuilding()
     {
         name = "Executive Building";
-        description = "mutherfuckin' EB";
+        shortDescription = "The Executive Building is your command center. From here you can construct other buildings, manage your taxes and organise different types of events.";
+        longDescription = "The Executive Building is your command center. From here you can construct other buildings, manage your taxes and organise different types of events.";
+        flavorText = "All your base are belong to us.";
+        longDescription = "";
         foodCost = 0;
         moneyCost = 0;
         buildingMaterialsCost = 0;

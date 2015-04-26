@@ -18,7 +18,7 @@ public class windowValues : MonoBehaviour {
         buildingName = clickedBy.name;
 
         extraTab.gameObject.GetComponent<hide>().setTrue();
-        updateValues(buildingName, values.buildingDescription(buildingName), values.numberOf(buildingName), "Flavor Text.");
+        updateValues(buildingName, values.buildingLongDescription(buildingName), values.numberOf(buildingName), "Flavor Text");
     }
 
     public void changeButtonSet(CanvasGroup active)

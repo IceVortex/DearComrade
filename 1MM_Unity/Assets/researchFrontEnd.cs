@@ -14,6 +14,104 @@ public class researchFrontEnd : MonoBehaviour {
         bool ok = false;
         if (ro.lab.titles[researchNumber] == "Fertility")
         {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchFertility();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Industrial Revolution")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchIndustrialRevolution();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Space Conservation")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchSpaceConservation();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "The Proletariat")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchTheProletariat();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Nanocarbon Materials")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchNanocarbonMaterials();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Bargaining")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchBargaining();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Shelters")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchShelters();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Social Gatherings")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            { 
+                ro.lab.researchSocialGatherings();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Oratory")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchOratory();
+                ok = true;
+            }
+        }
+        if (ro.lab.titles[researchNumber] == "Food Feast")
+        {
+            if (GameResources.instance.researchPoints >= 1)
+            {
+                ro.lab.researchFoodFeast();
+                ok = true;
+            }
+        }
+
+        if(ok)
+        { 
+            alreadyResearched.alpha = 1;
+            alreadyResearched.interactable = true;
+            alreadyResearched.blocksRaycasts = true;
+
+            researchButton.alpha = 0;
+            researchButton.interactable = false;
+            alreadyResearched.blocksRaycasts = false;
+        }
+     
+    }
+
+    #region Old Research
+    /*public void research()
+    {
+        bool ok = false;
+        if (ro.lab.titles[researchNumber] == "Fertility")
+        {
             if (GameResources.instance.buildingMaterials >= ro.lab.fertilityMaterialsCost && GameResources.instance.food >= ro.lab.fertilityFoodCost && GameResources.instance.money >= ro.lab.fertilityMoneyCost)
             {
                 ro.lab.researchFertility();
@@ -71,7 +169,7 @@ public class researchFrontEnd : MonoBehaviour {
         if (ro.lab.titles[researchNumber] == "Social Gatherings")
         {
             if (GameResources.instance.buildingMaterials >= ro.lab.socialGatheringsMaterialsCost && GameResources.instance.food >= ro.lab.socialGatheringsFoodCost && GameResources.instance.money >= ro.lab.socialGatheringsMoneyCost)
-            { 
+            {
                 ro.lab.researchSocialGatherings();
                 ok = true;
             }
@@ -93,8 +191,8 @@ public class researchFrontEnd : MonoBehaviour {
             }
         }
 
-        if(ok)
-        { 
+        if (ok)
+        {
             alreadyResearched.alpha = 1;
             alreadyResearched.interactable = true;
             alreadyResearched.blocksRaycasts = true;
@@ -103,8 +201,9 @@ public class researchFrontEnd : MonoBehaviour {
             researchButton.interactable = false;
             alreadyResearched.blocksRaycasts = false;
         }
-     
-    }
+
+    }*/
+    #endregion
 
     void Start()
     {
@@ -119,7 +218,7 @@ public class researchFrontEnd : MonoBehaviour {
         {
             researchName.text = ro.lab.titles[researchNumber];
             description.text = ro.lab.descriptions[researchNumber];
-            costs.text = "Costs: " + ro.lab.costs[researchNumber].x + " Food, " + ro.lab.costs[researchNumber].y + " Money, " + ro.lab.costs[researchNumber].z + " Materials.";
+            //costs.text = "Costs: " + ro.lab.costs[researchNumber].x + " Food, " + ro.lab.costs[researchNumber].y + " Money, " + ro.lab.costs[researchNumber].z + " Materials.";
         }
     }
     
