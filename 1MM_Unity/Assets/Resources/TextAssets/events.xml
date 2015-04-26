@@ -4,7 +4,7 @@
   <nr>1</nr>
   <required>none</required>
   <name>Organized Protest</name>
-  <description>Some of your people organized a protest because of the harsh conditions in the country. You lose x approval.</description>
+  <description>Some of your people organized a protest because of the harsh conditions in the country. You lose approval.</description>
   <resource>approval</resource>
   <type>negative</type>
   <modifier></modifier>
@@ -22,7 +22,7 @@
     <nr>3</nr>
     <required>none</required>
     <name>Famous person praise</name>
-    <description>A famous person in the country has praised you in the public. You gain x approval.</description>
+    <description>A famous person in the country has praised you in the public. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
     <modifier></modifier>
@@ -31,7 +31,7 @@
     <nr>4</nr>
     <required>none</required>
     <name>Good season</name>
-    <description>This season was a good one for the crops. You gain x bonus food.</description>
+    <description>This season was a good one for the crops. You gain bonus food.</description>
     <resource>food</resource>
     <type>positive</type>
     <modifier></modifier>
@@ -40,7 +40,7 @@
     <nr>5</nr>
     <required>none</required>
     <name>Drought</name>
-    <description>The drought destroyed a part of your crops. You gain only x food.</description>
+    <description>The drought destroyed a part of your crops. You gain only part of your food income.</description>
     <resource>food</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -49,7 +49,7 @@
     <nr>6</nr>
     <required>none</required>
     <name>Denunciation</name>
-    <description>A foreign country has denounced your leadership. You lose x approval.</description>
+    <description>A foreign country has denounced your leadership. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -67,7 +67,7 @@
     <nr>8</nr>
     <required>none</required>
     <name>Meeting with communist leader</name>
-    <description>Your meeting with the leader of a foreign communist country went well gaining praise from the people. You gain x approval.</description>
+    <description>Your meeting with the leader of a foreign communist country went well gaining praise from the people. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
     <modifier></modifier>
@@ -76,7 +76,7 @@
     <nr>9</nr>
     <required>none</required>
     <name>Disaster at construction site</name>
-    <description>There has been a miscommunication at a construction site, triggering a collapse. You lose x building materials.</description>
+    <description>There has been a miscommunication at a construction site, triggering a collapse. You lose building materials.</description>
     <resource>materials</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -85,7 +85,7 @@
     <nr>10</nr>
     <required>none</required>
     <name>United we stand</name>
-    <description>Some of your allied countries are low on resources and you had to help them. You lost x resources.</description>
+    <description>Some of your allied countries are low on resources and you had to help them. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -94,7 +94,7 @@
     <nr>11</nr>
     <required>none</required>
     <name>Allied Generosity</name>
-    <description>The allied countries have sent a gift to you. You gain x resources.</description>
+    <description>The allied countries have sent a gift to you. You gain resources.</description>
     <resource>all</resource>
     <type>positive</type>
     <modifier></modifier>
@@ -103,7 +103,7 @@
     <nr>12</nr>
     <required>none</required>
     <name>Prosperity</name>
-    <description>Your people are glad that the country is prospering. You gain x approval.</description>
+    <description>Your people are glad that the country is prospering. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
     <modifier></modifier>
@@ -112,7 +112,7 @@
     <nr>13</nr>
     <required>Laboratory</required>
     <name>Virus</name>
-    <description>Researches in biology have gone wrong and a dangerous virus has been released. The people are panicking and you lose x approval.</description>
+    <description>Researches in biology have gone wrong and a dangerous virus has been released. The people are panicking causing you lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -121,7 +121,7 @@
     <nr>14</nr>
     <required>none</required>
     <name>Terrorist Attack</name>
-    <description>Reports of a terrorist suicide attack are circulating, inducing mass panic. You lose x approval.</description>
+    <description>Reports of a terrorist suicide attack are circulating, inducing mass panic. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -130,7 +130,7 @@
     <nr>15</nr>
     <required>none</required>
     <name>Mass Emigration</name>
-    <description>People observed that life in your country is hard and have started running away. You lost x citizens.</description>
+    <description>People observed that life in your country is hard and have started running away. You lose citizens.</description>
     <resource>citizens</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -148,7 +148,7 @@
     <nr>17</nr>
     <required>none</required>
     <name>Bad rumors</name>
-    <description>A number of bad rumors have been appearing concerning your rulership. You lose x approval.</description>
+    <description>A number of bad rumors have been appearing concerning your rulership. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -157,7 +157,7 @@
     <nr>18</nr>
     <required>none</required>
     <name>Crushing the opposition</name>
-    <description>A new political party has appeared. However, your party managed to make them surrender. Your people have observed this and they are angry because you don’t give them free will. You lose x approval.</description>
+    <description>A new political party has appeared. However, your party managed to make them surrender. Your people have observed this and they are angry because you don’t give them free will. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -166,7 +166,7 @@
     <nr>19</nr>
     <required>Laboratory</required>
     <name>Research papers stolen</name>
-    <description>Scientists from a foreign country stole a part of your research, and finished it on their own. You have lost x resources.</description>
+    <description>Scientists from a foreign country stole a part of your research, and finished it on their own. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
     <modifier></modifier>
@@ -175,7 +175,7 @@
     <nr>20</nr>
     <required>Laboratory</required>
     <name>Research papers stolen</name>
-    <description>A group of scientists failed to finish their research and made no improvement thus only wasting resources. You lost x resources.</description>
+    <description>A group of scientists failed to finish their research and made no improvement thus only wasting resources. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
     <modifier></modifier>

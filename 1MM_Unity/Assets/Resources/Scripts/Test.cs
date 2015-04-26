@@ -6,7 +6,6 @@ using System.IO;
 
 public class Test : MonoBehaviour {
 
-    public Canvas UI, eventsUI;
     XmlReader reader;
     XmlReaderSettings settings;
     public string source;
@@ -14,6 +13,9 @@ public class Test : MonoBehaviour {
     public int eventNumber;
     public bool trigger;
 
+    public Text title, description, effect;
+
+    [System.Serializable]
     public struct gameEvent{
 
         public int nr;
@@ -26,9 +28,6 @@ public class Test : MonoBehaviour {
 
     void Awake()
     {
-        Camera.main.GetComponent<keyboardInput>().events = true;
-        disableUI();
-
         settings = new XmlReaderSettings();
         settings.IgnoreWhitespace = true;
         text = (TextAsset)Resources.Load(source, typeof(TextAsset));
@@ -36,26 +35,26 @@ public class Test : MonoBehaviour {
 
     }
 
-    void Start()
+    public void getRandomEvent()
     {
-        UI.enabled = false;
-    }
-
-    public void disableUI()
-    {
-        eventsUI.enabled = true;
-        UI.enabled = false;
-        Time.timeScale = 0;
-    }
-
-    void getRandomEvent()
-    {
+        reader = XmlReader.Create(new StringReader(text.text), settings);
         int x = Random.Range(1, 20);
         getToEvent(x);
+
+        if (thisEvent.required != "none")
+        {
+            if(!GameResources.instance.buildingConsutructedCheck(thisEvent.required))
+                getRandomEvent();
+        }
+        else
+        {
+            interpretData();
+        }
     }
 
     public void getToEvent(int x)
     {
+        //print(x);
         while (reader.Read())
         {
             if (reader.Name == "nr")
@@ -64,38 +63,136 @@ public class Test : MonoBehaviour {
             }
 
         }
+
         reader.Read();
+
         int.TryParse(reader.Value, out eventNumber);
+        //print(eventNumber);
+
         if (eventNumber != x)
             getToEvent(x);
         else
         {
-            thisEvent.nr = eventNumber; 
-            trigger = true;
+            readWholeEvent();
             interpretData();
         }
-        Camera.main.GetComponent<keyboardInput>().events = true;
+        //Camera.main.GetComponent<keyboardInput>().events = true;
     }
 
-    void interpretData()
-    { 
+    void readWholeEvent()
+    {
         
+        while(reader.Read())
+        { 
+            if (reader.Name == "event" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                trigger = false;
+                //Camera.main.GetComponent<keyboardInput>().events = false;
+                //Time.timeScale = 1;
+                break;
+            }
+
+
+            if (reader.NodeType != XmlNodeType.EndElement)
+            {
+                switch (reader.Name)
+                {
+                    case "required":
+                        reader.Read();
+                        thisEvent.required = reader.Value;
+                        break;
+                    case "name":
+                        reader.Read();
+                        thisEvent.n = reader.Value;
+                        break;
+                    case "description":
+                        reader.Read();
+                        thisEvent.description = reader.Value;
+                        break;
+                    case "resource":
+                        reader.Read();
+                        thisEvent.resource = reader.Value;
+                        break;
+                    case "type":
+                        reader.Read();
+                        thisEvent.type = reader.Value;
+                        break;
+                    case "modifer":
+                        reader.Read();
+                        float.TryParse(reader.Value, out thisEvent.modifier);
+                        break;
+
+                }
+                
+            }
+        }
+
+    }
+
+
+    void interpretData()
+    {
+        thisEvent.nr = eventNumber;
+        trigger = true;
+        int x = new int();
+        title.text = thisEvent.n;
+        description.text = thisEvent.description;
+        if (thisEvent.type == "stalemate")
+        {
+            if (thisEvent.resource == "all")
+               effect.text = "Effect: You don't gain any resources this turn.";
+            if (thisEvent.resource == "food")
+                effect.text = "Effect: You don't gain food this turn.";
+            x = 0;
+        }
+        else if (thisEvent.type == "negative")
+        {
+            effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " " + thisEvent.resource;
+            x = -1;
+        }
+        else if (thisEvent.type == "positive")
+        {
+            effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " " + thisEvent.resource;
+            x = 1;
+        }
+
+        if (thisEvent.resource == "approval")
+        {
+            LoggingSystem.Instance.approvalGained += thisEvent.modifier;
+            GameResources.instance.approval += x * thisEvent.modifier;
+        }
+        if (thisEvent.resource == "food" || thisEvent.resource == "all")
+        {
+            LoggingSystem.Instance.foodGained += thisEvent.modifier;
+            GameResources.instance.food += x * thisEvent.modifier;
+        }
+        if (thisEvent.resource == "materials" || thisEvent.resource == "all")
+        {
+            LoggingSystem.Instance.materialsGained += thisEvent.modifier;
+            GameResources.instance.buildingMaterials += x * thisEvent.modifier;
+        }
+        if (thisEvent.resource == "citizens" || thisEvent.resource == "all")
+        {
+            LoggingSystem.Instance.citizensGained += thisEvent.modifier;
+            GameResources.instance.buildingMaterials += x * thisEvent.modifier;
+        }
+
+        
+
     }
 
 	void Update () {
 
-        if (trigger && Input.GetKeyDown(KeyCode.Space) && eventsUI.enabled == true)
+        /*if (trigger)
         {
-            Camera.main.GetComponent<keyboardInput>().events = true;
+            //Camera.main.GetComponent<keyboardInput>().events = true;
             while(reader.Read())
             {
                 if (reader.Name == "event" && reader.NodeType == XmlNodeType.EndElement)
                 {
                     trigger = false;
-                    Camera.main.GetComponent<keyboardInput>().events = false;
-                    UI.enabled = true;
-                    eventsUI.enabled = false;
-                    Time.timeScale = 1;
+                    //Camera.main.GetComponent<keyboardInput>().events = false;
+                    //Time.timeScale = 1;
                     break;
                 }
 
@@ -134,7 +231,7 @@ public class Test : MonoBehaviour {
                 }
                 
             }
-        }
+        }*/
         
 	}
 }

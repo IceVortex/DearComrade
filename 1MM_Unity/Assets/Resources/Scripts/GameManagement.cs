@@ -26,7 +26,7 @@ public class GameManagement : MonoBehaviour {
 
     public void nextTurn()
     {
-
+        GetComponent<Test>().getRandomEvent();
         LoggingSystem.Instance.reset();
         GameResources.instance.turnIndex++;
         foreach (ABuilding building in GameResources.instance.buildings)

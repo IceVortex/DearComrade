@@ -157,4 +157,15 @@ public class GameResources : MonoBehaviour
             LoggingSystem.Instance.materialsGained += 5;
         }
     }
+
+    public bool buildingConsutructedCheck(string building)
+    {
+        foreach (ABuilding b in buildings)
+        {
+            if (b.name == building)
+                return true;
+        }
+        return false;
+    }
+
 }
