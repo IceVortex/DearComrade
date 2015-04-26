@@ -11,8 +11,8 @@ public class EducationalBuilding : ABuilding
         longDescription = "Educational Buildings are vital to the development of your country since they educate the children. These increase your approval by 10 and decrease your approval decay rate by 10%. Linking a house to the educational buildings reduces the cost of constructing buildings by 2%.";
         flavorText = "You need to educate yourself so you won’t hate yourself, ‘cause being a fool is bad for yo’ health.";
         foodCost = 0;
-        moneyCost = 125;
-        buildingMaterialsCost = 250;
+        moneyCost = 140;
+        buildingMaterialsCost = 200;
     }
 
     public override void Initialize(int index)

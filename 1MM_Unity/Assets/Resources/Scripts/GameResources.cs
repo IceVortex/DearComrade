@@ -32,10 +32,10 @@ public class GameResources : MonoBehaviour
     public float triggeredEventCostRate = 100;
 
     //Approval gained from publich speech and festival.
-    public float publichSpeechApproval = 2, festivalApproval = 3;
+    public float publichSpeechApproval = 25, festivalApproval = 25;
 
     //Approval gained from trading food at exec. building
-    public float foodRatioApproval = 0.01f;
+    public float foodRatioApproval = 0.1f;
 
     //The current turn index
     public int turnIndex = 0;

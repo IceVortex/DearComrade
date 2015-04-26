@@ -4,8 +4,8 @@ using System.Collections;
 public class ExecutiveBuilding : ABuilding
 {
     public int cdFestival = 0, cdPublicSpeech = 0;
-    private int festivalFoodCost = 100, festivalMoneyCost = 75;
-    private int publicSpeechMoneyCost = 75;
+    private int festivalFoodCost = 250, festivalMoneyCost = 200;
+    private int publicSpeecFoodCost = 250, publicSpeechMoneyCost = 200;
     private int numberOfCitizens = 400;
 
     public ExecutiveBuilding()
@@ -58,7 +58,8 @@ public class ExecutiveBuilding : ABuilding
 
     public bool canBuyPublicSpeech()
     {
-        if (publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.money && 
+        if (publicSpeecFoodCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.food &&
+            publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.money && 
             cdPublicSpeech == 0)
             return true;
         return false;
@@ -66,7 +67,7 @@ public class ExecutiveBuilding : ABuilding
 
     public void buyFestival()
     {
-        cdFestival = 6;
+        cdFestival = 10;
         GameResources.instance.approval += GameResources.instance.festivalApproval;
         GameResources.instance.food -= festivalFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
         GameResources.instance.money -= festivalMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
@@ -75,8 +76,9 @@ public class ExecutiveBuilding : ABuilding
 
     public void buyPublicSpeech()
     {
-        cdPublicSpeech = 1;
+        cdPublicSpeech = 10;
         GameResources.instance.approval += GameResources.instance.publichSpeechApproval;
+        GameResources.instance.food -= publicSpeecFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
         GameResources.instance.money -= publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
     }
 
