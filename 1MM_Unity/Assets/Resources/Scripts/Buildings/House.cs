@@ -11,9 +11,9 @@ public class House : ABuilding {
         shortDescription = "Houses increase the maximum number of citizens you can have by 300. ";
         longDescription = "Houses increase the maximum number of citizens you can have by 300. Houses can also be linked to other houses for an additional 150 Citizens.";
         flavorText = "You must construct additional pylons!";
-        foodCost = 0;
-        moneyCost = 10;
-        buildingMaterialsCost = 30;
+        foodCost = 40;
+        moneyCost = 2;
+        buildingMaterialsCost = 20;
         housePower = GameResources.instance.houseCitizensT;
     }
 

@@ -12,6 +12,7 @@ public class taxesFrontEnd : MonoBehaviour {
 	void Update () {
 
         GameResources.instance.taxRate = rate.value;
+        GameResources.instance.approvalDecayRate = rate.value;
         currentValue.text = "Current value: " + (int)rate.value + "%";
 	}
 }

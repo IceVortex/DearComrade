@@ -32,10 +32,10 @@ public class GameResources : MonoBehaviour
     public float triggeredEventCostRate = 100;
 
     //Approval gained from publich speech and festival.
-    public float publichSpeechApproval = 2, festivalApproval = 3;
+    public float publichSpeechApproval = 25, festivalApproval = 25;
 
     //Approval gained from trading food at exec. building
-    public float foodRatioApproval = 0.01f;
+    public float foodRatioApproval = 0.1f;
 
     //The current turn index
     public int turnIndex = 0;
@@ -87,9 +87,9 @@ public class GameResources : MonoBehaviour
     {
         Vector3 cost;
         building x = new building();
-        cost.x = x.foodCost;
-        cost.y = x.buildingMaterialsCost;
-        cost.z = x.moneyCost;
+        cost.x = x.foodCost * (GameResources.instance.buildingCostRate / 100);
+        cost.y = x.buildingMaterialsCost * (GameResources.instance.buildingCostRate / 100);
+        cost.z = x.moneyCost * (GameResources.instance.buildingCostRate / 100);
         return cost;
     }
 

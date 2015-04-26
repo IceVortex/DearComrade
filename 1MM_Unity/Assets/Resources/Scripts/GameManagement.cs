@@ -23,7 +23,7 @@ public class GameManagement : MonoBehaviour {
         Debug.Log("Current Materials: " + GameResources.instance.buildingMaterials);
         Debug.Log("Current Money: " + GameResources.instance.money);
         Debug.Log("Current Citizens: " + GameResources.instance.citizens + " / " + GameResources.instance.maximumCitizens);
-	}
+    }
 
 
     public void nextTurn()
