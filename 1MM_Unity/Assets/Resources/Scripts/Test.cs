@@ -134,7 +134,7 @@ public class Test : MonoBehaviour {
     {
         thisEvent.nr = eventNumber;
         trigger = true;
-        int x = new int();
+        float x = new float();
         title.text = thisEvent.n;
         description.text = thisEvent.description;
         if (thisEvent.type == "stalemate")
@@ -147,13 +147,24 @@ public class Test : MonoBehaviour {
         }
         else if (thisEvent.type == "negative")
         {
-            effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " " + thisEvent.resource;
+            if (thisEvent.resource != "all")
+                effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " " + thisEvent.resource + ".";
+            else
+                effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " of all resources.";
             x = -1;
         }
         else if (thisEvent.type == "positive")
         {
-            effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " " + thisEvent.resource;
+            if(thisEvent.resource != "all")
+                effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " " + thisEvent.resource + ".";
+            else
+                effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " of all resources.";
             x = 1;
+        }
+        else if (thisEvent.type == "halved")
+        {
+            x = 0.5f;
+            effect.text = "Effect: You gain only half of your normal food income.";
         }
 
         if (thisEvent.resource == "approval")

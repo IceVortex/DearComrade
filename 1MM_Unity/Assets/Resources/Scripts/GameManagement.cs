@@ -7,6 +7,7 @@ public class GameManagement : MonoBehaviour {
     public GameObject prefab;
     private GameObject obj;
     public testBuildingGeneration gen;
+    public loggingFrontend loggingFrontEnd;
 
     void Awake()
     {
@@ -38,6 +39,30 @@ public class GameManagement : MonoBehaviour {
         {
             GameResources.instance.linkEffectTurn(entry.Key, entry.Value);
         }
+
+        if (GetComponent<Test>().thisEvent.type == "stalemate" && GetComponent<Test>().thisEvent.resource == "food")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
+            LoggingSystem.Instance.foodGained = 0;
+        }
+
+        if (GetComponent<Test>().thisEvent.type == "stalemate" && GetComponent<Test>().thisEvent.resource == "all")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
+            GameResources.instance.buildingMaterials -= LoggingSystem.Instance.materialsGained;
+            GameResources.instance.money -= LoggingSystem.Instance.moneyGained;
+            LoggingSystem.Instance.foodGained = 0;
+            LoggingSystem.Instance.materialsGained = 0;
+            LoggingSystem.Instance.moneyGained = 0;
+        }
+
+        if (GetComponent<Test>().thisEvent.type == "halved")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained/2;
+            LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained/2;
+        }
+
+        loggingFrontEnd.updateValues();
 
         Debug.Log("====================================================");
         Debug.Log("Current Approval: " + GameResources.instance.approval);

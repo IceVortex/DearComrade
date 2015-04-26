@@ -42,7 +42,7 @@
     <name>Drought</name>
     <description>The drought destroyed a part of your crops. You gain only part of your food income.</description>
     <resource>food</resource>
-    <type>negative</type>
+    <type>halved</type>
     <modifier></modifier>
   </event>
   <event>
