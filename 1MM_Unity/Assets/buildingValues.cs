@@ -166,11 +166,6 @@ public class buildingValues
 
     public string buildingLongDescription(string building)
     {
-        if (building == "Executive Building")
-        {
-            ExecutiveBuilding x = new ExecutiveBuilding();
-            return x.longDescription;
-        }
 
         if (building == "House")
         {
@@ -244,11 +239,6 @@ public class buildingValues
 
     public string buildingFlavorText(string building)
     {
-        if (building == "Executive Building")
-        {
-            ExecutiveBuilding x = new ExecutiveBuilding();
-            return x.flavorText;
-        }
 
         if (building == "House")
         {

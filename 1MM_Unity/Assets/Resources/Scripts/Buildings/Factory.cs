@@ -7,7 +7,7 @@ public class Factory : ABuilding
 
     public Factory()
     {
-        name = "Factories";
+        name = "Factory";
         shortDescription = "Factories are used to generate 10 materials each turn.";
         longDescription = "Factories are used to generate 10 materials each turn. You can also link a house to a factory and you will gain an additional 5 materials each turn. The effect also applies if you link a factory to a house.";
         flavorText = "However, in object-oriented programming, a factory is an object for creating other objects.";

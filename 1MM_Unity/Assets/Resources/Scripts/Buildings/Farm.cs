@@ -7,7 +7,7 @@ public class Farm : ABuilding
     
     public Farm()
     {
-        name = "Food Farms";
+        name = "Farm";
         shortDescription = "Food farms are used to generate 10 food each turn.";
         longDescription = "Food farms are used to generate 10 food each turn. You can also link a house to a food farm and you will gain an additional 5 food each turn. This effect also applies if you link a food farm to a house.";
         flavorText = "Remember when farms generated 15 food each turn? Pepperidge Farm remembers.";
