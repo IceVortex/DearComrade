@@ -27,7 +27,7 @@ public class GameManagement : MonoBehaviour {
 
     void Update()
     {
-        if (GameResources.instance.approval >= 100f)
+        if (GameResources.instance.approval >= 100f && GameResources.instance.troops >= 3000)
             Debug.Log("Win");
         if (GameResources.instance.approval <= -100)
             Debug.Log("Lose");
