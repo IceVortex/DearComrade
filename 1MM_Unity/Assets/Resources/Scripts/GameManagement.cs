@@ -25,6 +25,13 @@ public class GameManagement : MonoBehaviour {
         Debug.Log("Current Citizens: " + GameResources.instance.citizens + " / " + GameResources.instance.maximumCitizens);
     }
 
+    void Update()
+    {
+        if (GameResources.instance.approval >= 100f)
+            Debug.Log("Win");
+        if (GameResources.instance.approval <= -100)
+            Debug.Log("Lose");
+    }
 
     public void nextTurn()
     {
@@ -66,13 +73,14 @@ public class GameManagement : MonoBehaviour {
 
         loggingFrontEnd.updateValues();
 
-        Debug.Log("====================================================");
-        Debug.Log("Current Approval: " + GameResources.instance.approval);
-        Debug.Log("Food Gained: " + LoggingSystem.Instance.foodGained);
-        Debug.Log("Materials Gained: " + LoggingSystem.Instance.materialsGained);
-        Debug.Log("Money Gained: " + LoggingSystem.Instance.moneyGained);
-        Debug.Log("Base Approval Lost: " + LoggingSystem.Instance.baseApprovalLost);
-        Debug.Log("Citizens Gained: " + LoggingSystem.Instance.citizensGained);
+        if (GameResources.instance.food < 0)
+            GameResources.instance.food = 0;
+        if (GameResources.instance.money < 0)
+            GameResources.instance.money = 0;
+        if (GameResources.instance.buildingMaterials < 0)
+            GameResources.instance.buildingMaterials = 0;
+        if (GameResources.instance.citizens < 0)
+            GameResources.instance.citizens = 0;
     }
 
 }

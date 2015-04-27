@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExecutiveBuilding : ABuilding
 {
-    public int cdFestival = 0, cdPublicSpeech = 0;
+    public int cdFestival = 8, cdPublicSpeech = 8;
     private int festivalFoodCost = 250, festivalMoneyCost = 200;
     private int publicSpeecFoodCost = 250, publicSpeechMoneyCost = 200;
     private int numberOfCitizens = 400;
