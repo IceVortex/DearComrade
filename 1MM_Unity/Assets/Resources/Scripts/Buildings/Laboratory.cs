@@ -35,8 +35,8 @@ public class Laboratory : ABuilding
                                     "Cost of buying resources at market is reduced by 30% and the number of resources gained from buying is also increased by 30%.", 
                                     "The maximum number of homeless citizens is increased to 300.",
                                     "The cost of triggered events is reduced by 20%.",
-                                    "The maximum approval gained from triggered events (Public speech and Festival) is increased by 1.",
-                                    "The approval gained from the “Increased food ratio” is increased by 0.01 per food exchanged."};
+                                    "The maximum approval gained from triggered events (Public speech and Festival) is increased by 7.",
+                                    "The approval gained from the “Increased food ratio” is increased by 0.025 per food exchanged."};
 
     public Vector3[] costs;
 
@@ -157,14 +157,14 @@ public class Laboratory : ABuilding
     public void researchOratory()
     {
         GameResources.instance.researchPoints--;
-        GameResources.instance.festivalApproval += 1;
-        GameResources.instance.publichSpeechApproval += 1;
+        GameResources.instance.festivalApproval += 7;
+        GameResources.instance.publichSpeechApproval += 7;
 
     }
 
     public void researchFoodFeast()
     {
         GameResources.instance.researchPoints--;
-        GameResources.instance.foodRatioApproval += 0.01f;
+        GameResources.instance.foodRatioApproval += 0.025f;
     }
 }
