@@ -120,6 +120,12 @@ public class windowValues : MonoBehaviour {
             changeButtonSet(buttonSet[3]);
             bMax.text = "Maximum amount: 1";
         }
+        if (n == "Military Outpost")
+        {
+            bIcon.sprite = icons[11];
+            changeButtonSet(buttonSet[4]);
+            bMax.text = "Maximum amount: 1";
+        }
 
     }
 

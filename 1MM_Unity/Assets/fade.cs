@@ -32,7 +32,7 @@ public class fade : MonoBehaviour {
 
     public void setToAlpha0()
     {
-        if(cg.alpha != 0)
+        if(cg.alpha != 0 && !fadeAllTo0)
         { 
             textZone.alpha = 0;
             fadeTo0 = false;
@@ -44,7 +44,7 @@ public class fade : MonoBehaviour {
 
     public void setToAlhpa1()
     {
-        if (cg.alpha != 0)
+        if (cg.alpha != 0 && !fadeAllTo0)
         { 
             Invoke("StartFadeTo0", 1.25F);
             cg.alpha = 1;
@@ -67,7 +67,7 @@ public class fade : MonoBehaviour {
 
     public void startFadeTo0()
     {
-        if(textZone.alpha!=0 && cg.alpha == 1 && !fadeTo1 == false)
+        if (textZone.alpha != 0 && cg.alpha == 1 && !fadeTo1 == false && !fadeAllTo0)
         { 
             textZone.interactable = true;
             textZone.blocksRaycasts = true;

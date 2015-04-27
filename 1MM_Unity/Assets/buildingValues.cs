@@ -82,6 +82,12 @@ public class buildingValues
             return x.name;
         }
 
+        else if (building == "Military Outpost")
+        {
+            MilitaryOutpost x = new MilitaryOutpost();
+            return x.name;
+        }
+
         else
             return "";
     }
@@ -160,6 +166,11 @@ public class buildingValues
             return x.shortDescription;
         }
 
+        else if (building == "Military Outpost")
+        {
+            MilitaryOutpost x = new MilitaryOutpost();
+            return x.shortDescription;
+        }
         else
             return "";
     }
@@ -233,6 +244,11 @@ public class buildingValues
             return x.longDescription;
         }
 
+        else if (building == "Military Outpost")
+        {
+            MilitaryOutpost x = new MilitaryOutpost();
+            return x.longDescription;
+        }
         else
             return "";
     }
@@ -306,6 +322,12 @@ public class buildingValues
             return x.flavorText;
         }
 
+        else if (building == "Military Outpost")
+        {
+            MilitaryOutpost x = new MilitaryOutpost();
+            return x.flavorText;
+        }
+
         else
             return "";
     }
@@ -366,6 +388,11 @@ public class buildingValues
         else if(building == "World Trade Center")
         {
             return GameResources.instance.cost<WTC>();
+        }
+
+        else if (building == "Military Outpost")
+        {
+            return GameResources.instance.cost<MilitaryOutpost>();
         }
 
         else

@@ -81,6 +81,11 @@ public class canBuild : MonoBehaviour {
             if (GameResources.instance.canBuy<EducationalBuilding>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
+        if (buildingName == "Military Outpost")
+        {
+            if (GameResources.instance.canBuy<MilitaryOutpost>() && buildingValues.numberOf(buildingName) < 1)
+                requirementsMet = true;
+        }
 
 
         if (requirementsMet)

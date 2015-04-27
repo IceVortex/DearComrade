@@ -50,6 +50,10 @@ public class build : MonoBehaviour {
             {
                 GameResources.instance.createBuilding<EducationalBuilding>(prefab, gen.generate());
             }
+            if (GetComponent<canBuild>().buildingName == "Military Outpost")
+            {
+                GameResources.instance.createBuilding<MilitaryOutpost>(prefab, gen.generate());
+            }
         }
     }
 
