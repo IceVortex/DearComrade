@@ -7,7 +7,7 @@
   <description>Some of your people organized a protest because of the harsh conditions in the country. You lose approval.</description>
   <resource>approval</resource>
   <type>negative</type>
-  <modifier></modifier>
+  <modifier>15</modifier>
 </event>
 <event>
   <nr>2</nr>
@@ -25,7 +25,7 @@
     <description>A famous person in the country has praised you in the public. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>25</modifier>
   </event>
   <event>
     <nr>4</nr>
@@ -34,7 +34,7 @@
     <description>This season was a good one for the crops. You gain bonus food.</description>
     <resource>food</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>100</modifier>
   </event>
   <event>
     <nr>5</nr>
@@ -52,7 +52,7 @@
     <description>A foreign country has denounced your leadership. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>15</modifier>
   </event>
   <event>
     <nr>7</nr>
@@ -70,7 +70,7 @@
     <description>Your meeting with the leader of a foreign communist country went well gaining praise from the people. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>25</modifier>
   </event>
   <event>
     <nr>9</nr>
@@ -79,7 +79,7 @@
     <description>There has been a miscommunication at a construction site, triggering a collapse. You lose building materials.</description>
     <resource>materials</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>100</modifier>
   </event>
   <event>
     <nr>10</nr>
@@ -88,7 +88,7 @@
     <description>Some of your allied countries are low on resources and you had to help them. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>75</modifier>
   </event>
   <event>
     <nr>11</nr>
@@ -97,7 +97,7 @@
     <description>The allied countries have sent a gift to you. You gain resources.</description>
     <resource>all</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>150</modifier>
   </event>
   <event>
     <nr>12</nr>
@@ -106,7 +106,7 @@
     <description>Your people are glad that the country is prospering. You gain approval.</description>
     <resource>approval</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>25</modifier>
   </event>
   <event>
     <nr>13</nr>
@@ -115,7 +115,7 @@
     <description>Researches in biology have gone wrong and a dangerous virus has been released. The people are panicking causing you lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>15</modifier>
   </event>
   <event>
     <nr>14</nr>
@@ -124,7 +124,7 @@
     <description>Reports of a terrorist suicide attack are circulating, inducing mass panic. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>15</modifier>
   </event>
   <event>
     <nr>15</nr>
@@ -133,7 +133,7 @@
     <description>People observed that life in your country is hard and have started running away. You lose citizens.</description>
     <resource>citizens</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>200</modifier>
   </event>
   <event>
     <nr>16</nr>
@@ -142,16 +142,16 @@
     <description>There has been a wave of illegal immigrants in your country. The number of citizens has increased.</description>
     <resource>citizens</resource>
     <type>positive</type>
-    <modifier></modifier>
+    <modifier>100</modifier>
   </event>
   <event>
     <nr>17</nr>
     <required>none</required>
     <name>Bad rumors</name>
-    <description>A number of bad rumors have been appearing concerning your rulership. You lose approval.</description>
+    <description>A number of bad rumors have been spreading concerning your rulership. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>15</modifier>
   </event>
   <event>
     <nr>18</nr>
@@ -160,7 +160,7 @@
     <description>A new political party has appeared. However, your party managed to make them surrender. Your people have observed this and they are angry because you don’t give them free will. You lose approval.</description>
     <resource>approval</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>15</modifier>
   </event>
   <event>
     <nr>19</nr>
@@ -169,7 +169,7 @@
     <description>Scientists from a foreign country stole a part of your research, and finished it on their own. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>100</modifier>
   </event>
   <event>
     <nr>20</nr>
@@ -178,6 +178,6 @@
     <description>A group of scientists failed to finish their research and made no improvement thus only wasting resources. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
-    <modifier></modifier>
+    <modifier>75</modifier>
   </event>
 </events>

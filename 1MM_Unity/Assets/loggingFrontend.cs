@@ -18,6 +18,6 @@ public class loggingFrontend : MonoBehaviour {
         values.text = "Food: " + LoggingSystem.Instance.foodGained.ToString() + "\n"
             + "Materials: " + LoggingSystem.Instance.materialsGained.ToString() + "\n"
             + "Money: " + LoggingSystem.Instance.moneyGained.ToString() + "\n"
-            + "Approval: " + (-LoggingSystem.Instance.baseApprovalLost).ToString();
+            + "Approval: " + (-LoggingSystem.Instance.baseApprovalLost + LoggingSystem.Instance.approvalGained).ToString();
     }
 }

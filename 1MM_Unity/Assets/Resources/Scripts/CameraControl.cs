@@ -54,6 +54,11 @@ public class CameraControl : MonoBehaviour {
         return temp;
     }
 
+    public void returnCameraToExecutiveBuilding()
+    {
+        cam.transform.position = GameObject.FindGameObjectWithTag("Executive").transform.position;
+    }
+
     bool recievedInput()
     {
         bool ok = new bool();

@@ -10,12 +10,15 @@ public class windowValues : MonoBehaviour {
     public CanvasGroup[] buttonSet;
     public CanvasGroup extraTab;
     public string buildingName;
+    public GameObject clickedByGO;
 
     public buildingValues values = new buildingValues();
 
     public void clicked(GameObject clickedBy)
     {
         buildingName = clickedBy.name;
+
+        clickedByGO = clickedBy;
 
         extraTab.gameObject.GetComponent<hide>().setTrue();
         updateValues(buildingName, values.buildingLongDescription(buildingName), values.numberOf(buildingName), values.buildingFlavorText(buildingName));

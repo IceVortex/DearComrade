@@ -114,7 +114,7 @@ public class GameResources : MonoBehaviour
         string typeDestination = GameResources.instance.buildings[indexDestination].GetType().ToString();
 
         if ((typeStart == "House" || typeStart == "Farm" || typeStart == "Factory") &&
-            (typeDestination != "ExecutivebBuilding" || typeDestination != "Laboratory"))
+            (typeDestination != "ExecutiveBuilding" && typeDestination != "Laboratory"))
             return true;
         else
             return false;

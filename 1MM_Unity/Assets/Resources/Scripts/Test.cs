@@ -20,7 +20,7 @@ public class Test : MonoBehaviour {
 
         public int nr;
         public string description, n, required, resource, type;
-        public float modifier;
+        public int modifier;
 
     };
 
@@ -74,7 +74,6 @@ public class Test : MonoBehaviour {
         else
         {
             readWholeEvent();
-            interpretData();
         }
         //Camera.main.GetComponent<keyboardInput>().events = true;
     }
@@ -117,9 +116,9 @@ public class Test : MonoBehaviour {
                         reader.Read();
                         thisEvent.type = reader.Value;
                         break;
-                    case "modifer":
+                    case "modifier":
                         reader.Read();
-                        float.TryParse(reader.Value, out thisEvent.modifier);
+                        int.TryParse(reader.Value, out thisEvent.modifier);
                         break;
 
                 }
@@ -133,7 +132,6 @@ public class Test : MonoBehaviour {
     void interpretData()
     {
         thisEvent.nr = eventNumber;
-        trigger = true;
         float x = new float();
         title.text = thisEvent.n;
         description.text = thisEvent.description;
@@ -169,23 +167,31 @@ public class Test : MonoBehaviour {
 
         if (thisEvent.resource == "approval")
         {
-            LoggingSystem.Instance.approvalGained += thisEvent.modifier;
+            LoggingSystem.Instance.approvalGained += x * thisEvent.modifier;
             GameResources.instance.approval += x * thisEvent.modifier;
         }
+
         if (thisEvent.resource == "food" || thisEvent.resource == "all")
         {
-            LoggingSystem.Instance.foodGained += thisEvent.modifier;
+            LoggingSystem.Instance.foodGained += x * thisEvent.modifier;
             GameResources.instance.food += x * thisEvent.modifier;
         }
+
+        if (thisEvent.resource == "money" || thisEvent.resource == "all")
+        {
+            LoggingSystem.Instance.moneyGained += x * thisEvent.modifier;
+            GameResources.instance.money += x * thisEvent.modifier;
+        }
+
         if (thisEvent.resource == "materials" || thisEvent.resource == "all")
         {
-            LoggingSystem.Instance.materialsGained += thisEvent.modifier;
+            LoggingSystem.Instance.materialsGained += x * thisEvent.modifier;
             GameResources.instance.buildingMaterials += x * thisEvent.modifier;
         }
-        if (thisEvent.resource == "citizens" || thisEvent.resource == "all")
+        if (thisEvent.resource == "citizens")
         {
-            LoggingSystem.Instance.citizensGained += thisEvent.modifier;
-            GameResources.instance.buildingMaterials += x * thisEvent.modifier;
+            LoggingSystem.Instance.citizensGained += x * thisEvent.modifier;
+            GameResources.instance.citizens += x * thisEvent.modifier;
         }
 
         
