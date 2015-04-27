@@ -116,6 +116,9 @@ public class MouseInput : MonoBehaviour {
                 {
                     result.text = "Comradery Succesfuly established!";
                     GameResources.instance.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
+
+                    comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
+
                 }
                  
 
