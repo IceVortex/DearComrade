@@ -24,7 +24,7 @@ public class Test : MonoBehaviour {
 
     };
 
-    public gameEvent thisEvent;
+    public gameEvent thisEvent, lastEvent;
 
     void Awake()
     {
@@ -46,15 +46,19 @@ public class Test : MonoBehaviour {
             if(!GameResources.instance.buildingConsutructedCheck(thisEvent.required))
                 getRandomEvent();
         }
+        else if(lastEvent.type == thisEvent.type)
+        {
+            getRandomEvent();
+        }
         else
         {
             interpretData();
+            lastEvent = thisEvent;
         }
     }
 
     public void getToEvent(int x)
     {
-        //print(x);
         while (reader.Read())
         {
             if (reader.Name == "nr")
@@ -67,7 +71,6 @@ public class Test : MonoBehaviour {
         reader.Read();
 
         int.TryParse(reader.Value, out eventNumber);
-        //print(eventNumber);
 
         if (eventNumber != x)
             getToEvent(x);
@@ -75,7 +78,6 @@ public class Test : MonoBehaviour {
         {
             readWholeEvent();
         }
-        //Camera.main.GetComponent<keyboardInput>().events = true;
     }
 
     void readWholeEvent()
@@ -86,8 +88,6 @@ public class Test : MonoBehaviour {
             if (reader.Name == "event" && reader.NodeType == XmlNodeType.EndElement)
             {
                 trigger = false;
-                //Camera.main.GetComponent<keyboardInput>().events = false;
-                //Time.timeScale = 1;
                 break;
             }
 
