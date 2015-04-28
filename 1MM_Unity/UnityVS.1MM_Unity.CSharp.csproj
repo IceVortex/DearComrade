@@ -104,6 +104,7 @@
     <Compile Include="Assets\Resources\Scripts\UI\tradingOverview.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\windowValues.cs" />
     <Compile Include="Assets\helpers.cs" />
+    <Compile Include="Assets\uiAlphaToggle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\events.xml" />
