@@ -7,7 +7,7 @@ public class Workplace : ABuilding
     public Workplace()
     {
         name = "Workplace";
-        shortDescription = "Workplaces are the backbone of the economy and having plenty of them helps improving the country. These increase your approval by 30 and decrease the approval decay rate by 10%. ";
+        shortDescription = "Workplaces increase your approval by 30 and decrease the approval decay rate by 10%. ";
         longDescription = "Workplaces are the backbone of the economy and having plenty of them helps improving the country. These increase your approval by 30 and decrease the approval decay rate by 10%. Linking a house to workplaces increase the gold gained per citizen by 0.001.";
         flavorText = "Work It Harder, Make It Better, Do It Faster, Makes Us stronger";
         foodCost = 0;
