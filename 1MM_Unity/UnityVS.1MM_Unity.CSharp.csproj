@@ -104,11 +104,7 @@
     <Compile Include="Assets\Resources\Scripts\UI\taxesFrontEnd.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\tradingOverview.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\windowValues.cs" />
-<<<<<<< HEAD
-    <Compile Include="Assets\helpers.cs" />
     <Compile Include="Assets\uiAlphaToggle.cs" />
-=======
->>>>>>> 2d0d155873455c70cda81207e407c729973b1112
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\events.xml" />
