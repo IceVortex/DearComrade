@@ -18,11 +18,7 @@ public class GameManagement : MonoBehaviour {
 
 	void Start () 
     {
-        Debug.Log("Current Approval: " + GameResources.instance.approval);
-        Debug.Log("Current Food: " + GameResources.instance.food);
-        Debug.Log("Current Materials: " + GameResources.instance.buildingMaterials);
-        Debug.Log("Current Money: " + GameResources.instance.money);
-        Debug.Log("Current Citizens: " + GameResources.instance.citizens + " / " + GameResources.instance.maximumCitizens);
+
     }
 
     void Update()
