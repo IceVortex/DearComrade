@@ -88,6 +88,24 @@ public class buildingValues
             return x.name;
         }
 
+        else if( building == "FoodTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.name;
+        }
+
+        else if (building == "MaterialsTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.name;
+        }
+
+        else if (building == "CitizensTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.name;
+        }
+
         else
             return "";
     }
@@ -171,6 +189,25 @@ public class buildingValues
             MilitaryOutpost x = new MilitaryOutpost();
             return x.shortDescription;
         }
+
+        else if (building == "FoodTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.shortDescription;
+        }
+
+        else if (building == "MaterialsTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.shortDescription;
+        }
+
+        else if (building == "CitizensTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.shortDescription;
+        }
+
         else
             return "";
     }
@@ -249,6 +286,26 @@ public class buildingValues
             MilitaryOutpost x = new MilitaryOutpost();
             return x.longDescription;
         }
+
+
+        else if (building == "FoodTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.longDescription;
+        }
+
+        else if (building == "MaterialsTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.longDescription;
+        }
+
+        else if (building == "CitizensTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.longDescription;
+        }
+
         else
             return "";
     }
@@ -325,6 +382,25 @@ public class buildingValues
         else if (building == "Military Outpost")
         {
             MilitaryOutpost x = new MilitaryOutpost();
+            return x.flavorText;
+        }
+
+
+        else if (building == "FoodTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.flavorText;
+        }
+
+        else if (building == "MaterialsTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
+            return x.flavorText;
+        }
+
+        else if (building == "CitizensTeritory")
+        {
+            FoodTerritory x = new FoodTerritory();
             return x.flavorText;
         }
 
