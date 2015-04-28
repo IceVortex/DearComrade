@@ -7,7 +7,7 @@ public class WTC : ABuilding
     public WTC()
     {
         name = "World Trade Center";
-        shortDescription = "By using this building you can trade food and materials for money or buy more food and materials using your currency.";
+        shortDescription = "The World Trade Center lets you sell food and materials or buy more food and materials.";
         longDescription = "By using this building you can trade food and materials for money or buy more food and materials using your currency. Linking a house to the WTC increases your sell rate, linking a factory or a farm increases your buy rate for both food and materials.";
         flavorText = "Beware of the planes.";
         foodCost = 0;

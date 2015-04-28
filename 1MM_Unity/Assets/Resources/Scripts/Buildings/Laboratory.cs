@@ -43,7 +43,7 @@ public class Laboratory : ABuilding
     public Laboratory()
     {
         name = "Laboratory";
-        shortDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " months, which you can assign to a particular research.";
+        shortDescription = "Laboratories let you make researches. They provide points which you can assign to a particular research.";
         longDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " months, which you can assign to a particular research.";
         flavorText = "Jet fuel can't melt steel beams.";
         foodCost = 0;

@@ -15,4 +15,14 @@ public class resourcesUI : MonoBehaviour {
         troops.text = "Troops: " + System.Math.Round(GameResources.instance.troops,2).ToString() + "/" + System.Math.Round(GameResources.instance.maximumTroops,2).ToString();
         researchPoints.text = "Research Points: " + System.Math.Round(GameResources.instance.researchPoints, 2).ToString();
     }
+
+    public void displayTooltip(GameObject tooltip)
+    {
+        tooltip.GetComponent<hide>().toggle();
+    }
+
+    public void hideTooltip(GameObject tooltip)
+    {
+        tooltip.GetComponent<hide>().toggle();
+    }
 }
