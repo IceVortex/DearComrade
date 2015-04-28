@@ -112,9 +112,30 @@ public class GameResources : MonoBehaviour
     {
         string typeStart = GameResources.instance.buildings[indexStart].GetType().ToString();
         string typeDestination = GameResources.instance.buildings[indexDestination].GetType().ToString();
-
-        if ((typeStart == "House" || typeStart == "Farm" || typeStart == "Factory") &&
-            (typeDestination != "ExecutiveBuilding" && typeDestination != "Laboratory"))
+        
+        if (typeStart == "House" && typeDestination == "House" && indexStart != indexDestination)
+            return true;
+        else if (typeStart == "House" && typeDestination == "WTC")
+            return true;
+        else if (typeStart == "Farm" && typeDestination == "WTC")
+            return true;
+        else if (typeStart == "House" && typeDestination == "Hospital")
+            return true;
+        else if (typeStart == "House" && typeDestination == "EducationalBuilding")
+            return true;
+        else if (typeStart == "House" && typeDestination == "PoliceStation")
+            return true;
+        else if (typeStart == "House" && typeDestination == "Workplace")
+            return true;
+        else if (typeStart == "House" && typeDestination == "PublicSpace")
+            return true;
+        else if (typeStart == "House" && typeDestination == "MilitaryOutpost")
+            return true;
+        else if ((typeStart == "House" && typeDestination == "Farm") ||
+            (typeStart == "Farm" && typeDestination == "House"))
+            return true;
+        else if ((typeStart == "House" && typeDestination == "Factory") ||
+            (typeStart == "Factory" && typeDestination == "House"))
             return true;
         else
             return false;
