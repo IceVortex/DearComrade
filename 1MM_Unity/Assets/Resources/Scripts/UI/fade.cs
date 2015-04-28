@@ -10,13 +10,16 @@ public class fade : MonoBehaviour {
 
     public void end()
     {
-        startTime = Time.time;
-        fadeTo0 = false;
-        fadeTo1 = false;
-        fadeAllTo0 = true;
-        textZone.interactable = false;
-        textZone.blocksRaycasts = false;
-        Invoke("hideEverything", endWantedTime + 0.25F);
+        if(!fadeAllTo0)
+        { 
+            startTime = Time.time;
+            fadeTo0 = false;
+            fadeTo1 = false;
+            fadeAllTo0 = true;
+            textZone.interactable = false;
+            textZone.blocksRaycasts = false;
+            Invoke("hideEverything", endWantedTime + 0.25F);
+        }
     }
 
     void hideEverything()

@@ -14,8 +14,10 @@ public class MainMenu : MonoBehaviour {
     public Text resolutionText, currentResolution, quality, currentQuality;
     public int qualitySize, resolutionSize;
     public Text[] setting;
-    public bool windowed,fade0,fade1,fadeToT1,clickedStart;
+    public bool windowed, fade0, fade1, clickedStart;
     public float wantedTime, currentT, f0Start,f1Start;
+
+    public CanvasGroup introduction1, introduction2, button;
 
     public void Awake()
     {
@@ -52,64 +54,50 @@ public class MainMenu : MonoBehaviour {
         quality.text = QualitySettings.names[(int)graphicSlider.value];
 
         if(clickedStart)
-        { 
-            if (fade0)
-            {
-                currentT = (Time.time - f0Start) / wantedTime;
-                cgToFade0.alpha = Mathf.Lerp(1, 0, currentT);
-                if (cgToFade0.alpha == 0)
-                {
-                    fade0 = false;
-                }
-            }
+        {
+
+            currentT = (Time.time - f1Start) / wantedTime;
 
             if (fade1)
             {
-                currentT = (Time.time - f1Start) / wantedTime;
-                cgToFade1.alpha = Mathf.Lerp(0, 1, currentT);
-                if (cgToFade1.alpha == 1)
-                {
-                    fade1 = false;
-                }
-            }
-
-            if (t1.alpha == 0 && t2.alpha == 1)
-            {
-                Invoke("load", 1.25F);
-            }
-
-            if (t1.alpha == 0 && t2.alpha == 0 && mainMenu.alpha == 0 && !fadeToT1)
-            {
-                fadeToAlpha1(Time.time, t2);
-            }
-
-
-            if (t1.alpha == 1 && t2.alpha == 0)
-            {
-                Invoke("Transition",1.25F);
-            }
-
-           if (t1.alpha == 0 && mainMenu.alpha == 0 && fadeToT1)
-            {
-                fadeToAlpha1(Time.time, t1);
-                fadeToT1 = false;
+                introduction1.alpha = Mathf.Lerp(0, 1, currentT);
             }
 
 
         }
-
-        
-       
 	}
- 
+
+    public void showButton()
+    {
+        button.alpha = 1;
+        button.interactable = true;
+        button.blocksRaycasts = true;
+    }
 
     public void OnClickStart()
     {
         clickedStart = true;
         fadeToAlpha0(Time.time, mainMenu);
-        fadeToT1 = true;
         mainMenu.interactable = false;
         mainMenu.blocksRaycasts = false;
+
+        mainMenu.gameObject.GetComponent<hide>().toggle();
+        Invoke("showIntroduction", 3.0F);
+
+        showButton();
+    }
+
+    public void showIntroduction()
+    {
+        fadeToAlpha1(Time.time, introduction1);
+        introduction1.gameObject.GetComponent<hide>().toggle();
+        Invoke("showSecondIntroduction", 7F);
+    }
+
+    public void showSecondIntroduction()
+    {
+        introduction2.alpha = 1;
+        introduction2.gameObject.GetComponent<hide>().toggle();
     }
 
     public void apply()
@@ -183,7 +171,7 @@ public class MainMenu : MonoBehaviour {
         fade1 = true;
     }
 
-    void load()
+    public void load()
     {
         Application.LoadLevel("FirstLevel");
     }
