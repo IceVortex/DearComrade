@@ -88,21 +88,21 @@ public class buildingValues
             return x.name;
         }
 
-        else if( building == "FoodTeritory")
+        else if(building == "Food Territory")
         {
             FoodTerritory x = new FoodTerritory();
             return x.name;
         }
 
-        else if (building == "MaterialsTeritory")
+        else if (building == "Materials Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            MaterialsTerritory x = new MaterialsTerritory();
             return x.name;
         }
 
-        else if (building == "CitizensTeritory")
+        else if (building == "Citizens Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            CitizensTerritory x = new CitizensTerritory();
             return x.name;
         }
 
@@ -190,21 +190,21 @@ public class buildingValues
             return x.shortDescription;
         }
 
-        else if (building == "FoodTeritory")
+        else if (building == "Food Territory")
         {
             FoodTerritory x = new FoodTerritory();
             return x.shortDescription;
         }
 
-        else if (building == "MaterialsTeritory")
+        else if (building == "Materials Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            MaterialsTerritory x = new MaterialsTerritory();
             return x.shortDescription;
         }
 
-        else if (building == "CitizensTeritory")
+        else if (building == "Citizens Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            CitizensTerritory x = new CitizensTerritory();
             return x.shortDescription;
         }
 
@@ -288,21 +288,21 @@ public class buildingValues
         }
 
 
-        else if (building == "FoodTeritory")
+        else if (building == "Food Territory")
         {
             FoodTerritory x = new FoodTerritory();
             return x.longDescription;
         }
 
-        else if (building == "MaterialsTeritory")
+        else if (building == "Materials Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            MaterialsTerritory x = new MaterialsTerritory();
             return x.longDescription;
         }
 
-        else if (building == "CitizensTeritory")
+        else if (building == "Citizens Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            CitizensTerritory x = new CitizensTerritory();
             return x.longDescription;
         }
 
@@ -386,21 +386,21 @@ public class buildingValues
         }
 
 
-        else if (building == "FoodTeritory")
+        else if (building == "Food Territory")
         {
             FoodTerritory x = new FoodTerritory();
             return x.flavorText;
         }
 
-        else if (building == "MaterialsTeritory")
+        else if (building == "Materials Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            MaterialsTerritory x = new MaterialsTerritory();
             return x.flavorText;
         }
 
-        else if (building == "CitizensTeritory")
+        else if (building == "Citizens Territory")
         {
-            FoodTerritory x = new FoodTerritory();
+            CitizensTerritory x = new CitizensTerritory();
             return x.flavorText;
         }
 

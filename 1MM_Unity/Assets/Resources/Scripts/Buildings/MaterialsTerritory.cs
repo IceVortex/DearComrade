@@ -7,9 +7,9 @@ public class MaterialsTerritory : ABuilding
 
     public MaterialsTerritory()
     {
-        name = "Materials Teritory";
-        shortDescription = "Materials teritories generate 15 materials each turn.";
-        longDescription = "Materials teritories generate 15 food each turn.";
+        name = "Materials Territory";
+        shortDescription = "Materials territories generate 15 materials each turn.";
+        longDescription = "Materials territories generate 15 materials each turn.";
         flavorText = "You can find any type of materials here. Even boyfriend materials.";
         foodCost = 0;
         moneyCost = 0;

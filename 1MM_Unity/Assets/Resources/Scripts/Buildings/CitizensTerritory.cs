@@ -6,7 +6,7 @@ public class CitizensTerritory : ABuilding
 
     public CitizensTerritory()
     {
-        name = "Citizens Teritory";
+        name = "Citizens Territory";
         shortDescription = "Citizens teritories increase the number of maximum citizens by 450.";
         longDescription = "Citizens teritories increase the number of maximum citizens by 450.";
         flavorText = "I swear they are not slaves.";

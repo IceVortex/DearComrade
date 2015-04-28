@@ -7,9 +7,9 @@ public class FoodTerritory : ABuilding
 
     public FoodTerritory()
     {
-        name = "Food Teritory";
-        shortDescription = "Food teritories generate 15 food each turn.";
-        longDescription = "Food teritories generate 15 food each turn.";
+        name = "Food Territory";
+        shortDescription = "Food territories generate 15 food each turn.";
+        longDescription = "Food territories generate 15 food each turn.";
         flavorText = "Remember when food territories generated 15 food each turn? They always generated 15 food each turn.";
         foodCost = 0;
         moneyCost = 0;

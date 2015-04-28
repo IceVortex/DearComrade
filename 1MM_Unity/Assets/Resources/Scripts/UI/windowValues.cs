@@ -126,6 +126,24 @@ public class windowValues : MonoBehaviour {
             changeButtonSet(buttonSet[4]);
             bMax.text = "Maximum amount: 1";
         }
+        if (n == "Food Territory")
+        {
+            bIcon.sprite = icons[12];
+            changeButtonSet(buttonSet[0]);
+            bMax.text = "Maximum amount: Unlimited";
+        }
+        if (n == "Materials Territory")
+        {
+            bIcon.sprite = icons[13];
+            changeButtonSet(buttonSet[0]);
+            bMax.text = "Maximum amount: Unlimited";
+        }
+        if (n == "Citizens Territory")
+        {
+            bIcon.sprite = icons[14];
+            changeButtonSet(buttonSet[0]);
+            bMax.text = "Maximum amount: Unlimited";
+        }
 
     }
 
