@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 public class GameManagement : MonoBehaviour {
     
-    public GameObject prefab;
+    public GameObject prefab, foodTerritoryPrefab, materialsTerritoryPrefab, citizensTerritoryPrefab;
     private GameObject obj;
     public testBuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
+    private int randNr;
 
     void Awake()
     {
@@ -77,6 +78,17 @@ public class GameManagement : MonoBehaviour {
             GameResources.instance.buildingMaterials = 0;
         if (GameResources.instance.citizens < 0)
             GameResources.instance.citizens = 0;
+
+        if((int)Random.Range(0f,101f) <= GameResources.instance.territoryConquerRate)
+        {
+            randNr = (int)Random.Range(0, 101);
+            if (randNr <= 33)
+                GameResources.instance.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
+            else if (randNr <= 66)
+                GameResources.instance.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
+            else if (randNr <= 100)
+                GameResources.instance.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
+        }
     }
 
 }

@@ -61,13 +61,16 @@
     <Compile Include="Assets\Resources\Scripts\BuildingScripts\buildingValues.cs" />
     <Compile Include="Assets\Resources\Scripts\BuildingScripts\canBuild.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\ABuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\CitizensTerritory.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\EducationalBuilding.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\ExecutiveBuilding.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\Factory.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\Farm.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\FoodTerritory.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\Hospital.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\House.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\Laboratory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\MaterialsTerritory.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\MilitaryOutpost.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\PoliceStation.cs" />
     <Compile Include="Assets\Resources\Scripts\Buildings\PublicSpace.cs" />
@@ -103,12 +106,8 @@
     <Compile Include="Assets\Resources\Scripts\UI\resourcesUI.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\taxesFrontEnd.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\tradingOverview.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\uiAlphaToggle.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\windowValues.cs" />
-<<<<<<< HEAD
-    <Compile Include="Assets\helpers.cs" />
-    <Compile Include="Assets\uiAlphaToggle.cs" />
-=======
->>>>>>> 2d0d155873455c70cda81207e407c729973b1112
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\events.xml" />

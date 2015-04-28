@@ -27,6 +27,7 @@ public class GameResources : MonoBehaviour
     public float buildingCostRate = 100, buyRate = 100, sellRate = 50;
     public float approvalDecayRate = 100, goldPerTurn = 0.01f;
     public float flatApproval = 1f;
+    public float territoryConquerRate = 0f;
 
     //Rate of triggered event cost.
     public float triggeredEventCostRate = 100;
@@ -166,6 +167,7 @@ public class GameResources : MonoBehaviour
             {
                 GameResources.instance.maximumCitizens -= houseCitizensT;
                 GameResources.instance.maximumTroops += houseCitizensT;
+                GameResources.instance.territoryConquerRate += 7;
 
                 if (GameResources.instance.citizens >= houseCitizensT)
                 {
