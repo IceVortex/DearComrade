@@ -26,8 +26,8 @@ public class MouseInput : MonoBehaviour {
             stopComradery();
         else
         {
-            changeText();
             comradery = true;
+            changeText();
             stopMoving();
         }
     }
@@ -141,6 +141,8 @@ public class MouseInput : MonoBehaviour {
 
                     comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
 
+                    if (window.GetComponentInChildren<windowValues>().clickedByGO)
+                        window.GetComponentInChildren<windowValues>().clicked(comrade1);
                    
                 }
                 if (comrade1 == comrade2)
@@ -152,7 +154,7 @@ public class MouseInput : MonoBehaviour {
 
                 comrade1 = comrade2 = null;
 
-                Invoke("ChangeText", 1.5F);
+                Invoke("changeText", 1.5F);
             }
 
         }
@@ -205,7 +207,7 @@ public class MouseInput : MonoBehaviour {
                     winComradery = false;
                     ComraderyButtonText.text = "Establish Comradery";
                     comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
-
+                    window.GetComponentInChildren<windowValues>().clicked(comrade1);
                 }
 
 
@@ -312,7 +314,7 @@ public class MouseInput : MonoBehaviour {
 
 	}
 
-    void changeText()
+    public void changeText()
     {
         if (comradery)
         {
@@ -339,10 +341,13 @@ public class MouseInput : MonoBehaviour {
 
     void hideResult()
     {
-        result.text = "";
-        resultCG.alpha = 0;
-        resultCG.interactable = false;
-        resultCG.blocksRaycasts = false;
+        if(!comradery && !move)
+        { 
+            result.text = "";
+            resultCG.alpha = 0;
+            resultCG.interactable = false;
+            resultCG.blocksRaycasts = false;
+        }
     }
 
 }

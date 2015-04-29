@@ -54,21 +54,30 @@ public class windowValues : MonoBehaviour {
         if (n == "House")
         {
             bIcon.sprite = icons[1];
-            changeButtonSet(buttonSet[0]);
+            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+                changeButtonSet(buttonSet[0]);
+            else
+                changeButtonSet(buttonSet[4]);
             bMax.text = "Maximum amount: Unlimited";
         }
 
         if (n == "Farm")
         {
             bIcon.sprite = icons[2];
-            changeButtonSet(buttonSet[0]);
+            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+                changeButtonSet(buttonSet[0]);
+            else
+                changeButtonSet(buttonSet[4]);
             bMax.text = "Maximum amount: Unlimited";
         }
 
         if (n == "Factory")
         {
             bIcon.sprite = icons[3];
-            changeButtonSet(buttonSet[0]);
+            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+                changeButtonSet(buttonSet[0]);
+            else
+                changeButtonSet(buttonSet[4]);
             bMax.text = "Maximum amount: Unlimited";
         }
 

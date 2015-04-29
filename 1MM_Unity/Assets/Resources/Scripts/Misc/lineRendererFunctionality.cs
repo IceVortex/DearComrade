@@ -18,15 +18,18 @@ public class lineRendererFunctionality : MonoBehaviour {
 
     public void updateTarget(GameObject target)
     {
+        Target = target;
         if (GameResources.instance.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex != 0)
         {
-            Target = target;
             lr.SetPosition(1, target.transform.position + Vector3.forward);
         }
-        else if (GameResources.instance.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex ==
+        if (GameResources.instance.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex ==
                  gameObject.GetComponent<IdManager>().buildingIndex)
         {
             target.GetComponent<LineRenderer>().materials[0] = mat;
+            lr.materials[0] = mat;
+            lr.material = mat;
+            target.GetComponent<LineRenderer>().material = mat;
         }
     }
 

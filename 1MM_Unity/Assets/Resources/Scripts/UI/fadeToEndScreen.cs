@@ -26,6 +26,11 @@ public class fadeToEndScreen : MonoBehaviour {
         {
             cg.alpha = Mathf.Lerp(0, 1, t);
         }
-
 	}
+
+    public void loadMainMenu()
+    {
+        Application.LoadLevel("Main Menu");
+    }
+
 }
