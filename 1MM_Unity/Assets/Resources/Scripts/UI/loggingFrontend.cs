@@ -18,6 +18,18 @@ public class loggingFrontend : MonoBehaviour {
         values.text = "Food: " + System.Math.Round(LoggingSystem.Instance.foodGained,2).ToString() + "\n"
             + "Materials: " + System.Math.Round(LoggingSystem.Instance.materialsGained,2).ToString() + "\n"
             + "Money: " + System.Math.Round(LoggingSystem.Instance.moneyGained,2).ToString() + "\n"
-            + "Approval: " + System.Math.Round((-LoggingSystem.Instance.baseApprovalLost + LoggingSystem.Instance.approvalGained),2).ToString();
+            + "Approval: " + System.Math.Round((-LoggingSystem.Instance.baseApprovalLost + LoggingSystem.Instance.approvalGained),2).ToString()+"\n";
+        if (LoggingSystem.Instance.territoryRecieved == 1)
+        {
+            values.text += "Your army has conquered a Food Territory.";
+        }
+        if (LoggingSystem.Instance.territoryRecieved == 2)
+        {
+            values.text += "Your army has conquered a Materials Territory.";
+        }
+        if (LoggingSystem.Instance.territoryRecieved == 3)
+        {
+            values.text += "Your army has conquered a Citizens Territory.";
+        }
     }
 }

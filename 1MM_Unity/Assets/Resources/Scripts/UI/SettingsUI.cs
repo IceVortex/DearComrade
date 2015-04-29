@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SettingsUI : MonoBehaviour
 {
 
-    public Canvas canvas, UI;
+    public Canvas canvas;
 
     public Resolution[] resolutions;
     public int currentRes,currenQual;
@@ -17,7 +17,6 @@ public class SettingsUI : MonoBehaviour
     public bool windowed;
 
     public KeyCode pressed, lastPressedKey;
-    public GameObject obj;
     public bool keyPressed, endTurnChange;
     
 
@@ -52,8 +51,6 @@ public class SettingsUI : MonoBehaviour
 
     void Update()
     {
-
-        
         lastPressedKey = pressed;
 
         setting[0].text = KeyBindingManager.Instance.endTurn.ToString();
@@ -133,10 +130,14 @@ public class SettingsUI : MonoBehaviour
     public void resume()
     {
         Time.timeScale = 1;
-        UI.enabled = true;
         canvas.enabled = false;
         Camera.main.GetComponent<keyboardInput>().showMenu = false;
+    }
 
+    public void showMenu()
+    {
+        canvas.enabled = true;
+        Time.timeScale = 0;
     }
 
     void OnGUI()

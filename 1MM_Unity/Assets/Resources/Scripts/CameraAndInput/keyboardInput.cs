@@ -4,8 +4,7 @@ using System.Collections;
 public class keyboardInput : MonoBehaviour {
 
     public bool toggled,toggled3;
-    public UIControl ui;
-    public string inv;
+    public SettingsUI ui;
     public float rawFps,fps,maxFps,minFps,avgFps;
     public bool showFPS, toggled2, showMenu, events;
     public int qty;
@@ -29,14 +28,13 @@ public class keyboardInput : MonoBehaviour {
         {
             showMenu = false;
             toggled3 = true;
-            
+            ui.resume();
         }
 
         if (showMenu == false && Input.GetKeyDown(KeyCode.Escape) && !toggled3)
         {
             showMenu = true;
-
-
+            ui.showMenu();
         }
 
         if (showFPS == true && Input.GetKeyDown(KeyCode.BackQuote))
@@ -61,16 +59,10 @@ public class keyboardInput : MonoBehaviour {
             avgFps += (rawFps - avgFps) / qty;
         }
 
-        if (showMenu == true && !events)
+        /*if (showMenu == true && !events)
         {
-            ui.ShowMenu();
-        }
-
-        if (showMenu == false && !events)
-        {
-            ui.settings.GetComponent<SettingsUI>().resume();
-            
-        }
+            ui.showMenu();
+        }*/
 
 	}
 

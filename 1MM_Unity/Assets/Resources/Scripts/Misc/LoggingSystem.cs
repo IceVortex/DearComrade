@@ -6,6 +6,7 @@ public class LoggingSystem : MonoBehaviour
 
     private static LoggingSystem instance;
     public float foodGained, materialsGained, moneyGained, citizensGained, baseApprovalLost, approvalGained;
+    public int territoryRecieved;
 
     public static LoggingSystem Instance
     {
@@ -20,5 +21,6 @@ public class LoggingSystem : MonoBehaviour
         citizensGained = 0;
         baseApprovalLost = 0;
         approvalGained = 0;
+        territoryRecieved = 0;
     }
 }

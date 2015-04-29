@@ -68,7 +68,7 @@ public class GameManagement : MonoBehaviour {
             LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained/2;
         }
 
-        loggingFrontEnd.updateValues();
+        
 
         if (GameResources.instance.food < 0)
             GameResources.instance.food = 0;
@@ -83,12 +83,25 @@ public class GameManagement : MonoBehaviour {
         {
             randNr = (int)Random.Range(0, 101);
             if (randNr <= 33)
+            {
                 GameResources.instance.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
+                LoggingSystem.Instance.territoryRecieved = 1;
+            }
             else if (randNr <= 66)
+            {
                 GameResources.instance.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
+                LoggingSystem.Instance.territoryRecieved = 2;
+            }
             else if (randNr <= 100)
+            {
                 GameResources.instance.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
+                LoggingSystem.Instance.territoryRecieved = 3;
+            }
         }
+
+
+        loggingFrontEnd.updateValues();
+
     }
 
 }

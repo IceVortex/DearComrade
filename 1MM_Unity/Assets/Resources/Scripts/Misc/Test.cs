@@ -38,7 +38,7 @@ public class Test : MonoBehaviour {
     public void getRandomEvent()
     {
         reader = XmlReader.Create(new StringReader(text.text), settings);
-        int x = Random.Range(1, 20);
+        int x = Random.Range(1, 21);
         getToEvent(x);
 
         if (thisEvent.required != "none")
