@@ -34,7 +34,7 @@ public class Laboratory : ABuilding
                                     "The resources cost of buildings is reduced by 20%.",
                                     "Cost of buying resources at market is reduced by 30% and the number of resources gained from buying is also increased by 30%.", 
                                     "The maximum number of homeless citizens is increased to 300.",
-                                    "The cost of triggered events is reduced by 20%.",
+                                    "The cost of organised events is reduced by 20%.",
                                     "The maximum approval gained from triggered events (Public speech and Festival) is increased by 7.",
                                     "The approval gained from the “Increased food ratio” is increased by 0.025 per food exchanged."};
 
