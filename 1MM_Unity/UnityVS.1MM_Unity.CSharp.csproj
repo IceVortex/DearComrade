@@ -99,6 +99,7 @@
     <Compile Include="Assets\Resources\Scripts\UI\currentTab.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\date.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\fade.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\fadeToEndScreen.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\hide.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\loggingFrontend.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\researchFrontEnd.cs" />

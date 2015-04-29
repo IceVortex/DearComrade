@@ -9,6 +9,9 @@ public class GameManagement : MonoBehaviour {
     public testBuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
+
+    public fadeToEndScreen lose, win;
+
     private int randNr;
 
     void Awake()
@@ -17,17 +20,17 @@ public class GameManagement : MonoBehaviour {
         gen.hub = GameObject.FindGameObjectWithTag("Executive");
     }
 
-	void Start () 
-    {
-
-    }
-
     void Update()
     {
-        if (GameResources.instance.approval >= 100f && GameResources.instance.troops >= 3000)
-            Debug.Log("Win");
-        if (GameResources.instance.approval <= -100)
-            Debug.Log("Lose");
+        if (GameResources.instance.approval >= 100f && GameResources.instance.troops >= 3000 && !win.fadeTo1)
+        {
+            win.startFadeTo1();
+
+        }
+        if (GameResources.instance.approval <= -100 && !lose.fadeTo1)
+        {
+            lose.startFadeTo1();
+        }
     }
 
     public void nextTurn()

@@ -10,11 +10,11 @@ public class MouseInput : MonoBehaviour {
     private Ray2D ray;
     public Collider2D clickedOn;
     public Camera cam;
-    public bool comradery, move;
+    public bool comradery, move, winMove, winComradery;
     public GameObject comrade1, comrade2, buildingToMove;
 
     public CanvasGroup resultCG;
-    public Text result;
+    public Text result, ComraderyButtonText, moveButtonText;
 
 	void Start () {
         cam = GetComponent<Camera>();	
@@ -22,24 +22,44 @@ public class MouseInput : MonoBehaviour {
 
     public void startComradery()
     {
-        comradery = true;
+        if (comradery)
+            stopComradery();
+        else
+        {
+            changeText();
+            comradery = true;
+            stopMoving();
+        }
     }
 
     public void windowComradery()
     {
-        comradery = true;
+        stopMoving();
+        winComradery = true;
         comrade1 = window.GetComponentInChildren<windowValues>().clickedByGO;
+    }
+
+    public void windowMoveBuilding()
+    {
+        stopComradery();
+        winMove = true;
+        buildingToMove = window.GetComponentInChildren<windowValues>().clickedByGO;
     }
 
     public void moveBuilding()
     {
-        move = true;
-        buildingToMove = window.GetComponentInChildren<windowValues>().clickedByGO;
+        if (move)
+            stopMoving();
+        else
+        {
+            stopComradery();
+            move = true;
+        }
     }
 
 
 	void Update () {
-        if (!comradery && !move)
+        if (!comradery && !move && !winMove && !winComradery)
         {
             if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
@@ -73,14 +93,11 @@ public class MouseInput : MonoBehaviour {
         }
         else if(comradery)
         {
+            ComraderyButtonText.text = "Cancel Comradery";
+
             resultCG.alpha = 1;
             resultCG.interactable = true;
             resultCG.blocksRaycasts = true;
-
-            if(!comrade1)
-            {
-                result.text = "Choose first comrade.";
-            }
 
             if (comrade1 && !comrade2)
             {
@@ -107,7 +124,6 @@ public class MouseInput : MonoBehaviour {
 
             if(comrade1 && comrade2)
             {
-                comradery = false;
 
                 if (!GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
                 {
@@ -125,8 +141,73 @@ public class MouseInput : MonoBehaviour {
 
                     comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
 
+                   
                 }
-                 
+                if (comrade1 == comrade2)
+                {
+                    result.text = "You must choose different comrades!";
+                }
+
+                
+
+                comrade1 = comrade2 = null;
+
+                Invoke("ChangeText", 1.5F);
+            }
+
+        }
+
+        else if (winComradery)
+        {
+            ComraderyButtonText.text = "Cancel Comradery";
+
+            resultCG.alpha = 1;
+            resultCG.interactable = true;
+            resultCG.blocksRaycasts = true;
+
+            if (comrade1 && !comrade2)
+            {
+                result.text = "Choose second comrade.";
+            }
+
+            if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
+                {
+                    clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
+
+                    if (comrade1 && !comrade2)
+                        comrade2 = clickedOn.gameObject;
+                }
+                else
+                {
+                    clickedOn = null;
+                }
+
+            }
+
+            if (comrade1 && comrade2)
+            {
+
+                if (!GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                {
+                    result.text = "The building already has a comrade.";
+                }
+                else if (!GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex))
+                {
+                    result.text = "One of the buildings you chose cannot have comrades.";
+                }
+                else if (GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex)
+                    && GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                {
+                    result.text = "Comradery Succesfuly established!";
+                    GameResources.instance.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
+                    winComradery = false;
+                    ComraderyButtonText.text = "Establish Comradery";
+                    comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
+
+                }
+
 
                 if (comrade1 == comrade2)
                 {
@@ -143,15 +224,35 @@ public class MouseInput : MonoBehaviour {
 
         else if (move)
         {
+            moveButtonText.text = "Stop Moving";
+
             float xPos, yPos;
             xPos = cam.ScreenToWorldPoint(Input.mousePosition).x;
             yPos = cam.ScreenToWorldPoint(Input.mousePosition).y;
 
             resultCG.alpha = 1;
-            result.text = "Click where you want the building to be moved.";
-
-            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            if (!buildingToMove)
             {
+                result.text = "Click on the building you want to move and hold the mouse button down.";
+
+                if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                {
+                    if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
+                    {
+                        clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
+                        buildingToMove = clickedOn.gameObject;
+                    }
+                    else
+                    {
+                        clickedOn = null;
+                    }
+
+                }
+            }
+            
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() && buildingToMove)
+            {
+                result.text = "Drag the mouse to where you want the building to be moved and release the mouse button.";
                 buildingToMove.GetComponent<Collider2D>().enabled = false;
 
                 if (!Physics2D.OverlapArea(new Vector2(xPos - 0.6F, yPos - 0.6F),
@@ -159,22 +260,82 @@ public class MouseInput : MonoBehaviour {
                 {
                     buildingToMove.transform.position = new Vector3(xPos, yPos, 0);
 
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonUp(0))
                     {
                         buildingToMove.transform.position = new Vector3(xPos, yPos, 0);
-                        move = false;
                         result.text = "Succesfully moved building";
                         buildingToMove.GetComponent<Collider2D>().enabled = true;
-                        if (resultCG.alpha != 0)
-                            Invoke("hideResult", 1.5F);
+                        buildingToMove = null;
                     }
                 }
 
             }
             
         }
+        else if (winMove)
+        {
+            moveButtonText.text = "Stop Moving";
+            result.text = "Click where you want the building to be moved.";
+
+            float xPos, yPos;
+            xPos = cam.ScreenToWorldPoint(Input.mousePosition).x;
+            yPos = cam.ScreenToWorldPoint(Input.mousePosition).y;
+
+            resultCG.alpha = 1;
+            
+
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                buildingToMove.GetComponent<Collider2D>().enabled = false;
+
+                if (!Physics2D.OverlapArea(new Vector2(xPos - 0.6F, yPos - 0.6F),
+                 new Vector2(xPos + 0.6F, yPos + 0.6F)))
+                {
+                    buildingToMove.transform.position = new Vector3(xPos, yPos, 0);
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        buildingToMove.transform.position = new Vector3(xPos, yPos, 0);
+                        result.text = "Succesfully moved building";
+                        winMove = false;
+                        moveButtonText.text = "Move Building";
+                        buildingToMove.GetComponent<Collider2D>().enabled = true;
+                        buildingToMove = null;
+                        if (resultCG.alpha != 0)
+                            Invoke("hideResult", 1.5F);
+                    }
+                }
+
+            }
+
+        }
 
 	}
+
+    void changeText()
+    {
+        if (comradery)
+        {
+            result.text = "Choose first comrade.";
+        }
+    }
+
+    public void stopComradery()
+    {
+        comradery = false;
+        comrade1 = comrade2 = null;
+        if (resultCG.alpha != 0)
+            Invoke("hideResult", 1.5F);
+        ComraderyButtonText.text = "Establish Comradery";
+    }
+
+    public void stopMoving()
+    {
+        move = false;
+        buildingToMove = null;
+        Invoke("hideResult", 1.5F);
+        moveButtonText.text = "Move Building";
+    }
 
     void hideResult()
     {
