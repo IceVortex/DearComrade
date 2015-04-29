@@ -17,8 +17,8 @@ public class SettingsUI : MonoBehaviour
     public Text[] setting;
     public bool windowed;
 
-    public KeyCode pressed, lastPressedKey;
-    public bool keyPressed, endTurnChange;
+    //public KeyCode pressed, lastPressedKey;
+    //public bool keyPressed, endTurnChange;
     
 
     public CanvasGroup menuCG, settingsCG;
@@ -55,37 +55,18 @@ public class SettingsUI : MonoBehaviour
 
     void Update()
     {
-        lastPressedKey = pressed;
-
-        setting[0].text = KeyBindingManager.Instance.endTurn.ToString();
-        
 
         windowed = wind.isOn;
         resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
         quality.text = QualitySettings.names[(int)graphicSlider.value];
 
-        if (Input.GetKeyUp(lastPressedKey) && endTurnChange)
-        {
-            if (KeyBindingManager.Instance.check(lastPressedKey))
-            {
-                KeyBindingManager.Instance.endTurn = lastPressedKey;
-                keyPressed = false;
-                endTurnChange = false;
-            }
-        }
-
 
     }
 
-    public void UpdateEndTurn()
+    /*public void UpdateEndTurn()
     {
         endTurnChange = true;
-    }
-
-    public void resetToDefaults()
-    {
-        KeyBindingManager.Instance.reset();
-    }
+    }*/
 
     public void mainMenu()
     {
@@ -144,20 +125,6 @@ public class SettingsUI : MonoBehaviour
     {
         canvas.enabled = true;
         Time.timeScale = 0;
-    }
-
-    void OnGUI()
-    {
-        keyPressed = false;
-        Event e = Event.current;
-
-        if (e.isKey)
-        {
-            pressed = e.keyCode;
-            keyPressed = true;
-        }
-
-
     }
 
 
