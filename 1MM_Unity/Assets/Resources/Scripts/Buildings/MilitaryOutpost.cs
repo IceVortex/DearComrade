@@ -8,11 +8,22 @@ public class MilitaryOutpost : ABuilding
     {
         name = "Military Outpost";
         shortDescription = "The Military Outpost lets you create troops.";
-        longDescription = "The Military Outpost lets you create troops. Troops are created by linking houses to the outpost. After that, you lose 300 maximum citizens which are added to the maximum number of troops and also 300 of your current citizens which are transformed into troops.";
+        longDescription = "The Military Outpost lets you create troops. Linking a house to the outpost grants you 300 troops but substracts 300 citizens. You also receive a stackable 8% chance to conquer a territory every turn, which is an improved version of a house, farm or factory.";
         flavorText = "Men at arms, women at legs.";
         foodCost = 0;
         moneyCost = 50;
         buildingMaterialsCost = 100;
     }
 
+    public override void Effect()
+    {
+        if (GameResources.instance.troops <= GameResources.instance.maximumTroops)
+        {
+            if (GameResources.instance.maximumTroops - GameResources.instance.troops > 100)
+                GameResources.instance.troops += 100;
+            else
+                GameResources.instance.troops = GameResources.instance.maximumTroops;
+        }
+
+    }
 }

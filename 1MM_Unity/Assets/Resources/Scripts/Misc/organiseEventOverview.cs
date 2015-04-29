@@ -22,7 +22,8 @@ public class organiseEventOverview : MonoBehaviour {
 
     public void rations()
     {
-        if (GameResources.instance.food >= 100)
+        //if (GameResources.instance.food >= 100)
+        if(eb.canBuyFoodRatio())    
             eb.increasedFoodRatio(100);
     }
 
@@ -59,7 +60,7 @@ public class organiseEventOverview : MonoBehaviour {
             overlays[1].blocksRaycasts = true;
         }
 
-        if (GameResources.instance.food>=100)
+        if (eb.canBuyFoodRatio())
         {
             overlays[2].alpha = 0;
             overlays[2].interactable = false;

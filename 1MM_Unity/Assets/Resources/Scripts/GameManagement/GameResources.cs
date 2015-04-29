@@ -167,7 +167,7 @@ public class GameResources : MonoBehaviour
             {
                 GameResources.instance.maximumCitizens -= houseCitizensT;
                 GameResources.instance.maximumTroops += houseCitizensT;
-                GameResources.instance.territoryConquerRate += 7;
+                GameResources.instance.territoryConquerRate += 8;
 
                 if (GameResources.instance.citizens >= houseCitizensT)
                 {

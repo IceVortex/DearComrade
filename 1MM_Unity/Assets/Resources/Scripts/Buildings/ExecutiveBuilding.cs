@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExecutiveBuilding : ABuilding
 {
-    public int cdFestival = 8, cdPublicSpeech = 8;
+    public int cdFestival = 8, cdPublicSpeech = 8, cdFoodRatio = 3;
     private int festivalFoodCost = 250, festivalMoneyCost = 200;
     private int publicSpeecFoodCost = 250, publicSpeechMoneyCost = 200;
     private int numberOfCitizens = 400;
@@ -31,6 +31,8 @@ public class ExecutiveBuilding : ABuilding
             cdFestival--;
         if (cdPublicSpeech > 0)
             cdPublicSpeech--;
+        if (cdFoodRatio > 0)
+            cdFoodRatio--;
         
         GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
         LoggingSystem.Instance.moneyGained += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
@@ -45,6 +47,13 @@ public class ExecutiveBuilding : ABuilding
 
 
         GameResources.instance.flatApproval += 0.1f;
+    }
+
+    public bool canBuyFoodRatio()
+    {
+        if (GameResources.instance.food >= 100 && cdFoodRatio == 0)
+            return true;
+        return false;
     }
 
     public bool canBuyFestival()
@@ -67,7 +76,7 @@ public class ExecutiveBuilding : ABuilding
 
     public void buyFestival()
     {
-        cdFestival = 10;
+        cdFestival = 8;
         GameResources.instance.approval += GameResources.instance.festivalApproval;
         GameResources.instance.food -= festivalFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
         GameResources.instance.money -= festivalMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
@@ -76,7 +85,7 @@ public class ExecutiveBuilding : ABuilding
 
     public void buyPublicSpeech()
     {
-        cdPublicSpeech = 10;
+        cdPublicSpeech = 8;
         GameResources.instance.approval += GameResources.instance.publichSpeechApproval;
         GameResources.instance.food -= publicSpeecFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
         GameResources.instance.money -= publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
@@ -84,6 +93,7 @@ public class ExecutiveBuilding : ABuilding
 
     public void increasedFoodRatio(int food)
     {
+        cdFoodRatio = 3;
         GameResources.instance.food -= food;
         GameResources.instance.approval += GameResources.instance.foodRatioApproval * food;
     }

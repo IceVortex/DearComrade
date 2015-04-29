@@ -18,6 +18,6 @@ public class CitizensTerritory : ABuilding
     public override void Initialize(int index)
     {
         base.Initialize(index);
-        GameResources.instance.maxHomelessCitizens += 450;
+        GameResources.instance.maximumCitizens += 450;
     }
 }
