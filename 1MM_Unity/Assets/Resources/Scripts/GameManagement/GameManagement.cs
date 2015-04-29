@@ -79,7 +79,7 @@ public class GameManagement : MonoBehaviour {
         if (GameResources.instance.citizens < 0)
             GameResources.instance.citizens = 0;
 
-        if((int)Random.Range(0f,101f) <= GameResources.instance.territoryConquerRate)
+        if((int)Random.Range(0f,101f) < GameResources.instance.territoryConquerRate)
         {
             randNr = (int)Random.Range(0, 101);
             if (randNr <= 33)
