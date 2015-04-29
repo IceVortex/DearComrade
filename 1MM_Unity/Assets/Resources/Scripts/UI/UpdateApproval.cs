@@ -23,5 +23,15 @@ public class UpdateApproval : MonoBehaviour {
             fillerRed.fillAmount = -GameResources.instance.approval / 200;
             fillerGreen.fillAmount = 0f;
         }
+
+        if (fillerGreen.fillAmount >= 0.5F)
+        {
+            fillerGreen.fillAmount = 0.5F;
+        }
+        if (fillerRed.fillAmount >= 0.5F)
+        {
+            fillerRed.fillAmount = 0.5F;
+        }
+
 	}
 }
