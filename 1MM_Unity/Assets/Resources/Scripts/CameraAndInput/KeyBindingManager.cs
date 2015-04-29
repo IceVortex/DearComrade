@@ -15,14 +15,10 @@ public class KeyBindingManager : MonoBehaviour {
 
 
 	void Awake () {
-        reset();
+
         scrollEnabled = false;
 	}
 
-    public void reset()
-    {
-        endTurn = KeyCode.Space;
-    }
 
     public bool check(KeyCode lastPressedKey)
     {
