@@ -22,38 +22,52 @@ public class MouseInput : MonoBehaviour {
 
     public void startComradery()
     {
-        if (comradery)
-            stopComradery();
-        else
-        {
-            comradery = true;
-            changeText();
-            stopMoving();
+        if(!winMove)
+        { 
+            if (comradery || winComradery)
+                stopComradery();
+            else
+            {
+                comradery = true;
+                changeText();
+                stopMoving();
+            }
         }
     }
 
     public void windowComradery()
     {
-        stopMoving();
-        winComradery = true;
-        comrade1 = window.GetComponentInChildren<windowValues>().clickedByGO;
+        if (!move && !comradery)
+        { 
+            stopMoving();
+            stopComradery();
+            winComradery = true;
+            comrade1 = window.GetComponentInChildren<windowValues>().clickedByGO;
+        }
     }
 
     public void windowMoveBuilding()
     {
-        stopComradery();
-        winMove = true;
-        buildingToMove = window.GetComponentInChildren<windowValues>().clickedByGO;
+        if (!move && !comradery)
+        { 
+            stopComradery();
+            stopMoving();
+            winMove = true;
+            buildingToMove = window.GetComponentInChildren<windowValues>().clickedByGO;
+        }
     }
 
     public void moveBuilding()
     {
-        if (move)
-            stopMoving();
-        else
+        if (!winMove && !winComradery)
         {
-            stopComradery();
-            move = true;
+            if (move)
+                stopMoving();
+            else
+            {
+                stopComradery();
+                move = true;
+            }
         }
     }
 
@@ -325,6 +339,7 @@ public class MouseInput : MonoBehaviour {
     public void stopComradery()
     {
         comradery = false;
+        winComradery = false;
         comrade1 = comrade2 = null;
         if (resultCG.alpha != 0)
             Invoke("hideResult", 1.5F);
@@ -334,6 +349,7 @@ public class MouseInput : MonoBehaviour {
     public void stopMoving()
     {
         move = false;
+        winMove = false;
         buildingToMove = null;
         Invoke("hideResult", 1.5F);
         moveButtonText.text = "Move Building";

@@ -40,7 +40,16 @@ public class MainMenu : MonoBehaviour {
         graphicSlider.maxValue = QualitySettings.names.Length - 1;
 
 
-        currentResolution.text = "Current Resolution: \n" + Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString();
+        if (!wind.isOn)
+            currentResolution.text = "Current Resolution: \n" + Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString();
+        else
+            currentResolution.text = "Current Resolution: \n" + Screen.width.ToString() + " x " + Screen.height.ToString();
+
+        if (!wind.isOn)
+            resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
+        else
+            resolutionText.text = "Current Resolution: \n" + Screen.width.ToString() + " x " + Screen.height.ToString();
+
         currentQuality.text = "Current Quality: \n" + QualitySettings.names[QualitySettings.GetQualityLevel()];
         graphicSlider.value = QualitySettings.GetQualityLevel();
         soundSlider.value = 1;

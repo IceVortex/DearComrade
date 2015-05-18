@@ -44,8 +44,16 @@ public class SettingsUI : MonoBehaviour
         resolutionSlider.value = currentRes;
         graphicSlider.maxValue = QualitySettings.names.Length - 1;
         
+        if(!wind.isOn)
+            currentResolution.text = "Current Resolution: \n" + Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString();
+        else
+            currentResolution.text = "Current Resolution: \n" + Screen.width.ToString() + " x " + Screen.height.ToString();
 
-        currentResolution.text = "Current Resolution: \n" + Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString();
+        if (!wind.isOn)
+            resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
+        else
+            resolutionText.text = "Current Resolution: \n" + Screen.width.ToString() + " x " + Screen.height.ToString();
+
         currentQuality.text = "Current Quality: \n" + QualitySettings.names[QualitySettings.GetQualityLevel()];
         graphicSlider.value = QualitySettings.GetQualityLevel();
 
@@ -57,7 +65,10 @@ public class SettingsUI : MonoBehaviour
     {
 
         windowed = wind.isOn;
-        resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
+        if(!wind.isOn)
+            resolutionText.text = resolutions[(int)resolutionSlider.value].width.ToString() + " x " + resolutions[(int)resolutionSlider.value].height.ToString();
+        else
+            resolutionText.text = "Current Resolution: \n" + Screen.width.ToString() + " x " + Screen.height.ToString();
         quality.text = QualitySettings.names[(int)graphicSlider.value];
 
 
