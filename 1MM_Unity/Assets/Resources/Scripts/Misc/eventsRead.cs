@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Xml;
 using System.IO;
 
-public class Test : MonoBehaviour {
+public class eventsRead : MonoBehaviour {
 
     XmlReader reader;
     XmlReaderSettings settings;

@@ -6,7 +6,7 @@ public class GameManagement : MonoBehaviour {
     
     public GameObject prefab, foodTerritoryPrefab, materialsTerritoryPrefab, citizensTerritoryPrefab;
     private GameObject obj;
-    public testBuildingGeneration gen;
+    public BuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
 
@@ -36,7 +36,7 @@ public class GameManagement : MonoBehaviour {
     public void nextTurn()
     {
         LoggingSystem.Instance.reset();
-        GetComponent<Test>().getRandomEvent();
+        GetComponent<eventsRead>().getRandomEvent();
         d.updateDate();
         GameResources.instance.turnIndex++;
         foreach (ABuilding building in GameResources.instance.buildings)
@@ -49,13 +49,13 @@ public class GameManagement : MonoBehaviour {
             GameResources.instance.linkEffectTurn(entry.Key, entry.Value);
         }
 
-        if (GetComponent<Test>().thisEvent.type == "stalemate" && GetComponent<Test>().thisEvent.resource == "food")
+        if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "food")
         {
             GameResources.instance.food -= LoggingSystem.Instance.foodGained;
             LoggingSystem.Instance.foodGained = 0;
         }
 
-        if (GetComponent<Test>().thisEvent.type == "stalemate" && GetComponent<Test>().thisEvent.resource == "all")
+        if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "all")
         {
             GameResources.instance.food -= LoggingSystem.Instance.foodGained;
             GameResources.instance.buildingMaterials -= LoggingSystem.Instance.materialsGained;
@@ -65,7 +65,7 @@ public class GameManagement : MonoBehaviour {
             LoggingSystem.Instance.moneyGained = 0;
         }
 
-        if (GetComponent<Test>().thisEvent.type == "halved")
+        if (GetComponent<eventsRead>().thisEvent.type == "halved")
         {
             GameResources.instance.food -= LoggingSystem.Instance.foodGained/2;
             LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained/2;
