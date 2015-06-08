@@ -166,6 +166,7 @@ public class MainMenu : MonoBehaviour {
 
     public void OnClickExit()
     {
+        PlayerPrefs.SetInt("disclaimer", 0);
         Application.Quit();
     }
 

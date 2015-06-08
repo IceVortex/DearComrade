@@ -109,6 +109,7 @@
     <Compile Include="Assets\Resources\Scripts\UI\tradingOverview.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\uiAlphaToggle.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\windowValues.cs" />
+    <Compile Include="Assets\fadeDisclaimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\TextAssets\Story.xml" />
