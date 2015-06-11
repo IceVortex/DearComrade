@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class testBuildingGeneration : MonoBehaviour {
+public class BuildingGeneration : MonoBehaviour {
 
 
     public GameObject hub, source;

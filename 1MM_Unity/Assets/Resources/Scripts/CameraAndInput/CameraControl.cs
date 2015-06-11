@@ -7,7 +7,7 @@ public class CameraControl : MonoBehaviour {
     public Vector2 camera_next_pos;
     public Vector3 temp, input, x;
 
-    public bool isMoving;
+    public bool isMoving, scrollEnabled;
 
     public float zoom, t, zoomSmoothingTime, lastChange;
     public int correction, mouseSpeed, scrollSpeed, zoomSpeed;
@@ -28,7 +28,7 @@ public class CameraControl : MonoBehaviour {
         currentState = transform.position;
         lastTrendSmoothing = Vector3.zero;
 
-        KeyBindingManager.Instance.scrollEnabled = true;
+        scrollEnabled = true;
 
 	}
 
@@ -63,7 +63,7 @@ public class CameraControl : MonoBehaviour {
     {
         bool ok = new bool();
 
-        if (KeyBindingManager.Instance.scrollEnabled)
+        if (scrollEnabled)
         {
             if (Input.mousePosition.x >= Screen.width - correction)
             {

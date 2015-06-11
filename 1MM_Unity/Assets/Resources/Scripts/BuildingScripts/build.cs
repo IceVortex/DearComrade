@@ -4,7 +4,7 @@ using System.Collections;
 public class build : MonoBehaviour {
 
     public GameObject prefab;
-    public testBuildingGeneration gen;
+    public BuildingGeneration gen;
 	
     public void createBuilding()
     {
