@@ -27,7 +27,7 @@ public class fadeDisclaimer : MonoBehaviour {
         fadeDisclaimerTo1 = true;
         cg.interactable = true;
         cg.blocksRaycasts = true;
-        Invoke("startFadeTo0", wantedTime + 4.5F);
+        Invoke("startFadeTo0", wantedTime + 7.5F);
 
     }
 
@@ -46,9 +46,14 @@ public class fadeDisclaimer : MonoBehaviour {
         fadeTo0 = false;
         startTime = Time.time;
         fadeTo1 = true;
+        Invoke("toggleInteractable", wantedTime);
+
+    }
+
+    public void toggleInteractable()
+    {
         mm.interactable = true;
         mm.blocksRaycasts = true;
-        
     }
 
 	void Update () {
