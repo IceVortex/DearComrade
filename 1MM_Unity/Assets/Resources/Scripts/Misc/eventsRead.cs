@@ -40,16 +40,23 @@ public class eventsRead : MonoBehaviour {
         reader = XmlReader.Create(new StringReader(text.text), settings);
         int x = Random.Range(1, 21);
         getToEvent(x);
-
-        if (thisEvent.required != "none")
-        {
-            if(!GameResources.instance.buildingConsutructedCheck(thisEvent.required))
-                getRandomEvent();
-        }
-        else if(lastEvent.type == thisEvent.type)
+        
+        if (lastEvent.type == thisEvent.type)
         {
             getRandomEvent();
         }
+        else if (thisEvent.required != "none")
+        {
+            if (!GameResources.instance.buildingConsutructedCheck(thisEvent.required))
+                getRandomEvent();
+            else
+            {
+                interpretData();
+                lastEvent = thisEvent;
+            }
+            
+        }
+        
         else
         {
             interpretData();

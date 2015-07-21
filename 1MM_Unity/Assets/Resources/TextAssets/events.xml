@@ -174,7 +174,7 @@
   <event>
     <nr>20</nr>
     <required>Laboratory</required>
-    <name>Research papers stolen</name>
+    <name>Research gone wrong</name>
     <description>A group of scientists failed to finish their research and made no improvement thus only wasting resources. You lose resources.</description>
     <resource>all</resource>
     <type>negative</type>
