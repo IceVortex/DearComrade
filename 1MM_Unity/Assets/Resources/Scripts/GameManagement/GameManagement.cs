@@ -39,6 +39,7 @@ public class GameManagement : MonoBehaviour {
         GetComponent<eventsRead>().getRandomEvent();
         d.updateDate();
         GameResources.instance.turnIndex++;
+
         foreach (ABuilding building in GameResources.instance.buildings)
         {
             building.Effect();
@@ -75,10 +76,13 @@ public class GameManagement : MonoBehaviour {
 
         if (GameResources.instance.food < 0)
             GameResources.instance.food = 0;
+
         if (GameResources.instance.money < 0)
             GameResources.instance.money = 0;
+
         if (GameResources.instance.buildingMaterials < 0)
             GameResources.instance.buildingMaterials = 0;
+
         if (GameResources.instance.citizens < 0)
             GameResources.instance.citizens = 0;
 

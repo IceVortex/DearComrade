@@ -8,14 +8,6 @@ public class BuildingGeneration : MonoBehaviour {
     public float radius;
     public int steps, modifier;
 
-    /*void OnGUI()
-    {
-        if (GUILayout.Button("Generate Random Building"))
-        {
-            generate();
-        }
-    }*/
-
     public Vector3 generate() 
     {
         steps++;
