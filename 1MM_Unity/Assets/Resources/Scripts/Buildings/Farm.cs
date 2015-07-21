@@ -14,12 +14,19 @@ public class Farm : ABuilding
         foodCost = 35;//50
         moneyCost = 3;
         buildingMaterialsCost = 20;
-        farmPower = GameResources.instance.farmFoodT;
+        //farmPower = res.farmFoodT;
+    }
+
+    public override void Initialize(int i, AResources resource)
+    {
+        base.Initialize(i, resource);
+        farmPower = res.farmFoodT;
     }
 
     public override void Effect()
     {
-        GameResources.instance.food += farmPower;
+        res.food += farmPower;
+        if(res is GameResources)
         LoggingSystem.Instance.foodGained += farmPower;
     }
 }

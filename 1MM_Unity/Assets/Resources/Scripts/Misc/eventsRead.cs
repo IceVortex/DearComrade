@@ -12,6 +12,7 @@ public class eventsRead : MonoBehaviour {
     public TextAsset text;
     public int eventNumber;
     public bool trigger;
+    public AResources resources;
 
     public Text title, description, effect;
 
@@ -47,7 +48,7 @@ public class eventsRead : MonoBehaviour {
         }
         else if (thisEvent.required != "none")
         {
-            if (!GameResources.instance.buildingConsutructedCheck(thisEvent.required))
+            if (!resources.buildingConsutructedCheck(thisEvent.required))
                 getRandomEvent();
             else
             {
@@ -139,15 +140,15 @@ public class eventsRead : MonoBehaviour {
     {
         if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "food")
         {
-            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
+            resources.food -= LoggingSystem.Instance.foodGained;
             LoggingSystem.Instance.foodGained = 0;
         }
 
         if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "all")
         {
-            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
-            GameResources.instance.buildingMaterials -= LoggingSystem.Instance.materialsGained;
-            GameResources.instance.money -= LoggingSystem.Instance.moneyGained;
+            resources.food -= LoggingSystem.Instance.foodGained;
+            resources.buildingMaterials -= LoggingSystem.Instance.materialsGained;
+            resources.money -= LoggingSystem.Instance.moneyGained;
             LoggingSystem.Instance.foodGained = 0;
             LoggingSystem.Instance.materialsGained = 0;
             LoggingSystem.Instance.moneyGained = 0;
@@ -155,7 +156,7 @@ public class eventsRead : MonoBehaviour {
 
         if (GetComponent<eventsRead>().thisEvent.type == "halved")
         {
-            GameResources.instance.food -= LoggingSystem.Instance.foodGained / 2;
+            resources.food -= LoggingSystem.Instance.foodGained / 2;
             LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained / 2;
         }
     }
@@ -199,30 +200,30 @@ public class eventsRead : MonoBehaviour {
         if (thisEvent.resource == "approval")
         {
             LoggingSystem.Instance.approvalGained += x * thisEvent.modifier;
-            GameResources.instance.approval += x * thisEvent.modifier;
+            resources.approval += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "food" || thisEvent.resource == "all")
         {
             LoggingSystem.Instance.foodGained += x * thisEvent.modifier;
-            GameResources.instance.food += x * thisEvent.modifier;
+            resources.food += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "money" || thisEvent.resource == "all")
         {
             LoggingSystem.Instance.moneyGained += x * thisEvent.modifier;
-            GameResources.instance.money += x * thisEvent.modifier;
+            resources.money += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "materials" || thisEvent.resource == "all")
         {
             LoggingSystem.Instance.materialsGained += x * thisEvent.modifier;
-            GameResources.instance.buildingMaterials += x * thisEvent.modifier;
+            resources.buildingMaterials += x * thisEvent.modifier;
         }
         if (thisEvent.resource == "citizens")
         {
             LoggingSystem.Instance.citizensGained += x * thisEvent.modifier;
-            GameResources.instance.citizens += x * thisEvent.modifier;
+            resources.citizens += x * thisEvent.modifier;
         }
 
         

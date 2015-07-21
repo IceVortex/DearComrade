@@ -21,25 +21,25 @@ public class WTC : ABuilding
 
     public void buyFood(int money)
     {
-        GameResources.instance.money -= money;
-        GameResources.instance.food += money * (GameResources.instance.buyRate / 100);
+        res.money -= money;
+        res.food += money * (res.buyRate / 100);
     }
 
     public void buyMaterials(int money)
     {
-        GameResources.instance.money -= money;
-        GameResources.instance.buildingMaterials += money * (GameResources.instance.buyRate / 100);
+        res.money -= money;
+        res.buildingMaterials += money * (res.buyRate / 100);
     }
 
     public void sellFood(int food)
     {
-        GameResources.instance.food -= food;
-        GameResources.instance.money += food * (GameResources.instance.sellRate / 100);
+        res.food -= food;
+        res.money += food * (res.sellRate / 100);
     }
 
     public void sellMaterials(int materials)
     {
-        GameResources.instance.buildingMaterials -= materials;
-        GameResources.instance.money += materials * (GameResources.instance.sellRate / 100);
+        res.buildingMaterials -= materials;
+        res.money += materials * (res.sellRate / 100);
     }
 }

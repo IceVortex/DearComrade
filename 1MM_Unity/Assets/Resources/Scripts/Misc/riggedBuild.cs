@@ -4,6 +4,7 @@ using System.Collections;
 public class riggedBuild : MonoBehaviour {
 
     private bool safe = false;
+    public AResources resources;
 
 	void Start () {
 	
@@ -16,18 +17,18 @@ public class riggedBuild : MonoBehaviour {
 			safe = true;
 
 		if (Input.GetKey (KeyCode.W) && safe) {
-			GameResources.instance.approval = 150;
-			GameResources.instance.troops = 3500;
+            resources.approval = 150;
+            resources.troops = 3500;
 		}
 
 		if (Input.GetKey (KeyCode.L) && safe) {
-			GameResources.instance.approval = -100;
+            resources.approval = -100;
 		}
 
 		if (Input.GetKeyDown (KeyCode.R) && safe) {
-			GameResources.instance.buildingMaterials+=100;
-			GameResources.instance.food+=100;
-			GameResources.instance.money+=100;
+            resources.buildingMaterials += 100;
+            resources.food += 100;
+            resources.money += 100;
 		}
 	}
 }

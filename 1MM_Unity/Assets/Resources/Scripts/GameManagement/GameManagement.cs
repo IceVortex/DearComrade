@@ -6,10 +6,11 @@ public class GameManagement : MonoBehaviour {
     
     public GameObject prefab, foodTerritoryPrefab, materialsTerritoryPrefab, citizensTerritoryPrefab;
     private GameObject obj;
+    public AIManagement ai;
     public BuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
-    public statistics stats;
+    public AResources res;
 
     public fadeToEndScreen lose, win;
 
@@ -17,18 +18,18 @@ public class GameManagement : MonoBehaviour {
 
     void Awake()
     {
-        GameResources.instance.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/Buildings/Executive Building"), new Vector3(0, 0, 0));
+        res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/Buildings/Executive Building"), new Vector3(0, 0, 0));
         gen.hub = GameObject.FindGameObjectWithTag("Executive");
     }
 
     void Update()
     {
-        if (GameResources.instance.approval >= 100f && GameResources.instance.troops >= 3000 && !win.fadeTo1)
+        if (res.approval >= 100f && res.troops >= 3000 && !win.fadeTo1)
         {
             win.startFadeTo1();
 
         }
-        if (GameResources.instance.approval <= -100 && !lose.fadeTo1)
+        if (res.approval <= -100 && !lose.fadeTo1)
         {
             lose.startFadeTo1();
         }
@@ -39,55 +40,56 @@ public class GameManagement : MonoBehaviour {
         LoggingSystem.Instance.reset();
         GetComponent<eventsRead>().getRandomEvent();
         d.updateDate();
-        GameResources.instance.turnIndex++;
+        res.turnIndex++;
 
-        foreach (ABuilding building in GameResources.instance.buildings)
+        ai.nextTurn();
+
+        foreach (ABuilding building in res.buildings)
         {
             building.Effect();
         }
 
-        foreach(var entry in GameResources.instance.links)
+        foreach(var entry in res.links)
         {
-            GameResources.instance.linkEffectTurn(entry.Key, entry.Value);
+            res.linkEffectTurn(entry.Key, entry.Value);
         }
 
         GetComponent<eventsRead>().eventEffect();
 
-        if (GameResources.instance.food < 0)
-            GameResources.instance.food = 0;
+        if (res.food < 0)
+            res.food = 0;
 
-        if (GameResources.instance.money < 0)
-            GameResources.instance.money = 0;
+        if (res.money < 0)
+            res.money = 0;
 
-        if (GameResources.instance.buildingMaterials < 0)
-            GameResources.instance.buildingMaterials = 0;
+        if (res.buildingMaterials < 0)
+            res.buildingMaterials = 0;
 
-        if (GameResources.instance.citizens < 0)
-            GameResources.instance.citizens = 0;
+        if (res.citizens < 0)
+            res.citizens = 0;
 
-        if((int)Random.Range(0f,101f) < GameResources.instance.territoryConquerRate)
+        if((int)Random.Range(0f,101f) < res.territoryConquerRate)
         {
             randNr = (int)Random.Range(0, 101);
             if (randNr <= 33)
             {
-                GameResources.instance.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
+                res.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
                 LoggingSystem.Instance.territoryRecieved = 1;
             }
             else if (randNr <= 66)
             {
-                GameResources.instance.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
+                res.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
                 LoggingSystem.Instance.territoryRecieved = 2;
             }
             else if (randNr <= 100)
             {
-                GameResources.instance.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
+                res.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
                 LoggingSystem.Instance.territoryRecieved = 3;
             }
         }
 
 
         loggingFrontEnd.updateValues();
-        stats.updateStatistics();
 
     }
 

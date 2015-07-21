@@ -7,7 +7,6 @@ public class Laboratory : ABuilding
 
     public int researchPointCount;
     public int researchPointInterval = 7;
-    public int researchesMade;
 
     public bool fertility, industrialRevolution, spaceConservation,
         theProletariat, nanocarbonMaterials, bargaining, improvedShelters,
@@ -50,7 +49,6 @@ public class Laboratory : ABuilding
         foodCost = 0;
         moneyCost = 75;
         buildingMaterialsCost = 150;
-        researchesMade = 0;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagement>();
 
         costs = new Vector3[10];
@@ -68,114 +66,105 @@ public class Laboratory : ABuilding
         
     }
 
-    public override void Initialize(int index)
+    public override void Initialize(int index, AResources resource)
     {
-        base.Initialize(index);
-        GameResources.instance.researchPoints++;
+        base.Initialize(index, resource);
+        res.researchPoints++;
     }
 
     public override void Effect()
     {
         researchPointCount++;
         if (researchPointCount % researchPointInterval == 0)
-            GameResources.instance.researchPoints++;
+            res.researchPoints++;
     }
 
     private void substractResources(float food, float money, float materials)
     {
-        GameResources.instance.food -= food;
-        GameResources.instance.money -= money;
-        GameResources.instance.buildingMaterials -= materials;
+        res.food -= food;
+        res.money -= money;
+        res.buildingMaterials -= materials;
     }
 
     public void researchFertility()
     {
-        GameResources.instance.researchPoints--;
-        foreach(ABuilding building in GameResources.instance.buildings)
+        res.researchPoints--;
+        foreach (ABuilding building in res.buildings)
         {
             if (building.GetType().ToString() == "Farm")
                 ((Farm)building).farmPower += 5;
             
         }
-        GameResources.instance.farmFoodT += 5;
-        GameResources.instance.researchesMade++;
+        res.farmFoodT += 5;
     }
 
     public void researchIndustrialRevolution()
     {
-        GameResources.instance.researchPoints--;
-        foreach (ABuilding building in GameResources.instance.buildings)
+        res.researchPoints--;
+        foreach (ABuilding building in res.buildings)
         {
             if (building.GetType().ToString() == "Factory")
                 ((Factory)building).factoryPower += 5;
 
         }
-        GameResources.instance.factoryMaterialsT += 5;
-        GameResources.instance.researchesMade++;
+        res.factoryMaterialsT += 5;
     }
 
     public void researchSpaceConservation()
     {
-        GameResources.instance.researchPoints--;
-        foreach (ABuilding building in GameResources.instance.buildings)
+        res.researchPoints--;
+        foreach (ABuilding building in res.buildings)
         {
             if (building.GetType().ToString() == "House")
-                GameResources.instance.maximumCitizens += 50;
+                res.maximumCitizens += 50;
 
         }
-        GameResources.instance.houseCitizensT += 50;
-        GameResources.instance.researchesMade++;
+        res.houseCitizensT += 50;
     }
 
     public void researchTheProletariat()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.goldPerTurn += 0.01f;
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.goldPerTurn += 0.01f;
     }
 
     public void researchNanocarbonMaterials()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.buildingCostRate -= 20;
-        Debug.Log("researched + " + GameResources.instance.buildingCostRate);
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.buildingCostRate -= 20;
+        //Debug.Log("researched + " + res.buildingCostRate);
     }
 
     public void researchBargaining()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.buyRate += 30;
-        GameResources.instance.sellRate -= GameResources.instance.sellRate * (30 / 100);
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.buyRate += 30;
+        res.sellRate -= res.sellRate * (30 / 100);
     }
 
     public void researchShelters()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.maxHomelessCitizens += 200;
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.maxHomelessCitizens += 200;
     }
 
     public void researchSocialGatherings()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.triggeredEventCostRate -= 20;
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.triggeredEventCostRate -= 20;
     }
 
     public void researchOratory()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.festivalApproval += 7;
-        GameResources.instance.publichSpeechApproval += 7;
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.festivalApproval += 7;
+        res.publichSpeechApproval += 7;
+
     }
 
     public void researchFoodFeast()
     {
-        GameResources.instance.researchPoints--;
-        GameResources.instance.foodRatioApproval += 0.025f;
-        GameResources.instance.researchesMade++;
+        res.researchPoints--;
+        res.foodRatioApproval += 0.025f;
     }
 }

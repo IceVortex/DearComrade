@@ -5,6 +5,7 @@ public class build : MonoBehaviour {
 
     public GameObject prefab;
     public BuildingGeneration gen;
+    public AResources resources;
 	
     public void createBuilding()
     {
@@ -12,47 +13,47 @@ public class build : MonoBehaviour {
         {
             if (GetComponent<canBuild>().buildingName == "House")
             {
-                GameResources.instance.createBuilding<House>(prefab, gen.generate());
+                resources.createBuilding<House>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Farm")
             {
-                GameResources.instance.createBuilding<Farm>(prefab, gen.generate());
+                resources.createBuilding<Farm>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Factory")
             {
-                GameResources.instance.createBuilding<Factory>(prefab, gen.generate());
+                resources.createBuilding<Factory>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Hospital")
             {
-                GameResources.instance.createBuilding<Hospital>(prefab, gen.generate());
+                resources.createBuilding<Hospital>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "World Trade Center")
             {
-                GameResources.instance.createBuilding<WTC>(prefab, gen.generate());
+                resources.createBuilding<WTC>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Laboratory")
             {
-                GameResources.instance.createBuilding<Laboratory>(prefab, gen.generate());
+                resources.createBuilding<Laboratory>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Police Station")
             {
-                GameResources.instance.createBuilding<PoliceStation>(prefab, gen.generate());
+                resources.createBuilding<PoliceStation>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Public Space")
             {
-                GameResources.instance.createBuilding<PublicSpace>(prefab, gen.generate());
+                resources.createBuilding<PublicSpace>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Workplace")
             {
-                GameResources.instance.createBuilding<Workplace>(prefab, gen.generate());
+                resources.createBuilding<Workplace>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Educational Building")
             {
-                GameResources.instance.createBuilding<EducationalBuilding>(prefab, gen.generate());
+                resources.createBuilding<EducationalBuilding>(prefab, gen.generate());
             }
             if (GetComponent<canBuild>().buildingName == "Military Outpost")
             {
-                GameResources.instance.createBuilding<MilitaryOutpost>(prefab, gen.generate());
+                resources.createBuilding<MilitaryOutpost>(prefab, gen.generate());
             }
         }
     }

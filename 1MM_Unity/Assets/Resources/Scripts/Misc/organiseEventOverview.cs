@@ -7,6 +7,7 @@ public class organiseEventOverview : MonoBehaviour {
     public ExecutiveBuilding eb;
     public GameObject ebGO;
     public CanvasGroup[] overlays;
+    public AResources resources;
 
     public void festival()
     {
@@ -29,7 +30,7 @@ public class organiseEventOverview : MonoBehaviour {
 
     void Start()
     {
-        eb = (ExecutiveBuilding)GameResources.instance.buildings[0];
+        eb = (ExecutiveBuilding)resources.buildings[0];
     }
 
     void Update()
