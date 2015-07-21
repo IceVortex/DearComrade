@@ -19,7 +19,8 @@ public class MaterialsTerritory : ABuilding
 
     public override void Effect()
     {
-        GameResources.instance.buildingMaterials += territory;
-        LoggingSystem.Instance.materialsGained += territory;
+        res.buildingMaterials += territory;
+        if (res is GameResources)
+            LoggingSystem.Instance.materialsGained += territory;
     }
 }

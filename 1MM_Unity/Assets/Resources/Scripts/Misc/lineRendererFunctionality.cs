@@ -7,7 +7,7 @@ public class lineRendererFunctionality : MonoBehaviour {
     public LineRenderer lr;
     public GameObject Target;
     public Material mat;
-
+    public AResources resources;
 	
 	void Start () {
         lr = GetComponent<LineRenderer>();
@@ -19,11 +19,11 @@ public class lineRendererFunctionality : MonoBehaviour {
     public void updateTarget(GameObject target)
     {
         Target = target;
-        if (GameResources.instance.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex != 0)
+        if (resources.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex != 0)
         {
             lr.SetPosition(1, target.transform.position + Vector3.forward);
         }
-        if (GameResources.instance.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex ==
+        if (resources.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex ==
                  gameObject.GetComponent<IdManager>().buildingIndex)
         {
             target.GetComponent<LineRenderer>().materials[0] = mat;

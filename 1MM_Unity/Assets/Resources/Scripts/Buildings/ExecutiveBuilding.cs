@@ -19,10 +19,10 @@ public class ExecutiveBuilding : ABuilding
         buildingMaterialsCost = 0;
     }
 
-    public override void Initialize(int i)
+    public override void Initialize(int i, AResources resource)
     {
-        base.Initialize(i);
-        GameResources.instance.maximumCitizens = numberOfCitizens;
+        base.Initialize(i, resource);
+        res.maximumCitizens = numberOfCitizens;
     }
 
     public override void Effect()
@@ -33,33 +33,36 @@ public class ExecutiveBuilding : ABuilding
             cdPublicSpeech--;
         if (cdFoodRatio > 0)
             cdFoodRatio--;
-        
-        GameResources.instance.money += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
-        LoggingSystem.Instance.moneyGained += GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
-        if (GameResources.instance.citizens - GameResources.instance.maximumCitizens < GameResources.instance.maxHomelessCitizens)
-            GameResources.instance.citizens += 100;
-        GameResources.instance.approval -= GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
+
+        res.money += res.goldPerTurn * res.citizens * (res.taxRate / 100);
+        if(res is GameResources)
+        LoggingSystem.Instance.moneyGained += res.goldPerTurn * res.citizens * (res.taxRate / 100);
+        if (res.citizens - res.maximumCitizens < res.maxHomelessCitizens)
+            res.citizens += 100;
+        res.approval -= res.flatApproval * (res.approvalDecayRate / 100);
 
         //Log the citizens, money and approval gained/lost
-        
-        LoggingSystem.Instance.citizensGained += 100;
-        LoggingSystem.Instance.baseApprovalLost = GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
 
+        if (res is GameResources)
+        {
+            LoggingSystem.Instance.citizensGained += 100;
+            LoggingSystem.Instance.baseApprovalLost = res.flatApproval * (res.approvalDecayRate / 100);
+        }
 
-        GameResources.instance.flatApproval += 0.1f;
+        res.flatApproval += 0.1f;
     }
 
     public bool canBuyFoodRatio()
     {
-        if (GameResources.instance.food >= 100 && cdFoodRatio == 0)
+        if (res.food >= 100 && cdFoodRatio == 0)
             return true;
         return false;
     }
 
     public bool canBuyFestival()
     {
-        if (festivalFoodCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.food &&
-            festivalMoneyCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.money && 
+        if (festivalFoodCost * (res.triggeredEventCostRate / 100) <= res.food &&
+            festivalMoneyCost * (res.triggeredEventCostRate / 100) <= res.money && 
             cdFestival == 0)
             return true;
         return false;
@@ -67,8 +70,8 @@ public class ExecutiveBuilding : ABuilding
 
     public bool canBuyPublicSpeech()
     {
-        if (publicSpeecFoodCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.food &&
-            publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100) <= GameResources.instance.money && 
+        if (publicSpeecFoodCost * (res.triggeredEventCostRate / 100) <= res.food &&
+            publicSpeechMoneyCost * (res.triggeredEventCostRate / 100) <= res.money && 
             cdPublicSpeech == 0)
             return true;
         return false;
@@ -77,25 +80,25 @@ public class ExecutiveBuilding : ABuilding
     public void buyFestival()
     {
         cdFestival = 8;
-        GameResources.instance.approval += GameResources.instance.festivalApproval;
-        GameResources.instance.food -= festivalFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
-        GameResources.instance.money -= festivalMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
+        res.approval += res.festivalApproval;
+        res.food -= festivalFoodCost * (res.triggeredEventCostRate / 100);
+        res.money -= festivalMoneyCost * (res.triggeredEventCostRate / 100);
         //GameResources.instance.money += (int)Random.Range(10f, 30f);
     }
 
     public void buyPublicSpeech()
     {
         cdPublicSpeech = 8;
-        GameResources.instance.approval += GameResources.instance.publichSpeechApproval;
-        GameResources.instance.food -= publicSpeecFoodCost * (GameResources.instance.triggeredEventCostRate / 100);
-        GameResources.instance.money -= publicSpeechMoneyCost * (GameResources.instance.triggeredEventCostRate / 100);
+        res.approval += res.publichSpeechApproval;
+        res.food -= publicSpeecFoodCost * (res.triggeredEventCostRate / 100);
+        res.money -= publicSpeechMoneyCost * (res.triggeredEventCostRate / 100);
     }
 
     public void increasedFoodRatio(int food)
     {
         cdFoodRatio = 3;
-        GameResources.instance.food -= food;
-        GameResources.instance.approval += GameResources.instance.foodRatioApproval * food;
+        res.food -= food;
+        res.approval += res.foodRatioApproval * food;
     }
 
 }

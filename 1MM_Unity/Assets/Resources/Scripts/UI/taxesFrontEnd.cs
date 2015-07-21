@@ -7,12 +7,13 @@ public class taxesFrontEnd : MonoBehaviour {
 
     public Text currentValue;
     public Slider rate;
+    public AResources resources;
 
 	
 	void Update () {
 
-        GameResources.instance.taxRate = rate.value;
-        GameResources.instance.approvalDecayRate = rate.value;
+        resources.taxRate = rate.value;
+        resources.approvalDecayRate = rate.value;
         currentValue.text = "Current value: " + (int)rate.value + "%";
 	}
 }

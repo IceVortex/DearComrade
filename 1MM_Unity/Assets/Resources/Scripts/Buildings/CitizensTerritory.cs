@@ -15,9 +15,9 @@ public class CitizensTerritory : ABuilding
         buildingMaterialsCost = 0;
     }
 
-    public override void Initialize(int index)
+    public override void Initialize(int index, AResources resource)
     {
-        base.Initialize(index);
-        GameResources.instance.maximumCitizens += 450;
+        base.Initialize(index, resource);
+        res.maximumCitizens += 450;
     }
 }

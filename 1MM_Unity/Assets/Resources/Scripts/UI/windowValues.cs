@@ -11,8 +11,14 @@ public class windowValues : MonoBehaviour {
     public CanvasGroup extraTab;
     public string buildingName;
     public GameObject clickedByGO;
+    public AResources resources;
 
     public buildingValues values = new buildingValues();
+
+    public void Awake()
+    {
+        values.res(resources);
+    }
 
     public void clicked(GameObject clickedBy)
     {
@@ -54,7 +60,7 @@ public class windowValues : MonoBehaviour {
         if (n == "House")
         {
             bIcon.sprite = icons[1];
-            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+            if (resources.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
                 changeButtonSet(buttonSet[0]);
             else
                 changeButtonSet(buttonSet[4]);
@@ -64,7 +70,7 @@ public class windowValues : MonoBehaviour {
         if (n == "Farm")
         {
             bIcon.sprite = icons[2];
-            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+            if (resources.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
                 changeButtonSet(buttonSet[0]);
             else
                 changeButtonSet(buttonSet[4]);
@@ -74,7 +80,7 @@ public class windowValues : MonoBehaviour {
         if (n == "Factory")
         {
             bIcon.sprite = icons[3];
-            if (GameResources.instance.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
+            if (resources.buildings[clickedByGO.GetComponent<IdManager>().buildingIndex].comradeIndex == 0)
                 changeButtonSet(buttonSet[0]);
             else
                 changeButtonSet(buttonSet[4]);

@@ -17,12 +17,12 @@ public class MilitaryOutpost : ABuilding
 
     public override void Effect()
     {
-        if (GameResources.instance.troops <= GameResources.instance.maximumTroops)
+        if (res.troops <= res.maximumTroops)
         {
-            if (GameResources.instance.maximumTroops - GameResources.instance.troops > 100)
-                GameResources.instance.troops += 100;
+            if (res.maximumTroops - res.troops > 100)
+                res.troops += 100;
             else
-                GameResources.instance.troops = GameResources.instance.maximumTroops;
+                res.troops = res.maximumTroops;
         }
 
     }
