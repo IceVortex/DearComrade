@@ -8,13 +8,14 @@ public class researchFrontEnd : MonoBehaviour {
     public Text researchName, description, costs;
     public int researchNumber;
     public researchOverview ro;
+    public AResources resources;
 
     public void research()
     {
         bool ok = false;
         if (ro.lab.titles[researchNumber] == "Fertility")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchFertility();
                 ok = true;
@@ -22,7 +23,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Industrial Revolution")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchIndustrialRevolution();
                 ok = true;
@@ -30,7 +31,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Space Conservation")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchSpaceConservation();
                 ok = true;
@@ -38,7 +39,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "The Proletariat")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchTheProletariat();
                 ok = true;
@@ -46,7 +47,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Nanocarbon Materials")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchNanocarbonMaterials();
                 ok = true;
@@ -54,7 +55,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Bargaining")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchBargaining();
                 ok = true;
@@ -62,7 +63,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Shelters")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchShelters();
                 ok = true;
@@ -70,7 +71,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Social Gatherings")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             { 
                 ro.lab.researchSocialGatherings();
                 ok = true;
@@ -78,7 +79,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Oratory")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchOratory();
                 ok = true;
@@ -86,7 +87,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Food Feast")
         {
-            if (GameResources.instance.researchPoints >= 1)
+            if (resources.researchPoints >= 1)
             {
                 ro.lab.researchFoodFeast();
                 ok = true;
@@ -112,7 +113,7 @@ public class researchFrontEnd : MonoBehaviour {
         bool ok = false;
         if (ro.lab.titles[researchNumber] == "Fertility")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.fertilityMaterialsCost && GameResources.instance.food >= ro.lab.fertilityFoodCost && GameResources.instance.money >= ro.lab.fertilityMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.fertilityMaterialsCost && resources.food >= ro.lab.fertilityFoodCost && resources.money >= ro.lab.fertilityMoneyCost)
             {
                 ro.lab.researchFertility();
                 ok = true;
@@ -120,7 +121,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Industrial Revolution")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.industrialRevolutionMaterialsCost && GameResources.instance.food >= ro.lab.industrialRevolutionFoodCost && GameResources.instance.money >= ro.lab.industrialRevolutionMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.industrialRevolutionMaterialsCost && resources.food >= ro.lab.industrialRevolutionFoodCost && resources.money >= ro.lab.industrialRevolutionMoneyCost)
             {
                 ro.lab.researchIndustrialRevolution();
                 ok = true;
@@ -128,7 +129,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Space Conservation")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.spaceConservationMaterialsCost && GameResources.instance.food >= ro.lab.spaceConservationFoodCost && GameResources.instance.money >= ro.lab.spaceConservationMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.spaceConservationMaterialsCost && resources.food >= ro.lab.spaceConservationFoodCost && resources.money >= ro.lab.spaceConservationMoneyCost)
             {
                 ro.lab.researchSpaceConservation();
                 ok = true;
@@ -136,7 +137,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "The Proletariat")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.theProletariatMaterialsCost && GameResources.instance.food >= ro.lab.theProletariatFoodCost && GameResources.instance.money >= ro.lab.theProletariatMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.theProletariatMaterialsCost && resources.food >= ro.lab.theProletariatFoodCost && resources.money >= ro.lab.theProletariatMoneyCost)
             {
                 ro.lab.researchTheProletariat();
                 ok = true;
@@ -144,7 +145,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Nanocarbon Materials")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.nanocarbonMaterialsMaterialsCost && GameResources.instance.food >= ro.lab.nanocarbonMaterialsFoodCost && GameResources.instance.money >= ro.lab.nanocarbonMaterialsMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.nanocarbonMaterialsMaterialsCost && resources.food >= ro.lab.nanocarbonMaterialsFoodCost && resources.money >= ro.lab.nanocarbonMaterialsMoneyCost)
             {
                 ro.lab.researchNanocarbonMaterials();
                 ok = true;
@@ -152,7 +153,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Bargaining")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.bargainingMaterialsCost && GameResources.instance.food >= ro.lab.bargainingFoodCost && GameResources.instance.money >= ro.lab.bargainingMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.bargainingMaterialsCost && resources.food >= ro.lab.bargainingFoodCost && resources.money >= ro.lab.bargainingMoneyCost)
             {
                 ro.lab.researchBargaining();
                 ok = true;
@@ -160,7 +161,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Shelters")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.improvedSheltersMaterialsCost && GameResources.instance.food >= ro.lab.improvedSheltersFoodCost && GameResources.instance.money >= ro.lab.improvedSheltersMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.improvedSheltersMaterialsCost && resources.food >= ro.lab.improvedSheltersFoodCost && resources.money >= ro.lab.improvedSheltersMoneyCost)
             {
                 ro.lab.researchShelters();
                 ok = true;
@@ -168,7 +169,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Social Gatherings")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.socialGatheringsMaterialsCost && GameResources.instance.food >= ro.lab.socialGatheringsFoodCost && GameResources.instance.money >= ro.lab.socialGatheringsMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.socialGatheringsMaterialsCost && resources.food >= ro.lab.socialGatheringsFoodCost && resources.money >= ro.lab.socialGatheringsMoneyCost)
             {
                 ro.lab.researchSocialGatherings();
                 ok = true;
@@ -176,7 +177,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Oratory")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.oratoryMaterialsCost && GameResources.instance.food >= ro.lab.oratoryFoodCost && GameResources.instance.money >= ro.lab.oratoryMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.oratoryMaterialsCost && resources.food >= ro.lab.oratoryFoodCost && resources.money >= ro.lab.oratoryMoneyCost)
             {
                 ro.lab.researchOratory();
                 ok = true;
@@ -184,7 +185,7 @@ public class researchFrontEnd : MonoBehaviour {
         }
         if (ro.lab.titles[researchNumber] == "Food Feast")
         {
-            if (GameResources.instance.buildingMaterials >= ro.lab.foodFeastMaterialsCost && GameResources.instance.food >= ro.lab.foodFeastFoodCost && GameResources.instance.money >= ro.lab.foodFeastMoneyCost)
+            if (resources.buildingMaterials >= ro.lab.foodFeastMaterialsCost && resources.food >= ro.lab.foodFeastFoodCost && resources.money >= ro.lab.foodFeastMoneyCost)
             {
                 ro.lab.researchFoodFeast();
                 ok = true;

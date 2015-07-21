@@ -14,12 +14,19 @@ public class Factory : ABuilding
         foodCost = 10;
         moneyCost = 6;//3
         buildingMaterialsCost = 30;//25
-        factoryPower = GameResources.instance.factoryMaterialsT;
+        //factoryPower = res.factoryMaterialsT;
+    }
+
+    public override void Initialize(int i, AResources resource)
+    {
+        base.Initialize(i, resource);
+        factoryPower = res.factoryMaterialsT;
     }
 
     public override void Effect()
     {
-        GameResources.instance.buildingMaterials += factoryPower;
+        res.buildingMaterials += factoryPower;
+        if(res is GameResources)
         LoggingSystem.Instance.materialsGained += factoryPower;
     }
 }

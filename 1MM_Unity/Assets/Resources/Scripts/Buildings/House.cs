@@ -14,13 +14,13 @@ public class House : ABuilding {
         foodCost = 40;
         moneyCost = 2;
         buildingMaterialsCost = 20;
-        housePower = GameResources.instance.houseCitizensT;
+        //housePower = res.houseCitizensT;
     }
 
-    public override void Initialize(int i)
+    public override void Initialize(int i, AResources resource)
     {
-        base.Initialize(i);
-        GameResources.instance.maximumCitizens += housePower;
+        base.Initialize(i, resource);
+        housePower = res.houseCitizensT;
     }
 
     public override void Effect()

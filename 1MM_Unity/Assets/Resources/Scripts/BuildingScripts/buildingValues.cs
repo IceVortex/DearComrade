@@ -5,8 +5,16 @@ using System;
 
 public class buildingValues
 {
+    public AResources resources;
+
     public buildingValues()
-    { }
+    {
+    }
+
+    public void res(AResources resource)
+    {
+        resources = resource;
+    }
 
     public string buildingName(string building)
     {
@@ -413,62 +421,62 @@ public class buildingValues
 
         if(building == "House")
         {
-            return GameResources.instance.cost<House>();
+            return resources.cost<House>();
         }
 
         else if(building == "Farm")
         {
-            return GameResources.instance.cost<Farm>();
+            return resources.cost<Farm>();
         }
 
         else if(building == "Factory")
         {
-            return GameResources.instance.cost<Factory>();
+            return resources.cost<Factory>();
         }
 
         else if(building == "Executive Building")
         {
-            return GameResources.instance.cost<ExecutiveBuilding>();
+            return resources.cost<ExecutiveBuilding>();
         }
 
         else if(building == "Educational Building")
         {
-            return GameResources.instance.cost<EducationalBuilding>();
+            return resources.cost<EducationalBuilding>();
         }
 
         else if(building == "Hospital")
         {
-            return GameResources.instance.cost<Hospital>();
+            return resources.cost<Hospital>();
         }
 
         else if(building == "Laboratory")
         {
-            return GameResources.instance.cost<Laboratory>();
+            return resources.cost<Laboratory>();
         }
 
         else if(building == "Police Station")
         {
-            return GameResources.instance.cost<PoliceStation>();
+            return resources.cost<PoliceStation>();
         }
 
         else if (building == "Workplace")
         {
-            return GameResources.instance.cost<Workplace>();
+            return resources.cost<Workplace>();
         }
 
         else if(building == "Public Space")
         {
-            return GameResources.instance.cost<PublicSpace>();
+            return resources.cost<PublicSpace>();
         }
 
         else if(building == "World Trade Center")
         {
-            return GameResources.instance.cost<WTC>();
+            return resources.cost<WTC>();
         }
 
         else if (building == "Military Outpost")
         {
-            return GameResources.instance.cost<MilitaryOutpost>();
+            return resources.cost<MilitaryOutpost>();
         }
 
         else
@@ -478,7 +486,7 @@ public class buildingValues
     public int numberOf(string n)
     {
         int count = 0;
-        foreach(ABuilding building in GameResources.instance.buildings)
+        foreach (ABuilding building in resources.buildings)
         {
             if (building.name == n)
                 count++;

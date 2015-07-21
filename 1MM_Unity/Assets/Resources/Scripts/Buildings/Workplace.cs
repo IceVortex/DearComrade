@@ -15,11 +15,11 @@ public class Workplace : ABuilding
         buildingMaterialsCost = 300;
     }
 
-    public override void Initialize(int index)
+    public override void Initialize(int index, AResources resource)
     {
-        base.Initialize(index);
-        GameResources.instance.approval += 30;
-        GameResources.instance.approvalDecayRate -= 10f;
+        base.Initialize(index, resource);
+        res.approval += 30;
+        res.approvalDecayRate -= 10f;
     }
 
 }

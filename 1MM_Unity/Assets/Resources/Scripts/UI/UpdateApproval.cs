@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UpdateApproval : MonoBehaviour {
 
     public Image fillerGreen, fillerRed;
+    public AResources resources;
 
 	// Use this for initialization
 	void Start () {
@@ -13,14 +14,14 @@ public class UpdateApproval : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(GameResources.instance.approval >= 0)
-        {    
-            fillerGreen.fillAmount = GameResources.instance.approval / 200;
+        if (resources.approval >= 0)
+        {
+            fillerGreen.fillAmount = resources.approval / 200;
             fillerRed.fillAmount = 0f;
         }
         else
         {
-            fillerRed.fillAmount = -GameResources.instance.approval / 200;
+            fillerRed.fillAmount = -resources.approval / 200;
             fillerGreen.fillAmount = 0f;
         }
 

@@ -16,6 +16,8 @@ public class MouseInput : MonoBehaviour {
     public CanvasGroup resultCG;
     public Text result, ComraderyButtonText, moveButtonText;
 
+    public AResources resources;
+
 	void Start () {
         cam = GetComponent<Camera>();	
 	}
@@ -139,19 +141,19 @@ public class MouseInput : MonoBehaviour {
             if(comrade1 && comrade2)
             {
 
-                if (!GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                if (!resources.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "The building already has a comrade.";
                 }
-                else if (!GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex))
+                else if (!resources.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "One of the buildings you chose cannot have comrades.";
                 }
-                else if (GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex)
-                    && GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                else if (resources.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex)
+                    && resources.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "Comradery Succesfuly established!";
-                    GameResources.instance.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
+                    resources.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
 
                     comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);
 
@@ -205,19 +207,19 @@ public class MouseInput : MonoBehaviour {
             if (comrade1 && comrade2)
             {
 
-                if (!GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                if (!resources.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "The building already has a comrade.";
                 }
-                else if (!GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex))
+                else if (!resources.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "One of the buildings you chose cannot have comrades.";
                 }
-                else if (GameResources.instance.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex)
-                    && GameResources.instance.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
+                else if (resources.canLink(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex)
+                    && resources.isLinkable(comrade1.GetComponent<IdManager>().buildingIndex))
                 {
                     result.text = "Comradery Succesfuly established!";
-                    GameResources.instance.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
+                    resources.linkBuildings(comrade1.GetComponent<IdManager>().buildingIndex, comrade2.GetComponent<IdManager>().buildingIndex);
                     winComradery = false;
                     ComraderyButtonText.text = "Establish Comradery";
                     comrade1.GetComponent<lineRendererFunctionality>().updateTarget(comrade2);

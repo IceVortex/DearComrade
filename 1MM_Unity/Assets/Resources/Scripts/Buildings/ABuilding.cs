@@ -6,21 +6,23 @@ public class ABuilding {
     public string name, shortDescription, longDescription, flavorText;
     public int listIndex, comradeIndex = 0;
     public float foodCost, moneyCost, buildingMaterialsCost;
+    public AResources res;
 
     public virtual void Effect()
     { }
 
-    public virtual void Initialize(int index)
+    public virtual void Initialize(int index, AResources resource)
     {
         listIndex = index;
+        res = resource;
         substractCost();
     }
 
     public void substractCost()
     {
-        GameResources.instance.food -= foodCost * (GameResources.instance.buildingCostRate / 100);
-        GameResources.instance.money -= moneyCost * (GameResources.instance.buildingCostRate / 100);
-        GameResources.instance.buildingMaterials -= buildingMaterialsCost * (GameResources.instance.buildingCostRate / 100);
+        res.food -= foodCost * (res.buildingCostRate / 100);
+        res.money -= moneyCost * (res.buildingCostRate / 100);
+        res.buildingMaterials -= buildingMaterialsCost * (res.buildingCostRate / 100);
     }
 
 }

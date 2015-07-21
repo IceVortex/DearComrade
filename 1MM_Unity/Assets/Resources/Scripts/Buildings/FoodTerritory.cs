@@ -19,7 +19,8 @@ public class FoodTerritory : ABuilding
 
     public override void Effect()
     {
-        GameResources.instance.food += territory;
-        LoggingSystem.Instance.foodGained += territory;
+        res.food += territory;
+        if(res is GameResources)
+            LoggingSystem.Instance.foodGained += territory;
     }
 }

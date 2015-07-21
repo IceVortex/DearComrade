@@ -15,10 +15,10 @@ public class PublicSpace : ABuilding
         buildingMaterialsCost = 100;
     }
 
-    public override void Initialize(int index)
+    public override void Initialize(int index, AResources resource)
     {
-        base.Initialize(index);
-        GameResources.instance.approval += 10;
+        base.Initialize(index, resource);
+        res.approval += 10;
     }
 
 }

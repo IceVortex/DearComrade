@@ -6,28 +6,29 @@ public class tradingOverview : MonoBehaviour {
 
     public GameObject WTCGO;
     public WTC wtc;
+    public AResources resources;
 
     public void buyFood()
     {
-        if(GameResources.instance.money >= 100)
+        if(resources.money >= 100)
             wtc.buyFood(100);
     }
 
     public void buyMaterials()
     {
-        if (GameResources.instance.money >= 100)
+        if (resources.money >= 100)
             wtc.buyMaterials(100);
     }
 
     public void sellFood()
     {
-        if (GameResources.instance.food >= 100)
+        if (resources.food >= 100)
             wtc.sellFood(100);
     }
 
     public void sellMaterials()
     {
-        if (GameResources.instance.buildingMaterials >= 100)
+        if (resources.buildingMaterials >= 100)
             wtc.sellMaterials(100);
     }
 
@@ -39,7 +40,7 @@ public class tradingOverview : MonoBehaviour {
         if (!WTCGO && GameObject.FindGameObjectWithTag("WTC"))
         {
             WTCGO = GameObject.FindGameObjectWithTag("WTC");
-            wtc = (WTC)GameResources.instance.buildings[WTCGO.GetComponent<IdManager>().buildingIndex];
+            wtc = (WTC)resources.buildings[WTCGO.GetComponent<IdManager>().buildingIndex];
         }
 	}
 }

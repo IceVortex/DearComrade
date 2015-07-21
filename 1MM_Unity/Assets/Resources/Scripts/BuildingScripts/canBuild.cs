@@ -9,11 +9,12 @@ public class canBuild : MonoBehaviour {
     public string buildingName;
     public Vector3 costs;
     public Text bName, details;
+    public AResources resources;
     public buildingValues buildingValues = new buildingValues();
-
 
     void Start()
     {
+        buildingValues.res(resources);
         costs = buildingValues.buildingCost(buildingName);
     }
 
@@ -32,58 +33,58 @@ public class canBuild : MonoBehaviour {
 
         if (buildingName == "House")
         {
-            if (GameResources.instance.canBuy<House>())
+            if (resources.canBuy<House>())
                 requirementsMet = true;
         }
 
         if (buildingName == "Farm")
         {
-            if (GameResources.instance.canBuy<Farm>())
+            if (resources.canBuy<Farm>())
                 requirementsMet = true;
         }
         if (buildingName == "Factory")
         {
-            if (GameResources.instance.canBuy<Factory>())
+            if (resources.canBuy<Factory>())
                 requirementsMet = true;
         }
         if (buildingName == "Hospital")
         {
-            if (GameResources.instance.canBuy<Hospital>() && buildingValues.numberOf(buildingName)<1)
+            if (resources.canBuy<Hospital>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "World Trade Center")
         {
-            if (GameResources.instance.canBuy<WTC>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<WTC>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Laboratory")
         {
-            if (GameResources.instance.canBuy<Laboratory>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<Laboratory>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Police Station")
         {
-            if (GameResources.instance.canBuy<PoliceStation>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<PoliceStation>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Public Space")
         {
-            if (GameResources.instance.canBuy<PublicSpace>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<PublicSpace>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Workplace")
         {
-            if (GameResources.instance.canBuy<Workplace>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<Workplace>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Educational Building")
         {
-            if (GameResources.instance.canBuy<EducationalBuilding>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<EducationalBuilding>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
         if (buildingName == "Military Outpost")
         {
-            if (GameResources.instance.canBuy<MilitaryOutpost>() && buildingValues.numberOf(buildingName) < 1)
+            if (resources.canBuy<MilitaryOutpost>() && buildingValues.numberOf(buildingName) < 1)
                 requirementsMet = true;
         }
 

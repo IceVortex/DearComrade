@@ -6,6 +6,7 @@ public class researchOverview : MonoBehaviour {
     public GameObject laboratoryGO;
     public Laboratory lab;
     public bool foundLab;
+    public AResources resources;
 
 	void Start () {
 	
@@ -15,7 +16,7 @@ public class researchOverview : MonoBehaviour {
         if (!laboratoryGO && GameObject.FindGameObjectWithTag("Laboratory"))
         {
             laboratoryGO = GameObject.FindGameObjectWithTag("Laboratory");
-            lab = (Laboratory)GameResources.instance.buildings[laboratoryGO.GetComponent<IdManager>().buildingIndex];
+            lab = (Laboratory)resources.buildings[laboratoryGO.GetComponent<IdManager>().buildingIndex];
             foundLab = true;
         }
 	}
