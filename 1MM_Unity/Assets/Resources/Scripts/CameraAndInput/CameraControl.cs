@@ -28,7 +28,7 @@ public class CameraControl : MonoBehaviour {
         currentState = transform.position;
         lastTrendSmoothing = Vector3.zero;
 
-        scrollEnabled = true;
+        scrollEnabled = false;
 
 	}
 
