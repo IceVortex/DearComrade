@@ -9,6 +9,7 @@ public class GameManagement : MonoBehaviour {
     public BuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
+    public statistics stats;
 
     public fadeToEndScreen lose, win;
 
@@ -86,6 +87,7 @@ public class GameManagement : MonoBehaviour {
 
 
         loggingFrontEnd.updateValues();
+        stats.updateStatistics();
 
     }
 

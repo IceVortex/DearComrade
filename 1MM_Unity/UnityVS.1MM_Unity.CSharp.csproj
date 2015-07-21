@@ -96,6 +96,7 @@
     <Compile Include="Assets\Resources\Scripts\Misc\nextTurn.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\organiseEventOverview.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\riggedBuild.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\statistics.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\SettingsUI.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\UIControl.cs" />

@@ -47,6 +47,9 @@ public class GameResources : MonoBehaviour
     public Dictionary<int, int> links = new Dictionary<int, int>();
     public int currentIndex = 0;
 
+    //Variables used for statistics
+    public int researchesMade;
+
     public GameObject obj;
  
     //This is the public reference that other classes will use
@@ -200,6 +203,62 @@ public class GameResources : MonoBehaviour
             LoggingSystem.Instance.materialsGained += 5;
         }
     }
+
+    public int numberOfBuildings(string building)
+    {
+        int x=0;
+        foreach (ABuilding b in buildings)
+        {
+            if (b.name == building)
+                x++;
+        }
+        return x;
+    }
+
+    public float resourcePerTurn(string res)
+    {
+        float value=0;
+        if (res == "food")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Farm")
+                {
+                    value += farmFoodT;
+                }
+            }
+            foreach (var entry in GameResources.instance.links)
+            {
+                if (GameResources.instance.buildings[entry.Key].GetType().ToString() == "Farm" ||
+                    GameResources.instance.buildings[entry.Value].GetType().ToString() == "Farm")
+                    value += 5;
+            }
+
+        }
+        if (res == "materials")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Factory")
+                {
+                    value += factoryMaterialsT;
+                }
+            }
+            foreach (var entry in GameResources.instance.links)
+            {
+                if (GameResources.instance.buildings[entry.Key].GetType().ToString() == "Factory" ||
+                    GameResources.instance.buildings[entry.Value].GetType().ToString() == "Factory")
+                    value += 5;
+            }
+        }
+        if (res == "money")
+        {
+            value = GameResources.instance.goldPerTurn * GameResources.instance.citizens * (GameResources.instance.taxRate / 100);
+        }
+
+        return value;
+    }
+
 
     public bool buildingConsutructedCheck(string building)
     {

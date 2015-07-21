@@ -7,6 +7,7 @@ public class Laboratory : ABuilding
 
     public int researchPointCount;
     public int researchPointInterval = 7;
+    public int researchesMade;
 
     public bool fertility, industrialRevolution, spaceConservation,
         theProletariat, nanocarbonMaterials, bargaining, improvedShelters,
@@ -49,6 +50,7 @@ public class Laboratory : ABuilding
         foodCost = 0;
         moneyCost = 75;
         buildingMaterialsCost = 150;
+        researchesMade = 0;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagement>();
 
         costs = new Vector3[10];
@@ -96,6 +98,7 @@ public class Laboratory : ABuilding
             
         }
         GameResources.instance.farmFoodT += 5;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchIndustrialRevolution()
@@ -108,6 +111,7 @@ public class Laboratory : ABuilding
 
         }
         GameResources.instance.factoryMaterialsT += 5;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchSpaceConservation()
@@ -120,12 +124,14 @@ public class Laboratory : ABuilding
 
         }
         GameResources.instance.houseCitizensT += 50;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchTheProletariat()
     {
         GameResources.instance.researchPoints--;
         GameResources.instance.goldPerTurn += 0.01f;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchNanocarbonMaterials()
@@ -133,6 +139,7 @@ public class Laboratory : ABuilding
         GameResources.instance.researchPoints--;
         GameResources.instance.buildingCostRate -= 20;
         Debug.Log("researched + " + GameResources.instance.buildingCostRate);
+        GameResources.instance.researchesMade++;
     }
 
     public void researchBargaining()
@@ -140,18 +147,21 @@ public class Laboratory : ABuilding
         GameResources.instance.researchPoints--;
         GameResources.instance.buyRate += 30;
         GameResources.instance.sellRate -= GameResources.instance.sellRate * (30 / 100);
+        GameResources.instance.researchesMade++;
     }
 
     public void researchShelters()
     {
         GameResources.instance.researchPoints--;
         GameResources.instance.maxHomelessCitizens += 200;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchSocialGatherings()
     {
         GameResources.instance.researchPoints--;
         GameResources.instance.triggeredEventCostRate -= 20;
+        GameResources.instance.researchesMade++;
     }
 
     public void researchOratory()
@@ -159,12 +169,13 @@ public class Laboratory : ABuilding
         GameResources.instance.researchPoints--;
         GameResources.instance.festivalApproval += 7;
         GameResources.instance.publichSpeechApproval += 7;
-
+        GameResources.instance.researchesMade++;
     }
 
     public void researchFoodFeast()
     {
         GameResources.instance.researchPoints--;
         GameResources.instance.foodRatioApproval += 0.025f;
+        GameResources.instance.researchesMade++;
     }
 }
