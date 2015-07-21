@@ -135,6 +135,30 @@ public class eventsRead : MonoBehaviour {
 
     }
 
+    public void eventEffect()
+    {
+        if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "food")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
+            LoggingSystem.Instance.foodGained = 0;
+        }
+
+        if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "all")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained;
+            GameResources.instance.buildingMaterials -= LoggingSystem.Instance.materialsGained;
+            GameResources.instance.money -= LoggingSystem.Instance.moneyGained;
+            LoggingSystem.Instance.foodGained = 0;
+            LoggingSystem.Instance.materialsGained = 0;
+            LoggingSystem.Instance.moneyGained = 0;
+        }
+
+        if (GetComponent<eventsRead>().thisEvent.type == "halved")
+        {
+            GameResources.instance.food -= LoggingSystem.Instance.foodGained / 2;
+            LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained / 2;
+        }
+    }
 
     void interpretData()
     {
