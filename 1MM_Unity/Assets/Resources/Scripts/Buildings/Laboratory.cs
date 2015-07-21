@@ -96,6 +96,7 @@ public class Laboratory : ABuilding
             
         }
         res.farmFoodT += 5;
+        res.researchesMade++;
     }
 
     public void researchIndustrialRevolution()
@@ -108,6 +109,7 @@ public class Laboratory : ABuilding
 
         }
         res.factoryMaterialsT += 5;
+        res.researchesMade++;
     }
 
     public void researchSpaceConservation()
@@ -120,12 +122,14 @@ public class Laboratory : ABuilding
 
         }
         res.houseCitizensT += 50;
+        res.researchesMade++;
     }
 
     public void researchTheProletariat()
     {
         res.researchPoints--;
         res.goldPerTurn += 0.01f;
+        res.researchesMade++;
     }
 
     public void researchNanocarbonMaterials()
@@ -133,6 +137,7 @@ public class Laboratory : ABuilding
         res.researchPoints--;
         res.buildingCostRate -= 20;
         //Debug.Log("researched + " + res.buildingCostRate);
+        res.researchesMade++;
     }
 
     public void researchBargaining()
@@ -140,18 +145,21 @@ public class Laboratory : ABuilding
         res.researchPoints--;
         res.buyRate += 30;
         res.sellRate -= res.sellRate * (30 / 100);
+        res.researchesMade++;
     }
 
     public void researchShelters()
     {
         res.researchPoints--;
         res.maxHomelessCitizens += 200;
+        res.researchesMade++;
     }
 
     public void researchSocialGatherings()
     {
         res.researchPoints--;
         res.triggeredEventCostRate -= 20;
+        res.researchesMade++;
     }
 
     public void researchOratory()
@@ -159,12 +167,13 @@ public class Laboratory : ABuilding
         res.researchPoints--;
         res.festivalApproval += 7;
         res.publichSpeechApproval += 7;
-
+        res.researchesMade++;
     }
 
     public void researchFoodFeast()
     {
         res.researchPoints--;
         res.foodRatioApproval += 0.025f;
+        res.researchesMade++;
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class statistics : MonoBehaviour {
 
+
+    public AResources resources;
     public int nrOfBuildings, nrOfFarms, nrOfHouses, nrOfFactories, nrOfTerritories;
     public float foodPerTurn, moneyPerTurn, materialsPerTurn, approvalDecayRate, currentApprovalDecay;
     public int nrOfResearches, timeUntilResearch, timeUntilFestival, timeUntilPS, timeUntilIFR;
@@ -14,21 +16,21 @@ public class statistics : MonoBehaviour {
 
     public void updateStatistics()
     {
-        nrOfBuildings = GameResources.instance.currentIndex;
-        nrOfFarms = GameResources.instance.numberOfBuildings("Farm");
-        nrOfFactories = GameResources.instance.numberOfBuildings("Factory");
-        nrOfHouses = GameResources.instance.numberOfBuildings("House");
-        nrOfTerritories = GameResources.instance.numberOfBuildings("Food Territory") +
-            GameResources.instance.numberOfBuildings("Materials Territory") +
-            GameResources.instance.numberOfBuildings("Citizens Territory");
+        nrOfBuildings = resources.currentIndex;
+        nrOfFarms = resources.numberOfBuildings("Farm");
+        nrOfFactories = resources.numberOfBuildings("Factory");
+        nrOfHouses = resources.numberOfBuildings("House");
+        nrOfTerritories = resources.numberOfBuildings("Food Territory") +
+            resources.numberOfBuildings("Materials Territory") +
+            resources.numberOfBuildings("Citizens Territory");
 
-        foodPerTurn = GameResources.instance.resourcePerTurn("food");
-        materialsPerTurn = GameResources.instance.resourcePerTurn("materials");
-        moneyPerTurn = GameResources.instance.resourcePerTurn("money");
-        approvalDecayRate = GameResources.instance.approvalDecayRate;
-        currentApprovalDecay = -GameResources.instance.flatApproval * (GameResources.instance.approvalDecayRate / 100);
+        foodPerTurn = resources.resourcePerTurn("food");
+        materialsPerTurn = resources.resourcePerTurn("materials");
+        moneyPerTurn = resources.resourcePerTurn("money");
+        approvalDecayRate = resources.approvalDecayRate;
+        currentApprovalDecay = resources.flatApproval * (resources.approvalDecayRate / 100);
 
-        nrOfResearches = GameResources.instance.researchesMade;
+        nrOfResearches = resources.researchesMade;
 
         //if(GameObject.FindGameObjectWithTag("Laboratory"))
             //timeUntilResearch = 7 - GameObject.FindGameObjectWithTag("Laboratory").GetComponent<Laboratory>().researchPointCount % 7;

@@ -39,6 +39,8 @@ public class AResources : MonoBehaviour
     //The current turn index
     public int turnIndex = 0;
 
+    //Variables used for statistics
+    public int researchesMade;
 
     //The list of buildings, links and the index
     public List<ABuilding> buildings = new List<ABuilding>();
@@ -66,7 +68,6 @@ public class AResources : MonoBehaviour
         obj.name = buildings[currentIndex].name;
         obj.GetComponent<IdManager>().buildingIndex = currentIndex;
         currentIndex++;
-
     }
 
     public Vector3 cost<building>() where building : ABuilding, new()
@@ -192,6 +193,61 @@ public class AResources : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    public int numberOfBuildings(string building)
+    {
+        int x = 0;
+        foreach (ABuilding b in buildings)
+        {
+            if (b.name == building)
+                x++;
+        }
+        return x;
+    }
+
+    public float resourcePerTurn(string res)
+    {
+        float value = 0;
+        if (res == "food")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Farm")
+                {
+                    value += farmFoodT;
+                }
+            }
+            foreach (var entry in links)
+            {
+                if (buildings[entry.Key].GetType().ToString() == "Farm" ||
+                    buildings[entry.Value].GetType().ToString() == "Farm")
+                    value += 5;
+            }
+
+        }
+        if (res == "materials")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Factory")
+                {
+                    value += factoryMaterialsT;
+                }
+            }
+            foreach (var entry in links)
+            {
+                if (buildings[entry.Key].GetType().ToString() == "Factory" ||
+                    buildings[entry.Value].GetType().ToString() == "Factory")
+                    value += 5;
+            }
+        }
+        if (res == "money")
+        {
+            value = goldPerTurn * citizens * (taxRate / 100);
+        }
+
+        return value;
     }
 
 }

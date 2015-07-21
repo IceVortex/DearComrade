@@ -11,6 +11,7 @@ public class GameManagement : MonoBehaviour {
     public loggingFrontend loggingFrontEnd;
     public date d;
     public AResources res;
+    public statistics stats;
 
     public fadeToEndScreen lose, win;
 
@@ -90,7 +91,7 @@ public class GameManagement : MonoBehaviour {
 
 
         loggingFrontEnd.updateValues();
-
+        stats.updateStatistics();
     }
 
 }
