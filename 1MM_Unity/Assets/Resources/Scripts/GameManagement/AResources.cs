@@ -70,11 +70,7 @@ public class AResources : MonoBehaviour
         obj = (GameObject)GameObject.Instantiate(buildingPrefab, position, Quaternion.identity);
         obj.name = buildings[currentIndex].name;
         obj.GetComponent<IdManager>().buildingIndex = currentIndex;
-<<<<<<< HEAD
         obj.GetComponent<IdManager>().res = this;
-=======
-
->>>>>>> ec989fa3015c1464b4c4233a8463427e115437ed
         currentIndex++;
     }
 
