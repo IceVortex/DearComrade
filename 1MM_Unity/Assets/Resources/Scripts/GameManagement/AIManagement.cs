@@ -11,6 +11,9 @@ public class AIManagement : MonoBehaviour {
     private Queue<ABuilding> buildingsList = new Queue<ABuilding>();
     private ABuilding nextBuilding;
     private bool building;
+    private int i;
+    private bool savingUp = false;
+    private int wtcIndex;
 
     void Awake()
     {
@@ -33,17 +36,53 @@ public class AIManagement : MonoBehaviour {
 
     public void nextTurn()
     {
-        // If the number of farms is less then 2/3 of the nr. of factories, I'm adding some farms
-        if (res.numberOfBuildings("Farm") <= (int)((float)res.numberOfBuildings("Factory") * 2 / 3))
-            buildingsList.Enqueue(new Farm());
-        else
-            buildingsList.Enqueue(new Factory());
 
-        // If I'm low on citizens, I need 'em
-        if (res.maximumCitizens - res.citizens <= 200)
+        // If I am not saving up, I will look for something to save up for, therefore, I will check dem thresholds
+        if (!savingUp)
+            checkAndAddThresholds();
+
+        if (res.findBuilding<WTC>() != 0)
+            wtcIndex = res.findBuilding<WTC>();
+
+        // If the number of farms is less then 2/3 of the nr. of factories, I'm adding some farms
+        if (res.numberOfBuildings("Farm") <= (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+            for (i = 1; i <= res.howManyCanBuy<Farm>(); i++)
+                buildingsList.Enqueue(new Farm());
+
+        else if (res.numberOfBuildings("Farm") > (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+            for (i = 1; i <= res.howManyCanBuy<Factory>(); i++ )
+                buildingsList.Enqueue(new Factory());
+
+        // If I'm low on citizens, I need to catch 'em all
+        if (res.maximumCitizens - res.citizens <= 200 && !savingUp)
             buildingsList.Enqueue(new House());
 
-        if (buildingsList.Count >= 1)
+        if(savingUp)
+        {
+            if(wtcIndex != 0)
+            {
+                while (res.buildingMaterials - 100 >= buildingsList.Peek().buildingMaterialsCost &&
+                    res.money <= buildingsList.Peek().moneyCost)
+                    ((WTC)res.buildings[wtcIndex]).sellMaterials(100);
+
+                while (res.food - 100 >= buildingsList.Peek().foodCost &&
+                    res.money <= buildingsList.Peek().moneyCost)
+                    ((WTC)res.buildings[wtcIndex]).sellFood(100);
+
+                while (res.money - 100 >= buildingsList.Peek().moneyCost &&
+                    res.buildingMaterials <= buildingsList.Peek().buildingMaterialsCost)
+                                    ((WTC)res.buildings[wtcIndex]).buyMaterials(100);
+
+                while (res.money - 100 >= buildingsList.Peek().moneyCost &&
+                    res.food <= buildingsList.Peek().foodCost)
+                    ((WTC)res.buildings[wtcIndex]).buyFood(100);
+            }
+
+            if (canBuild(buildingsList.Peek(), 1))
+                savingUp = false;
+        }
+
+        if (buildingsList.Count >= 1 && !savingUp)
         {
             building = true;
             while (building && buildingsList.Count >= 1)
@@ -58,7 +97,6 @@ public class AIManagement : MonoBehaviour {
                     building = false;
             }
         }
-
 
         // End Turn - Carpe diem
         foreach (ABuilding building in res.buildings)
@@ -205,7 +243,7 @@ public class AIManagement : MonoBehaviour {
             if (res.canBuyMore<WTC>(numberOfBuildings))
             {
                 for (i = 1; i <= numberOfBuildings; i++)
-                    res.createBuilding<WTC>((GameObject)Resources.Load("Prefabs/AI Buildings/WTC"), gen.generate());
+                    res.createBuilding<WTC>((GameObject)Resources.Load("Prefabs/AI Buildings/World Trade Center"), gen.generate());
                 return true;
             }
         }
@@ -261,6 +299,85 @@ public class AIManagement : MonoBehaviour {
         }
 
         return false;
+    }
+    #endregion
+
+    #region Threshold Reached - Returns true if the resource generation threshold is reached
+    private bool thresholdReached<building>() where building : ABuilding, new()
+    {
+        building x = new building();
+
+        if (x is Laboratory || x is WTC)
+        {
+            if (res.resourcePerTurn("food") >= x.foodCost / 3 &&
+                   res.resourcePerTurn("materials") >= x.buildingMaterialsCost / 3)
+                return true;
+        }
+        
+        else if (x is MilitaryOutpost || x is PublicSpace || x is EducationalBuilding ||
+                x is PoliceStation || x is Workplace || x is Hospital)
+        {
+            if (res.resourcePerTurn("food") >= x.foodCost / 2 &&
+                   res.resourcePerTurn("materials") >= x.buildingMaterialsCost / 2)
+                return true;
+        }
+
+        return false;
+    }
+    #endregion
+
+    #region Check for thresholds
+    private void checkAndAddThresholds()
+    {
+
+        if (thresholdReached<WTC>() && !res.buildingConsutructedCheck("World Trade Center"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new WTC());
+        }
+        else if (thresholdReached<Laboratory>() && !res.buildingConsutructedCheck("Laboratory"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new Laboratory());
+        }
+        else if (thresholdReached<MilitaryOutpost>() && !res.buildingConsutructedCheck("Military Outpost"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new MilitaryOutpost());
+        }
+        else if (thresholdReached<PublicSpace>() && !res.buildingConsutructedCheck("Public Space"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new PublicSpace());
+        }
+        else if (thresholdReached<EducationalBuilding>() && !res.buildingConsutructedCheck("Educational Building"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new EducationalBuilding());
+        }
+        else if (thresholdReached<PoliceStation>() && !res.buildingConsutructedCheck("Police Station"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new PoliceStation());
+        }
+        else if (thresholdReached<Workplace>() && !res.buildingConsutructedCheck("Workplace"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new Workplace());
+        }
+        else if (thresholdReached<Hospital>() && !res.buildingConsutructedCheck("Hospital"))
+        {
+            savingUp = true;
+            buildingsList.Clear();
+            buildingsList.Enqueue(new Hospital());
+        }
     }
     #endregion
 }
