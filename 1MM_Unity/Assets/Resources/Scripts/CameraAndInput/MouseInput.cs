@@ -74,7 +74,17 @@ public class MouseInput : MonoBehaviour {
     }
 
 
-	void Update () {
+	void Update () 
+    {
+        if (Input.GetKeyDown(keybindManager.instance.startComradery))
+        {
+            startComradery();
+        }
+        if (Input.GetKeyDown(keybindManager.instance.startMove))
+        {
+            moveBuilding();
+        }
+
         if (!comradery && !move && !winMove && !winComradery)
         {
             if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())

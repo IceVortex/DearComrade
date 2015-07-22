@@ -59,6 +59,11 @@ public class CameraControl : MonoBehaviour {
         cam.transform.position = GameObject.FindGameObjectWithTag("Executive").transform.position;
     }
 
+    public void goToEnemyEB()
+    {
+        cam.transform.position = GameObject.FindGameObjectWithTag("AIExecutive").transform.position;
+    }
+
     bool recievedInput()
     {
         bool ok = new bool();
@@ -106,6 +111,15 @@ public class CameraControl : MonoBehaviour {
 
     void Update()
     {
+        if (Input.GetKeyDown(keybindManager.instance.returnToEB))
+        {
+            returnCameraToExecutiveBuilding();
+        }
+        if (Input.GetKeyDown(keybindManager.instance.goToEnemyEB))
+        {
+            goToEnemyEB();
+        }
+
         isMoving = false;
         if (recievedInput())
         {
@@ -127,10 +141,5 @@ public class CameraControl : MonoBehaviour {
             cam.orthographicSize = x.z;
         else
             cam.orthographicSize = 3.5F;
-    }
-
-    void LateUpdate()
-    {
-        
     }
 }

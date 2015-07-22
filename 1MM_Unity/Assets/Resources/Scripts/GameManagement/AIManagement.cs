@@ -13,7 +13,7 @@ public class AIManagement : MonoBehaviour {
 
     void Awake()
     {
-        res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/Executive Building"), new Vector3(50, 50, 0));
+        res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/Executive Building"), new Vector3(20, 20, 0));
         gen.hub = GameObject.FindGameObjectWithTag("AIExecutive");
     }
 
@@ -34,12 +34,10 @@ public class AIManagement : MonoBehaviour {
     {
         foreach (ABuilding building in res.buildings)
             building.Effect();
-
         foreach (var entry in res.links)
         {
             res.linkEffectTurn(entry.Key, entry.Value);
         }
-
         if (res.canBuy<Factory>())
             res.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/AI Buildings/Factory"), gen.generate());
     }
