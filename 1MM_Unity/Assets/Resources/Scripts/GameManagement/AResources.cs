@@ -60,6 +60,17 @@ public class AResources : MonoBehaviour
             return false;
     }
 
+    public bool canBuyMore<building>(int numberOfBuildings) where building : ABuilding, new()
+    {
+        building x = new building();
+        if (food >= x.foodCost * (buildingCostRate / 100) * numberOfBuildings &&
+            money >= x.moneyCost * (buildingCostRate / 100) * numberOfBuildings &&
+            buildingMaterials >= x.buildingMaterialsCost * (buildingCostRate / 100) * numberOfBuildings)
+            return true;
+        else
+            return false;
+    }
+
     public void createBuilding<building>(GameObject buildingPrefab, Vector3 position) where building : ABuilding, new()
     {
         //Adding the buildings to the list

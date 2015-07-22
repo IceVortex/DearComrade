@@ -49,8 +49,11 @@ public class AIManagement : MonoBehaviour {
             while (building && buildingsList.Count >= 1)
             {
                 nextBuilding = buildingsList.Peek();
-                if (tryBuild(nextBuilding))
+                if (canBuild(nextBuilding, 1))
+                {
+                    build(nextBuilding, 1);
                     buildingsList.Dequeue();
+                }
                 else
                     building = false;
             }
@@ -65,95 +68,194 @@ public class AIManagement : MonoBehaviour {
             res.linkEffectTurn(entry.Key, entry.Value);
     }
 
-    #region tryBuild - Checks if AI can construct a particular building
-    private bool tryBuild(ABuilding building)
+    #region canBuild - Checks if AI has resources for a particular number of buildings of a type
+    private bool canBuild(ABuilding building, int numberOfBuildings)
     {
         if (building is House)
         {
-            if (res.canBuy<House>())
+            if (res.canBuyMore<House>(numberOfBuildings))
             {
-                res.createBuilding<House>((GameObject)Resources.Load("Prefabs/AI Buildings/House"), gen.generate());
                 return true;
             }
         }
 
         else if (building is Farm)
         {
-            if (res.canBuy<Farm>())
+            if (res.canBuyMore<Farm>(numberOfBuildings))
             {
-                res.createBuilding<Farm>((GameObject)Resources.Load("Prefabs/AI Buildings/Farm"), gen.generate());
                 return true;
             }
         }
 
         else if (building is Factory)
         {
-            if (res.canBuy<Factory>())
+            if (res.canBuyMore<Factory>(numberOfBuildings))
             {
-                res.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/AI Buildings/Factory"), gen.generate());
                 return true;
             }
         }
 
         else if (building is Laboratory)
         {
-            if (res.canBuy<Laboratory>())
+            if (res.canBuyMore<Laboratory>(numberOfBuildings))
             {
-                res.createBuilding<Laboratory>((GameObject)Resources.Load("Prefabs/AI Buildings/Laboratory"), gen.generate());
                 return true;
             }
         }
 
         else if (building is WTC)
         {
-            if (res.canBuy<WTC>())
+            if (res.canBuyMore<WTC>(numberOfBuildings))
             {
-                res.createBuilding<WTC>((GameObject)Resources.Load("Prefabs/AI Buildings/WTC"), gen.generate());
                 return true;
             }
         }
 
         else if (building is PublicSpace)
         {
-            if (res.canBuy<PublicSpace>())
+            if (res.canBuyMore<PublicSpace>(numberOfBuildings))
             {
-                res.createBuilding<PublicSpace>((GameObject)Resources.Load("Prefabs/AI Buildings/PublicSpace"), gen.generate());
                 return true;
             }
         }
 
         else if (building is EducationalBuilding)
         {
-            if (res.canBuy<EducationalBuilding>())
+            if (res.canBuyMore<EducationalBuilding>(numberOfBuildings))
             {
-                res.createBuilding<EducationalBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/EducationalBuilding"), gen.generate());
                 return true;
             }
         }
 
         else if (building is PoliceStation)
         {
-            if (res.canBuy<PoliceStation>())
+            if (res.canBuyMore<PoliceStation>(numberOfBuildings))
             {
-                res.createBuilding<PoliceStation>((GameObject)Resources.Load("Prefabs/AI Buildings/PoliceStation"), gen.generate());
                 return true;
             }
         }
 
         else if (building is Workplace)
         {
-            if (res.canBuy<Workplace>())
+            if (res.canBuyMore<Workplace>(numberOfBuildings))
             {
-                res.createBuilding<Workplace>((GameObject)Resources.Load("Prefabs/AI Buildings/Workplace"), gen.generate());
                 return true;
             }
         }
 
         else if (building is Hospital)
         {
-            if (res.canBuy<Hospital>())
+            if (res.canBuyMore<Hospital>(numberOfBuildings))
             {
-                res.createBuilding<Hospital>((GameObject)Resources.Load("Prefabs/AI Buildings/Hospital"), gen.generate());
+                return true;
+            }
+        }
+
+        return false;
+    }
+    #endregion
+
+    #region Build- Buys a number of buildings for the AI
+    private bool build(ABuilding building, int numberOfBuildings)
+    {
+        int i = 1;
+
+        if (building is House)
+        {
+            if (res.canBuyMore<House>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<House>((GameObject)Resources.Load("Prefabs/AI Buildings/House"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is Farm)
+        {
+            if (res.canBuyMore<Farm>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<Farm>((GameObject)Resources.Load("Prefabs/AI Buildings/Farm"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is Factory)
+        {
+            if (res.canBuyMore<Factory>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<Factory>((GameObject)Resources.Load("Prefabs/AI Buildings/Factory"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is Laboratory)
+        {
+            if (res.canBuyMore<Laboratory>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<Laboratory>((GameObject)Resources.Load("Prefabs/AI Buildings/Laboratory"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is WTC)
+        {
+            if (res.canBuyMore<WTC>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<WTC>((GameObject)Resources.Load("Prefabs/AI Buildings/WTC"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is PublicSpace)
+        {
+            if (res.canBuyMore<PublicSpace>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<PublicSpace>((GameObject)Resources.Load("Prefabs/AI Buildings/PublicSpace"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is EducationalBuilding)
+        {
+            if (res.canBuyMore<EducationalBuilding>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<EducationalBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/EducationalBuilding"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is PoliceStation)
+        {
+            if (res.canBuyMore<PoliceStation>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<PoliceStation>((GameObject)Resources.Load("Prefabs/AI Buildings/PoliceStation"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is Workplace)
+        {
+            if (res.canBuyMore<Workplace>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<Workplace>((GameObject)Resources.Load("Prefabs/AI Buildings/Workplace"), gen.generate());
+                return true;
+            }
+        }
+
+        else if (building is Hospital)
+        {
+            if (res.canBuyMore<Hospital>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<Hospital>((GameObject)Resources.Load("Prefabs/AI Buildings/Hospital"), gen.generate());
                 return true;
             }
         }
