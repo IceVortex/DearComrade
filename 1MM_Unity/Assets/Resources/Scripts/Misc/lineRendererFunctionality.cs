@@ -10,8 +10,10 @@ public class lineRendererFunctionality : MonoBehaviour {
     public AResources resources;
 	
 	void Start () {
+        
         lr = GetComponent<LineRenderer>();
 
+        resources = GetComponent<IdManager>().res;
         
         lr.SetPosition(1, transform.position + Vector3.forward);
 	}
