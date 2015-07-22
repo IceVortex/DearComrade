@@ -62,11 +62,15 @@ public class AResources : MonoBehaviour
 
     public void createBuilding<building>(GameObject buildingPrefab, Vector3 position) where building : ABuilding, new()
     {
+        //Adding the buildings to the list
         buildings.Add(new building());
         buildings[currentIndex].Initialize(currentIndex, this);
+
+        //Creating the game object in the scene, for the visual representation
         obj = (GameObject)GameObject.Instantiate(buildingPrefab, position, Quaternion.identity);
         obj.name = buildings[currentIndex].name;
         obj.GetComponent<IdManager>().buildingIndex = currentIndex;
+
         currentIndex++;
     }
 

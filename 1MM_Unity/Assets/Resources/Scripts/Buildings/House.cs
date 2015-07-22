@@ -21,6 +21,7 @@ public class House : ABuilding {
     {
         base.Initialize(i, resource);
         housePower = res.houseCitizensT;
+        res.maximumCitizens += housePower;
     }
 
     public override void Effect()
