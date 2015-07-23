@@ -94,6 +94,7 @@
     <Compile Include="Assets\Resources\Scripts\Misc\BuildingGeneration.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\IdManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\LoggingSystem.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\achievement.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\eventsRead.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\helpers.cs" />
     <Compile Include="Assets\Resources\Scripts\Misc\keybindManager.cs" />
