@@ -60,6 +60,33 @@ public class AResources : MonoBehaviour
             return false;
     }
 
+    public bool canBuyMore<building>(int numberOfBuildings) where building : ABuilding, new()
+    {
+        building x = new building();
+        if (food >= x.foodCost * (buildingCostRate / 100) * numberOfBuildings &&
+            money >= x.moneyCost * (buildingCostRate / 100) * numberOfBuildings &&
+            buildingMaterials >= x.buildingMaterialsCost * (buildingCostRate / 100) * numberOfBuildings)
+            return true;
+        else
+            return false;
+    }
+
+    public int howManyCanBuy<building>() where building : ABuilding, new()
+    {
+        // Returns maximum number of buildings you can make of "building" type
+        building x = new building();
+        return (int)System.Math.Min(food / x.foodCost, System.Math.Min(money/x.moneyCost, buildingMaterials/x.buildingMaterialsCost));
+    }
+
+    public int findBuilding<building>() where building : ABuilding, new()
+    {
+        building x = new building();
+        foreach (ABuilding b in buildings)
+            if (b.name == x.name)
+                return b.listIndex;
+        return 0;
+    }
+
     public void createBuilding<building>(GameObject buildingPrefab, Vector3 position) where building : ABuilding, new()
     {
         //Adding the buildings to the list
