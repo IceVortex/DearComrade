@@ -98,6 +98,10 @@ public class AResources : MonoBehaviour
         obj.name = buildings[currentIndex].name;
         obj.GetComponent<IdManager>().buildingIndex = currentIndex;
         obj.GetComponent<IdManager>().res = this;
+
+        //Adding the object in scene to the buildings list
+        buildings[currentIndex].sceneBuilding = (GameObject)obj;
+
         currentIndex++;
     }
 

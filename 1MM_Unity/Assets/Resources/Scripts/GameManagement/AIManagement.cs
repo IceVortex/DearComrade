@@ -8,17 +8,19 @@ public class AIManagement : MonoBehaviour {
     public BuildingGeneration gen;
     public AResources res;
     public fadeToEndScreen lose, win;
-    private Queue<ABuilding> buildingsList = new Queue<ABuilding>();
+    private Stack<ABuilding> buildingsList = new Stack<ABuilding>();
     private ABuilding nextBuilding;
     private bool building;
-    private int i;
+    private int i, savingUpCD, savingUpCD_Constant = 2;
+    private int rand, researchCount = 1;
     private bool savingUp = false;
-    private int wtcIndex;
+    private int wtcIndex, laboratoryIndex;
 
     void Awake()
     {
         res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/Executive Building"), new Vector3(20, 20, 0));
         gen.hub = GameObject.FindGameObjectWithTag("AIExecutive");
+
     }
 
     void Update()
@@ -38,50 +40,101 @@ public class AIManagement : MonoBehaviour {
     {
 
         // If I am not saving up, I will look for something to save up for, therefore, I will check dem thresholds
-        if (!savingUp)
+        if (!savingUp && savingUpCD == 0)
             checkAndAddThresholds();
 
-        if (res.findBuilding<WTC>() != 0)
+        // Decreasing the savingUp Cooldown
+        if (savingUpCD > 0)
+            savingUpCD--;
+
+        // Checking if a WTC or Lab has been built
+        if (wtcIndex == 0)
             wtcIndex = res.findBuilding<WTC>();
 
-        // If the number of farms is less then 2/3 of the nr. of factories, I'm adding some farms
-        if (res.numberOfBuildings("Farm") <= (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
-            for (i = 1; i <= res.howManyCanBuy<Farm>(); i++)
-                buildingsList.Enqueue(new Farm());
+        if (laboratoryIndex == 0)
+            laboratoryIndex = res.findBuilding<Laboratory>();
 
-        else if (res.numberOfBuildings("Farm") > (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
-            for (i = 1; i <= res.howManyCanBuy<Factory>(); i++ )
-                buildingsList.Enqueue(new Factory());
+        // Checking for researches
+        if(res.researchPoints == 1)
+        {
+            Debug.Log("current ciz: " + res.maximumCitizens);
+            buyResearch();
+            Debug.Log("after research ciz: " + res.maximumCitizens);
+        }
 
-        // If I'm low on citizens, I need to catch 'em all
-        if (res.maximumCitizens - res.citizens <= 200 && !savingUp)
-            buildingsList.Enqueue(new House());
+        if (res.currentIndex == 1) // First turn
+        {
+            // It's the first turn (no buildings yet) => Add first 2 buildings for the beginning configuration
+            rand = (int)UnityEngine.Random.Range(1, 3);
+            if (rand == 1)
+            {
+                buildingsList.Push(new Factory());
+                buildingsList.Push(new Factory());
+            }
+            else if (rand == 2)
+            {
+                buildingsList.Push(new Farm());
+                buildingsList.Push(new Farm());
+            }
+        }
+        else // Other turns
+        {
+            // If the number of farms is less then 2/3 of the nr. of factories, I'm adding some farms
+            if (res.numberOfBuildings("Farm") <= (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+                for (i = 1; i <= res.howManyCanBuy<Farm>(); i++)
+                    buildingsList.Push(new Farm());
 
-        if(savingUp)
+            else if (res.numberOfBuildings("Farm") > (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+                for (i = 1; i <= res.howManyCanBuy<Factory>(); i++)
+                    buildingsList.Push(new Factory());
+
+            // If I'm low on citizens, I need to catch 'em all
+            if (res.maximumCitizens - res.citizens <= 200 && !savingUp)
+                buildingsList.Push(new House());
+        }
+
+        if(savingUp) // If I need resources, I try trading for them
         {
             if(wtcIndex != 0)
             {
                 while (res.buildingMaterials - 100 >= buildingsList.Peek().buildingMaterialsCost &&
                     res.money <= buildingsList.Peek().moneyCost)
+                {
+                    Debug.Log("Before selling materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).sellMaterials(100);
-
+                    Debug.Log("After selling materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
+                }
                 while (res.food - 100 >= buildingsList.Peek().foodCost &&
                     res.money <= buildingsList.Peek().moneyCost)
+                {
+                    Debug.Log("Before selling food: " + res.food.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).sellFood(100);
-
+                    Debug.Log("After selling food: " + res.food.ToString() + " " + res.money.ToString());
+                }
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.buildingMaterials <= buildingsList.Peek().buildingMaterialsCost)
-                                    ((WTC)res.buildings[wtcIndex]).buyMaterials(100);
-
+                {
+                    Debug.Log("Before buying materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
+                    ((WTC)res.buildings[wtcIndex]).buyMaterials(100);
+                    Debug.Log("After buying materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
+                }
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.food <= buildingsList.Peek().foodCost)
+                {
+                    Debug.Log("Before buying food: " + res.food.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).buyFood(100);
+                    Debug.Log("Before buying food: " + res.food.ToString() + " " + res.money.ToString());
+                }
             }
-
-            if (canBuild(buildingsList.Peek(), 1))
+            // If I can build the highest priority building, I am not saving up anymore
+            if (canBuild(buildingsList.Peek(), 1)) 
+            { 
                 savingUp = false;
+                savingUpCD = savingUpCD_Constant;
+            }
         }
 
+        //Building stuff
         if (buildingsList.Count >= 1 && !savingUp)
         {
             building = true;
@@ -91,10 +144,49 @@ public class AIManagement : MonoBehaviour {
                 if (canBuild(nextBuilding, 1))
                 {
                     build(nextBuilding, 1);
-                    buildingsList.Dequeue();
+                    buildingsList.Pop();
                 }
                 else
                     building = false;
+            }
+        }
+
+        // Checking for buildings without a comrade and link them
+        foreach (ABuilding b in res.buildings)
+        {
+            if ((b is Farm || b is Factory) && res.isLinkable(b.listIndex))
+            {
+                rand = UnityEngine.Random.Range(1, res.numberOfBuildings("House") + 1);
+                i = 1;
+
+                foreach (ABuilding build in res.buildings)
+                    if(build is House && i == rand)
+                    {
+                        res.linkBuildings(b.listIndex, build.listIndex);
+                        b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(build.sceneBuilding);
+                        break;
+                    }
+                    else if (build is House && i != rand)
+                    {
+                        i++;
+                    }
+            }
+            else if (b is House && res.isLinkable(b.listIndex))
+            {
+                rand = UnityEngine.Random.Range(1, res.numberOfBuildings("Farm") + res.numberOfBuildings("Factory") + 1);
+                i = 1;
+
+                foreach (ABuilding build in res.buildings)
+                    if ((build is Farm || build is Factory) && i == rand)
+                    {
+                        res.linkBuildings(b.listIndex, build.listIndex);
+                        b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(build.sceneBuilding);
+                        break;
+                    }
+                    else if((build is Farm || build is Factory) && i != rand)
+                    {
+                        i++;
+                    }
             }
         }
 
@@ -144,6 +236,14 @@ public class AIManagement : MonoBehaviour {
         else if (building is WTC)
         {
             if (res.canBuyMore<WTC>(numberOfBuildings))
+            {
+                return true;
+            }
+        }
+
+        else if (building is MilitaryOutpost)
+        {
+            if (res.canBuyMore<MilitaryOutpost>(numberOfBuildings))
             {
                 return true;
             }
@@ -248,12 +348,22 @@ public class AIManagement : MonoBehaviour {
             }
         }
 
+        else if (building is MilitaryOutpost)
+        {
+            if (res.canBuyMore<MilitaryOutpost>(numberOfBuildings))
+            {
+                for (i = 1; i <= numberOfBuildings; i++)
+                    res.createBuilding<MilitaryOutpost>((GameObject)Resources.Load("Prefabs/AI Buildings/Military Outpost"), gen.generate());
+                return true;
+            }
+        }
+
         else if (building is PublicSpace)
         {
             if (res.canBuyMore<PublicSpace>(numberOfBuildings))
             {
                 for (i = 1; i <= numberOfBuildings; i++)
-                    res.createBuilding<PublicSpace>((GameObject)Resources.Load("Prefabs/AI Buildings/PublicSpace"), gen.generate());
+                    res.createBuilding<PublicSpace>((GameObject)Resources.Load("Prefabs/AI Buildings/Public Space"), gen.generate());
                 return true;
             }
         }
@@ -263,7 +373,7 @@ public class AIManagement : MonoBehaviour {
             if (res.canBuyMore<EducationalBuilding>(numberOfBuildings))
             {
                 for (i = 1; i <= numberOfBuildings; i++)
-                    res.createBuilding<EducationalBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/EducationalBuilding"), gen.generate());
+                    res.createBuilding<EducationalBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/Educational Building"), gen.generate());
                 return true;
             }
         }
@@ -273,7 +383,7 @@ public class AIManagement : MonoBehaviour {
             if (res.canBuyMore<PoliceStation>(numberOfBuildings))
             {
                 for (i = 1; i <= numberOfBuildings; i++)
-                    res.createBuilding<PoliceStation>((GameObject)Resources.Load("Prefabs/AI Buildings/PoliceStation"), gen.generate());
+                    res.createBuilding<PoliceStation>((GameObject)Resources.Load("Prefabs/AI Buildings/Police Station"), gen.generate());
                 return true;
             }
         }
@@ -334,50 +444,127 @@ public class AIManagement : MonoBehaviour {
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new WTC());
+            buildingsList.Push(new WTC());
         }
         else if (thresholdReached<Laboratory>() && !res.buildingConsutructedCheck("Laboratory"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new Laboratory());
+            buildingsList.Push(new Laboratory());
         }
         else if (thresholdReached<MilitaryOutpost>() && !res.buildingConsutructedCheck("Military Outpost"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new MilitaryOutpost());
+            buildingsList.Push(new MilitaryOutpost());
         }
         else if (thresholdReached<PublicSpace>() && !res.buildingConsutructedCheck("Public Space"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new PublicSpace());
+            buildingsList.Push(new PublicSpace());
         }
         else if (thresholdReached<EducationalBuilding>() && !res.buildingConsutructedCheck("Educational Building"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new EducationalBuilding());
+            buildingsList.Push(new EducationalBuilding());
         }
         else if (thresholdReached<PoliceStation>() && !res.buildingConsutructedCheck("Police Station"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new PoliceStation());
+            buildingsList.Push(new PoliceStation());
         }
         else if (thresholdReached<Workplace>() && !res.buildingConsutructedCheck("Workplace"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new Workplace());
+            buildingsList.Push(new Workplace());
         }
         else if (thresholdReached<Hospital>() && !res.buildingConsutructedCheck("Hospital"))
         {
             savingUp = true;
             buildingsList.Clear();
-            buildingsList.Enqueue(new Hospital());
+            buildingsList.Push(new Hospital());
         }
+
+    }
+    #endregion
+
+    #region BuyResearch - If a research point is available, buy a research
+    private void buyResearch()
+    {
+        if (researchCount == 1)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchNanocarbonMaterials();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 2)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchBargaining();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 3)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchTheProletariat();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 4)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchSpaceConservation();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 5)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchFertility();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 6)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchIndustrialRevolution();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 7)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchSocialGatherings();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 8)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchOratory();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 9)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchFoodFeast();
+            researchCount++;
+            return;
+        }
+
+        if (researchCount == 10)
+        {
+            ((Laboratory)res.buildings[laboratoryIndex]).researchShelters();
+            researchCount++;
+            return;
+        }
+        return;
     }
     #endregion
 }
