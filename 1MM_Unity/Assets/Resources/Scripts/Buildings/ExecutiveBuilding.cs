@@ -49,7 +49,7 @@ public class ExecutiveBuilding : ABuilding
             LoggingSystem.Instance.baseApprovalLost = res.flatApproval * (res.approvalDecayRate / 100);
         }
 
-        res.flatApproval += 0.1f;
+        res.flatApproval += res.flatApprovalDecayIncreasePerTurn;
     }
 
     public bool canBuyFoodRatio()
@@ -83,7 +83,6 @@ public class ExecutiveBuilding : ABuilding
         res.approval += res.festivalApproval;
         res.food -= festivalFoodCost * (res.triggeredEventCostRate / 100);
         res.money -= festivalMoneyCost * (res.triggeredEventCostRate / 100);
-        //GameResources.instance.money += (int)Random.Range(10f, 30f);
     }
 
     public void buyPublicSpeech()

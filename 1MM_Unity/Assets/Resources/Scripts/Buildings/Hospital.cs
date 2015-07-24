@@ -8,7 +8,7 @@ public class Hospital : ABuilding
     {
         name = "Hospital";
         shortDescription = "Hospitals increase your approval by 40 and decrease the approval decay by 10%.";
-        longDescription = "Hospitals are absolutely essential to your country so your citizens stay healthy. Hospitals increase your approval by 40 and decrease the approval decay by 10%. Linking a house to a hospital increases the maximum number of homeless citizens by 50.";
+        longDescription = "Hospitals are absolutely essential to your country so your citizens stay healthy. Hospitals increase your approval by 40 and decrease the approval decay by 10%. Linking a house to a hospital decreases the flat approval decay by 1. You can link only 2 houses to this building.";
         flavorText = "How do vaccines cause autism? They don't.";
         foodCost = 0;
         moneyCost = 245;

@@ -25,6 +25,7 @@ public class AResources : MonoBehaviour
     public float buildingCostRate = 100, buyRate = 100, sellRate = 50;
     public float approvalDecayRate = 100, goldPerTurn = 0.01f;
     public float flatApproval = 1f;
+    public float flatApprovalDecayIncreasePerTurn = 0.1f;
     public float territoryConquerRate = 0f;
 
     //Rate of triggered event cost.
@@ -216,6 +217,50 @@ public class AResources : MonoBehaviour
             buildingMaterials += 5;
         }
     }
+
+    public void automateLinkingFarmAndFactory()
+    {
+        int i, rand;
+
+        if (numberOfBuildings<House>() != 0)
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if ((b is Factory || b is Farm) && isLinkable(b.listIndex))
+                {
+                    i = 1;
+                    rand = (int)Random.Range(1, numberOfBuildings<House>() + 1);
+                    foreach (ABuilding h in buildings)
+                    {
+                        if (h is House)
+                        {
+                            if (i == rand)
+                            {
+                                linkBuildings(b.listIndex, h.listIndex);
+                                b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(h.sceneBuilding);
+                                break;
+                            }
+                            else
+                                i++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        public void automateLinkingHouse(GameObject building)
+        {
+            int targetIndex = building.GetComponent<IdManager>().buildingIndex;
+            foreach(ABuilding b in buildings)
+            {
+                if(b is House && isLinkable(b.listIndex) && canLink(b.listIndex, targetIndex))
+                {
+                    linkBuildings(b.listIndex, targetIndex);
+                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(building);
+                }
+            }
+        }
 
     public bool buildingConsutructedCheck(string building)
     {

@@ -99,22 +99,18 @@ public class AIManagement : MonoBehaviour {
             {
                 while (res.buildingMaterials - 100 >= buildingsList.Peek().buildingMaterialsCost &&
                     res.money <= buildingsList.Peek().moneyCost)
-                    ((WTC)res.buildings[wtcIndex]).sellMaterials(100);
                 
                 while (res.food - 100 >= buildingsList.Peek().foodCost &&
                     res.money <= buildingsList.Peek().moneyCost)
                     ((WTC)res.buildings[wtcIndex]).sellFood(100);
-                    Debug.Log("After selling food: " + res.food.ToString() + " " + res.money.ToString());
                 
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.buildingMaterials <= buildingsList.Peek().buildingMaterialsCost)
                     ((WTC)res.buildings[wtcIndex]).buyMaterials(100);
-                    Debug.Log("After buying materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
                 
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.food <= buildingsList.Peek().foodCost)
                     ((WTC)res.buildings[wtcIndex]).buyFood(100);
-                    Debug.Log("Before buying food: " + res.food.ToString() + " " + res.money.ToString());
                 
             }
             // If I can build the highest priority building, I am not saving up anymore

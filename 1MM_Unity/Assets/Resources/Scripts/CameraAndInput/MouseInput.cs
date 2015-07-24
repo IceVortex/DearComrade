@@ -10,7 +10,7 @@ public class MouseInput : MonoBehaviour {
     private Ray2D ray;
     public Collider2D clickedOn;
     public Camera cam;
-    public bool comradery, move, winMove, winComradery;
+    public bool comradery, move, winMove, winComradery, houseLinking;
     public GameObject comrade1, comrade2, buildingToMove;
 
     public CanvasGroup resultCG;
@@ -82,6 +82,15 @@ public class MouseInput : MonoBehaviour {
         }
     }
 
+    public void automatedHouseLinkingTarget()
+    {
+        houseLinking = true;
+
+        stopMoving();
+        stopComradery();
+
+    }
+
 
 	void Update () 
     {
@@ -94,7 +103,7 @@ public class MouseInput : MonoBehaviour {
             moveBuilding();
         }
 
-        if (!comradery && !move && !winMove && !winComradery)
+        if (!comradery && !move && !winMove && !winComradery && !houseLinking)
         {
             if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
@@ -348,6 +357,23 @@ public class MouseInput : MonoBehaviour {
 
             }
 
+        }
+        else if(houseLinking)
+        {
+            result.text = "Click on the building you want to link your houses to.";
+            if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
+                {
+                    clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
+                    if (clickedOn.GetComponent<IdManager>().res.GetType().ToString() != "AIResources")
+                    {
+                        resources.automateLinkingHouse(clickedOn.gameObject);
+                        houseLinking = false;
+                    }
+                }
+
+            }
         }
 
 	}

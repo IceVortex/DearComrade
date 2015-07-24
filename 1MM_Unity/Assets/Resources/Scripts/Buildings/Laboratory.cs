@@ -12,17 +12,6 @@ public class Laboratory : ABuilding
         theProletariat, nanocarbonMaterials, bargaining, improvedShelters,
         socialGatherings, oratory, foodFeast;
 
-    public int fertilityFoodCost = 150, fertilityMoneyCost = 0, fertilityMaterialsCost = 0;
-    public int industrialRevolutionFoodCost = 0, industrialRevolutionMoneyCost = 0, industrialRevolutionMaterialsCost = 150;
-    public int spaceConservationFoodCost = 0, spaceConservationMoneyCost = 100, spaceConservationMaterialsCost = 150;
-    public int theProletariatFoodCost = 0, theProletariatMoneyCost = 200, theProletariatMaterialsCost = 0;
-    public int nanocarbonMaterialsFoodCost = 0, nanocarbonMaterialsMoneyCost = 200, nanocarbonMaterialsMaterialsCost = 300;
-    public int bargainingFoodCost = 0, bargainingMoneyCost = 300, bargainingMaterialsCost = 0;
-    public int improvedSheltersFoodCost = 0, improvedSheltersMoneyCost = 50, improvedSheltersMaterialsCost = 100;
-    public int socialGatheringsFoodCost = 200, socialGatheringsMoneyCost = 200, socialGatheringsMaterialsCost = 200;
-    public int oratoryFoodCost = 0, oratoryMoneyCost = 400, oratoryMaterialsCost = 0;
-    public int foodFeastFoodCost = 200, foodFeastMoneyCost = 0, foodFeastMaterialsCost = 0;
-
     public string[] titles = {"Fertility", "Industrial Revolution", "Space Conservation", "The Proletariat",
                              "Nanocarbon Materials", "Bargaining", "Shelters", "Social Gatherings",
                              "Oratory", "Food Feast"};
@@ -32,7 +21,7 @@ public class Laboratory : ABuilding
                                     "Houses increase the maximum citizen count by an additional 50 villagers.",
                                     "Each turn you receive a bonus of 0.01 gold per villager.",
                                     "The resources cost of buildings is reduced by 20%.",
-                                    "Cost of buying resources at market is reduced by 30% and the number of resources gained from buying is also increased by 30%.", 
+                                    "The selling rate of resources at the World Trade Center is increased by 20%.", 
                                     "The maximum number of homeless citizens is increased to 300.",
                                     "The cost of organised events is reduced by 20%.",
                                     "The maximum approval gained from triggered events (Public speech and Festival) is increased by 7.",
@@ -136,7 +125,6 @@ public class Laboratory : ABuilding
     {
         res.researchPoints--;
         res.buildingCostRate -= 20;
-        //Debug.Log("researched + " + res.buildingCostRate);
         res.researchesMade++;
     }
 

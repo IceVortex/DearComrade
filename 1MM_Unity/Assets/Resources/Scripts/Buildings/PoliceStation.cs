@@ -8,7 +8,7 @@ public class PoliceStation : ABuilding
     {
         name = "Police Station";
         shortDescription = "Police Stations increase your approval by 20 and decrease the approval decay rate by 10%.";
-        longDescription = "Police Stations are essential for ensuring the security of your citizens. These increase your approval by 20 and decrease the approval decay rate by 10%. Linking a house to the police stations decreases the approval decay by 1%.";
+        longDescription = "Police Stations are essential for ensuring the security of your citizens. These increase your approval by 20 and decrease the approval decay rate by 10%. Linking a house to the police stations decreases the approval decay by 5%. You can only link 2 houses to this building.";
         flavorText = "If the thug life chose you, the police also chooses to arrest you.";
         foodCost = 0;
         moneyCost = 175;
