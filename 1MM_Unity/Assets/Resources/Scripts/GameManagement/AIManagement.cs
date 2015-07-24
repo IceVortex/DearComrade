@@ -13,8 +13,8 @@ public class AIManagement : MonoBehaviour {
     private bool building;
     private int i, savingUpCD, savingUpCD_Constant = 2;
     private int rand, researchCount = 1;
-    private bool savingUp = false;
-    private int wtcIndex, laboratoryIndex;
+    private bool savingUp = false, linkedToUnique;
+    private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex;
 
     void Awake()
     {
@@ -99,32 +99,23 @@ public class AIManagement : MonoBehaviour {
             {
                 while (res.buildingMaterials - 100 >= buildingsList.Peek().buildingMaterialsCost &&
                     res.money <= buildingsList.Peek().moneyCost)
-                {
-                    Debug.Log("Before selling materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).sellMaterials(100);
-                    Debug.Log("After selling materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
-                }
+                
                 while (res.food - 100 >= buildingsList.Peek().foodCost &&
                     res.money <= buildingsList.Peek().moneyCost)
-                {
-                    Debug.Log("Before selling food: " + res.food.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).sellFood(100);
                     Debug.Log("After selling food: " + res.food.ToString() + " " + res.money.ToString());
-                }
+                
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.buildingMaterials <= buildingsList.Peek().buildingMaterialsCost)
-                {
-                    Debug.Log("Before buying materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).buyMaterials(100);
                     Debug.Log("After buying materials: " + res.buildingMaterials.ToString() + " " + res.money.ToString());
-                }
+                
                 while (res.money - 100 >= buildingsList.Peek().moneyCost &&
                     res.food <= buildingsList.Peek().foodCost)
-                {
-                    Debug.Log("Before buying food: " + res.food.ToString() + " " + res.money.ToString());
                     ((WTC)res.buildings[wtcIndex]).buyFood(100);
                     Debug.Log("Before buying food: " + res.food.ToString() + " " + res.money.ToString());
-                }
+                
             }
             // If I can build the highest priority building, I am not saving up anymore
             if (canBuild(buildingsList.Peek(), 1)) 
@@ -154,6 +145,7 @@ public class AIManagement : MonoBehaviour {
         // Checking for buildings without a comrade and link them
         foreach (ABuilding b in res.buildings)
         {
+            // Linking Farms and Factories to Houses.
             if ((b is Farm || b is Factory) && res.isLinkable(b.listIndex))
             {
                 rand = UnityEngine.Random.Range(1, res.numberOfBuildings<House>() + 1);
@@ -171,22 +163,60 @@ public class AIManagement : MonoBehaviour {
                         i++;
                     }
             }
+                // Linking Houses.
             else if (b is House && res.isLinkable(b.listIndex))
             {
+                // Randomizing the building I will link the house to.
                 rand = UnityEngine.Random.Range(1, res.numberOfBuildings<Farm>() + res.numberOfBuildings<Factory>() + 1);
                 i = 1;
 
-                foreach (ABuilding build in res.buildings)
-                    if ((build is Farm || build is Factory) && i == rand)
+                // Looking for WTC, Educational Building, and Workplace
+                if (wtcIndex == 0)
+                    wtcIndex = res.findBuilding<WTC>();
+
+                if (educationalBuildingIndex == 0)
+                    educationalBuildingIndex = res.findBuilding<EducationalBuilding>();
+
+                if (workplaceIndex == 0)
+                    workplaceIndex = res.findBuilding<Workplace>();
+
+                // When I link a house to an unique building, this gets set to true.
+                linkedToUnique = false;
+
+                // If there's any, I try to link to it first.
+                if (wtcIndex != 0 && res.numberOfBuildingsLinkedTo<WTC>() < 2)
+                {
+                    linkedToUnique = true;
+                    res.linkBuildings(b.listIndex, wtcIndex);
+                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(res.buildings[wtcIndex].sceneBuilding);
+                }
+                else if (educationalBuildingIndex != 0 && res.numberOfBuildingsLinkedTo<EducationalBuilding>() < 2)
+                {
+                    linkedToUnique = true;
+                    res.linkBuildings(b.listIndex, educationalBuildingIndex);
+                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(res.buildings[educationalBuildingIndex].sceneBuilding);
+                }
+                else if (workplaceIndex != 0 && res.numberOfBuildingsLinkedTo<Workplace>() < 2)
+                {
+                    linkedToUnique = true;
+                    res.linkBuildings(b.listIndex, workplaceIndex);
+                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(res.buildings[workplaceIndex].sceneBuilding);
+                }
+                else if(!linkedToUnique)
+                    foreach (ABuilding build in res.buildings)
                     {
-                        res.linkBuildings(b.listIndex, build.listIndex);
-                        b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(build.sceneBuilding);
-                        break;
+                        if ((build is Farm || build is Factory) && i == rand)
+                        {
+                            res.linkBuildings(b.listIndex, build.listIndex);
+                            b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(build.sceneBuilding);
+                            break;
+                        }
+                        else if ((build is Farm || build is Factory) && i != rand)
+                        {
+                            i++;
+                        }
                     }
-                    else if((build is Farm || build is Factory) && i != rand)
-                    {
-                        i++;
-                    }
+
             }
         }
 

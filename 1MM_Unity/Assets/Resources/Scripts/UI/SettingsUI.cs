@@ -6,7 +6,7 @@ public class SettingsUI : MonoBehaviour
 {
 
     public Canvas canvas;
-    public AudioSource audio;
+    public AudioSource music;
 
     public Resolution[] resolutions;
     public int currentRes,currenQual;
@@ -58,7 +58,7 @@ public class SettingsUI : MonoBehaviour
         graphicSlider.value = QualitySettings.GetQualityLevel();
 
         soundSlider.value = 1;
-        audio.volume = soundSlider.value / 3;
+        music.volume = soundSlider.value / 3;
     }
 
     void Update()
@@ -112,7 +112,7 @@ public class SettingsUI : MonoBehaviour
     {
         QualitySettings.SetQualityLevel((int)graphicSlider.value);
 
-        audio.volume = soundSlider.value / 3;
+        music.volume = soundSlider.value / 3;
 
         Screen.SetResolution(resolutions[(int)resolutionSlider.value].width, resolutions[(int)resolutionSlider.value].height, true);
         resolutionText.text = resolutions[(int)resolutionSlider.value].width + " x " + resolutions[(int)resolutionSlider.value].height;
