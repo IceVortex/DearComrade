@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour {
 
     public CanvasGroup mainMenu, options, credits,cgToFade0,cgToFade1;
     public CanvasGroup t1,t2;
-    public AudioSource audio;
+    public AudioSource music;
     
     public Resolution[] resolutions;
     public int currentRes, currenQual;
@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour {
         currentQuality.text = "Current Quality: \n" + QualitySettings.names[QualitySettings.GetQualityLevel()];
         graphicSlider.value = QualitySettings.GetQualityLevel();
         soundSlider.value = 1;
-        audio.volume = soundSlider.value / 3;
+        music.volume = soundSlider.value / 3;
     }
 
 
@@ -115,7 +115,7 @@ public class MainMenu : MonoBehaviour {
     public void apply()
     {
         QualitySettings.SetQualityLevel((int)graphicSlider.value);
-        audio.volume = soundSlider.value / 3;
+        music.volume = soundSlider.value / 3;
         Screen.SetResolution(resolutions[(int)resolutionSlider.value].width, resolutions[(int)resolutionSlider.value].height, true);
         resolutionText.text = resolutions[(int)resolutionSlider.value].width + " x " + resolutions[(int)resolutionSlider.value].height;
 

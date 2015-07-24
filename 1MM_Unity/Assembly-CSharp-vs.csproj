@@ -73,7 +73,6 @@
      <Compile Include="Assets\Resources\Scripts\GameManagement\AResources.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManagement\GameManagement.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManagement\GameResources.cs" />
-     <Compile Include="Assets\Resources\Scripts\GameManagement\GameResourcesCopy.cs" />
      <Compile Include="Assets\Resources\Scripts\Misc\BuildingGeneration.cs" />
      <Compile Include="Assets\Resources\Scripts\Misc\IdManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Misc\LoggingSystem.cs" />
