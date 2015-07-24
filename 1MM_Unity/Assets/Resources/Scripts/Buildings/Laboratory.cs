@@ -143,8 +143,7 @@ public class Laboratory : ABuilding
     public void researchBargaining()
     {
         res.researchPoints--;
-        res.buyRate += 30;
-        res.sellRate -= res.sellRate * (30 / 100);
+        res.sellRate += 20;
         res.researchesMade++;
     }
 

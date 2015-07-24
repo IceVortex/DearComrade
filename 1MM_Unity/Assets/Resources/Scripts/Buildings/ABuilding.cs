@@ -7,6 +7,7 @@ public class ABuilding {
     public int listIndex, comradeIndex = 0;
     public float foodCost, moneyCost, buildingMaterialsCost;
     public AResources res;
+    public GameObject sceneBuilding;
 
     public virtual void Effect()
     { }

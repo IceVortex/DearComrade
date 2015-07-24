@@ -17,12 +17,12 @@ public class statistics : MonoBehaviour {
     public void updateStatistics()
     {
         nrOfBuildings = resources.currentIndex;
-        nrOfFarms = resources.numberOfBuildings("Farm");
-        nrOfFactories = resources.numberOfBuildings("Factory");
-        nrOfHouses = resources.numberOfBuildings("House");
-        nrOfTerritories = resources.numberOfBuildings("Food Territory") +
-            resources.numberOfBuildings("Materials Territory") +
-            resources.numberOfBuildings("Citizens Territory");
+        nrOfFarms = resources.numberOfBuildings<Farm>();
+        nrOfFactories = resources.numberOfBuildings<Factory>();
+        nrOfHouses = resources.numberOfBuildings<House>();
+        nrOfTerritories = resources.numberOfBuildings<FoodTerritory>() +
+            resources.numberOfBuildings<MaterialsTerritory>() +
+            resources.numberOfBuildings<CitizensTerritory>();
 
         foodPerTurn = resources.resourcePerTurn("food");
         materialsPerTurn = resources.resourcePerTurn("materials");

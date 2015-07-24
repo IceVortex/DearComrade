@@ -21,6 +21,11 @@ public class lineRendererFunctionality : MonoBehaviour {
     public void updateTarget(GameObject target)
     {
         Target = target;
+        lr = GetComponent<LineRenderer>();
+        resources = GetComponent<IdManager>().res;
+
+        Debug.Log(gameObject.GetComponent<IdManager>().buildingIndex);
+        Debug.Log(resources);
         if (resources.buildings[target.GetComponent<IdManager>().buildingIndex].comradeIndex != 0)
         {
             lr.SetPosition(1, target.transform.position + Vector3.forward);
