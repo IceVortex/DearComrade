@@ -119,7 +119,7 @@ public class MouseInput : MonoBehaviour {
         }
         else if(comradery)
         {
-            ComraderyButtonText.text = "Cancel Comradery";
+            ComraderyButtonText.text = "Cancel comradery [E]";
 
             resultCG.alpha = 1;
             resultCG.interactable = true;
@@ -187,7 +187,7 @@ public class MouseInput : MonoBehaviour {
 
         else if (winComradery)
         {
-            ComraderyButtonText.text = "Cancel Comradery";
+            ComraderyButtonText.text = "Cancel comradery [E]";
 
             resultCG.alpha = 1;
             resultCG.interactable = true;
@@ -252,7 +252,7 @@ public class MouseInput : MonoBehaviour {
 
         else if (move)
         {
-            moveButtonText.text = "Stop Moving";
+            moveButtonText.text = "Stop moving [R]";
 
             float xPos, yPos;
             xPos = cam.ScreenToWorldPoint(Input.mousePosition).x;
@@ -302,7 +302,7 @@ public class MouseInput : MonoBehaviour {
         }
         else if (winMove)
         {
-            moveButtonText.text = "Stop Moving";
+            moveButtonText.text = "Stop moving [R]";
             result.text = "Click where you want the building to be moved.";
 
             float xPos, yPos;
@@ -355,7 +355,7 @@ public class MouseInput : MonoBehaviour {
         comrade1 = comrade2 = null;
         if (resultCG.alpha != 0)
             Invoke("hideResult", 1.5F);
-        ComraderyButtonText.text = "Establish Comradery";
+        ComraderyButtonText.text = "Establish comradery [E]";
     }
 
     public void stopMoving()
@@ -364,7 +364,7 @@ public class MouseInput : MonoBehaviour {
         winMove = false;
         buildingToMove = null;
         Invoke("hideResult", 1.5F);
-        moveButtonText.text = "Move Building";
+        moveButtonText.text = "Move buildings [R]";
     }
 
     void hideResult()
