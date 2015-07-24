@@ -80,11 +80,11 @@ public class AIManagement : MonoBehaviour {
         else // Other turns
         {
             // If the number of farms is less then 2/3 of the nr. of factories, I'm adding some farms
-            if (res.numberOfBuildings("Farm") <= (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+            if (res.numberOfBuildings<Farm>() <= (int)((float)res.numberOfBuildings<Factory>() * 2 / 3) && !savingUp)
                 for (i = 1; i <= res.howManyCanBuy<Farm>(); i++)
                     buildingsList.Push(new Farm());
 
-            else if (res.numberOfBuildings("Farm") > (int)((float)res.numberOfBuildings("Factory") * 2 / 3) && !savingUp)
+            else if (res.numberOfBuildings<Farm>() > (int)((float)res.numberOfBuildings<Factory>() * 2 / 3) && !savingUp)
                 for (i = 1; i <= res.howManyCanBuy<Factory>(); i++)
                     buildingsList.Push(new Factory());
 
@@ -156,7 +156,7 @@ public class AIManagement : MonoBehaviour {
         {
             if ((b is Farm || b is Factory) && res.isLinkable(b.listIndex))
             {
-                rand = UnityEngine.Random.Range(1, res.numberOfBuildings("House") + 1);
+                rand = UnityEngine.Random.Range(1, res.numberOfBuildings<House>() + 1);
                 i = 1;
 
                 foreach (ABuilding build in res.buildings)
@@ -173,7 +173,7 @@ public class AIManagement : MonoBehaviour {
             }
             else if (b is House && res.isLinkable(b.listIndex))
             {
-                rand = UnityEngine.Random.Range(1, res.numberOfBuildings("Farm") + res.numberOfBuildings("Factory") + 1);
+                rand = UnityEngine.Random.Range(1, res.numberOfBuildings<Farm>() + res.numberOfBuildings<Factory>() + 1);
                 i = 1;
 
                 foreach (ABuilding build in res.buildings)

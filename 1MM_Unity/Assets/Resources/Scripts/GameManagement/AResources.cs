@@ -45,6 +45,7 @@ public class AResources : MonoBehaviour
     //The list of buildings, links and the index
     public List<ABuilding> buildings = new List<ABuilding>();
     public Dictionary<int, int> links = new Dictionary<int, int>();
+    public Dictionary<string, int> nrOfLinkedBuildings;
     public int currentIndex = 0;
 
     private GameObject obj;
@@ -137,19 +138,17 @@ public class AResources : MonoBehaviour
         
         if (typeStart == "House" && typeDestination == "House" && indexStart != indexDestination)
             return true;
-        else if (typeStart == "House" && typeDestination == "WTC")
+        else if (typeStart == "House" && typeDestination == "WTC" && numberOfBuildingsLinkedTo<WTC>() < 2)
             return true;
-        else if (typeStart == "Farm" && typeDestination == "WTC")
+        else if (typeStart == "House" && typeDestination == "Hospital" && numberOfBuildingsLinkedTo<Hospital>() < 2)
             return true;
-        else if (typeStart == "House" && typeDestination == "Hospital")
+        else if (typeStart == "House" && typeDestination == "EducationalBuilding" && numberOfBuildingsLinkedTo<EducationalBuilding>() < 2)
             return true;
-        else if (typeStart == "House" && typeDestination == "EducationalBuilding")
+        else if (typeStart == "House" && typeDestination == "PoliceStation" && numberOfBuildingsLinkedTo<PoliceStation>() < 2)
             return true;
-        else if (typeStart == "House" && typeDestination == "PoliceStation")
+        else if (typeStart == "House" && typeDestination == "Workplace" && numberOfBuildingsLinkedTo<Workplace>() < 2)
             return true;
-        else if (typeStart == "House" && typeDestination == "Workplace")
-            return true;
-        else if (typeStart == "House" && typeDestination == "PublicSpace")
+        else if (typeStart == "House" && typeDestination == "PublicSpace" && numberOfBuildingsLinkedTo<PoliceStation>() < 2)
             return true;
         else if (typeStart == "House" && typeDestination == "MilitaryOutpost")
             return true;
@@ -171,36 +170,34 @@ public class AResources : MonoBehaviour
         if (typeStart == "House" && typeDestination == "House")
             maximumCitizens += 150;
         else if (typeStart == "House" && typeDestination == "WTC")
-            sellRate += 2;
-        else if (typeStart == "Farm" && typeDestination == "WTC")
-            buyRate += 2;
+            sellRate += 15;
         else if (typeStart == "House" && typeDestination == "Hospital")
-            maxHomelessCitizens += 50;
+            flatApproval -= 1;
         else if (typeStart == "House" && typeDestination == "EducationalBuilding")
-            buildingCostRate -= 2;
+            buildingCostRate -= 15;
         else if (typeStart == "House" && typeDestination == "PoliceStation")
-            approvalDecayRate -= 1;
+            approvalDecayRate -= 5;
         else if (typeStart == "House" && typeDestination == "Workplace")
-            goldPerTurn += 0.001f;
+            goldPerTurn += 0.005f;
         else if (typeStart == "House" && typeDestination == "PublicSpace")
-            approval += 0.5f;
+            approval += 10f;
         else if (typeStart == "House" && typeDestination == "MilitaryOutpost")
-            {
-                maximumCitizens -= houseCitizensT;
-                maximumTroops += houseCitizensT;
-                territoryConquerRate += 8;
+        {
+            maximumCitizens -= houseCitizensT;
+            maximumTroops += houseCitizensT;
+            territoryConquerRate += 8;
 
-                if (citizens >= houseCitizensT)
-                {
-                    citizens -= houseCitizensT;
-                    troops += houseCitizensT;
-                }
-                else
-                {
-                    troops += citizens;
-                    citizens = 0;
-                }
+            if (citizens >= houseCitizensT)
+            {
+                citizens -= houseCitizensT;
+                troops += houseCitizensT;
             }
+            else
+            {
+                troops += citizens;
+                citizens = 0;
+            }
+        }
     }
 
     public void linkEffectTurn(int indexStart, int indexDestination)
@@ -230,12 +227,23 @@ public class AResources : MonoBehaviour
         return false;
     }
 
-    public int numberOfBuildings(string building)
+    public int numberOfBuildings<building>() where building: ABuilding
     {
         int x = 0;
         foreach (ABuilding b in buildings)
         {
-            if (b.name == building)
+            if (b is building)
+                x++;
+        }
+        return x;
+    }
+
+    public int numberOfBuildingsLinkedTo<building>() where building:ABuilding
+    {
+        int x = 0;
+        foreach(ABuilding b in buildings)
+        {
+            if (buildings[b.comradeIndex] is building)
                 x++;
         }
         return x;
