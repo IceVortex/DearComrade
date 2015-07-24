@@ -20,6 +20,7 @@ public class loggingFrontend : MonoBehaviour {
             + "Materials: " + System.Math.Round(LoggingSystem.Instance.materialsGained,2).ToString() + "\n"
             + "Money: " + System.Math.Round(LoggingSystem.Instance.moneyGained,2).ToString() + "\n"
             + "Approval: " + System.Math.Round((-LoggingSystem.Instance.baseApprovalLost + LoggingSystem.Instance.approvalGained),2).ToString()+"\n";
+
         if (LoggingSystem.Instance.territoryRecieved == 1)
         {
             values.text += "Your army has conquered a Food Territory.";

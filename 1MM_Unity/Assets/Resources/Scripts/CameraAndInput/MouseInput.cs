@@ -64,7 +64,16 @@ public class MouseInput : MonoBehaviour {
         if (!winMove && !winComradery)
         {
             if (move)
+            {
+                if(buildingToMove)
+                { 
+                    buildingToMove.transform.position = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x, cam.ScreenToWorldPoint(Input.mousePosition).y, 0);
+                    result.text = "Succesfully moved building";
+                    buildingToMove.GetComponent<Collider2D>().enabled = true;
+                    buildingToMove = null;
+                }
                 stopMoving();
+            }
             else
             {
                 stopComradery();
@@ -92,10 +101,13 @@ public class MouseInput : MonoBehaviour {
                 if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
                 {
                     clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
-                    if (window.GetComponent<hide>().hideTab == true)
-                        window.GetComponent<hide>().toggle();
+                    if(clickedOn.GetComponent<IdManager>().res.GetType().ToString() != "AIResources")
+                    { 
+                        if (window.GetComponent<hide>().hideTab == true)
+                            window.GetComponent<hide>().toggle();
 
-                    window.GetComponentInChildren<windowValues>().clicked(clickedOn.gameObject);
+                        window.GetComponentInChildren<windowValues>().clicked(clickedOn.gameObject);
+                    }
                 }
                 else
                 {

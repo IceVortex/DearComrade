@@ -14,7 +14,7 @@ public class lineRendererFunctionality : MonoBehaviour {
         lr = GetComponent<LineRenderer>();
 
         resources = GetComponent<IdManager>().res;
-        
+        lr.SetPosition(0, transform.position + Vector3.forward);
         lr.SetPosition(1, transform.position + Vector3.forward);
 	}
 
@@ -40,7 +40,6 @@ public class lineRendererFunctionality : MonoBehaviour {
 
     void Update()
     {
-        
         lr.SetPosition(0, transform.position + Vector3.forward);
 
 

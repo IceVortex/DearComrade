@@ -7,12 +7,12 @@ public class statistics : MonoBehaviour {
 
     public AResources resources;
     public int nrOfBuildings, nrOfFarms, nrOfHouses, nrOfFactories, nrOfTerritories;
-    public float foodPerTurn, moneyPerTurn, materialsPerTurn, approvalDecayRate, currentApprovalDecay;
+    public float foodPerTurn, moneyPerTurn, materialsPerTurn, approvalDecayRate, currentApprovalDecay, buyRate, sellRate;
     public int nrOfResearches, timeUntilResearch, timeUntilFestival, timeUntilPS, timeUntilIFR;
 
     public Text TnrOfBuildings, TnrOfFarms, TnrOfHouses, TnrOfFactories,
         TnrOfTerritories, TfoodPerTurn, TmoneyPerTurn, TmaterialsPerTurn, TapprovalDecayRate, TcurrentApprovalDecay,
-        TnrOfResearches, TtimeUntilResearch, TtimeUntilFestival, TtimeUntilPS, TtimeUntilIFR; 
+        TnrOfResearches, TtimeUntilResearch, TtimeUntilFestival, TtimeUntilPS, TtimeUntilIFR, TbuyRate, TsellRate; 
 
     public void updateStatistics()
     {
@@ -32,11 +32,14 @@ public class statistics : MonoBehaviour {
 
         nrOfResearches = resources.researchesMade;
 
-        //if(GameObject.FindGameObjectWithTag("Laboratory"))
-            //timeUntilResearch = 7 - GameObject.FindGameObjectWithTag("Laboratory").GetComponent<Laboratory>().researchPointCount % 7;
-        //timeUntilFestival = GameObject.FindGameObjectWithTag("Executive").GetComponent<ExecutiveBuilding>().cdFestival;
-        //timeUntilPS = GameObject.FindGameObjectWithTag("Executive").GetComponent<ExecutiveBuilding>().cdPublicSpeech;
-        //timeUntilIFR = GameObject.FindGameObjectWithTag("Executive").GetComponent<ExecutiveBuilding>().cdFoodRatio;
+        if(GameObject.FindGameObjectWithTag("Laboratory"))
+            timeUntilResearch = 7 - ((Laboratory)resources.buildings[GameObject.FindGameObjectWithTag("Laboratory").GetComponent<IdManager>().buildingIndex]).researchPointCount % 7;
+        timeUntilFestival = ((ExecutiveBuilding)resources.buildings[GameObject.FindGameObjectWithTag("Executive").GetComponent<IdManager>().buildingIndex]).cdFestival;
+        timeUntilPS = ((ExecutiveBuilding)resources.buildings[GameObject.FindGameObjectWithTag("Executive").GetComponent<IdManager>().buildingIndex]).cdPublicSpeech;
+        timeUntilIFR = ((ExecutiveBuilding)resources.buildings[GameObject.FindGameObjectWithTag("Executive").GetComponent<IdManager>().buildingIndex]).cdFoodRatio;
+
+        buyRate = resources.buyRate;
+        sellRate = resources.sellRate;
 
         TnrOfBuildings.text = nrOfBuildings.ToString();
         TnrOfFarms.text = nrOfFarms.ToString();
@@ -46,14 +49,15 @@ public class statistics : MonoBehaviour {
         TfoodPerTurn.text = foodPerTurn.ToString();
         TmoneyPerTurn.text = moneyPerTurn.ToString();
         TmaterialsPerTurn.text = materialsPerTurn.ToString();
-        TapprovalDecayRate.text = approvalDecayRate.ToString();
+        TapprovalDecayRate.text = approvalDecayRate.ToString()+"%";
         TcurrentApprovalDecay.text = currentApprovalDecay.ToString();
         TnrOfResearches.text = nrOfResearches.ToString();
         TtimeUntilResearch.text = timeUntilResearch.ToString();
         TtimeUntilFestival.text = timeUntilFestival.ToString();
         TtimeUntilPS.text = timeUntilPS.ToString();
         TtimeUntilIFR.text = timeUntilIFR.ToString();
-
+        TbuyRate.text = buyRate.ToString()+"%";
+        TsellRate.text = sellRate.ToString()+"%";
     }
 
     void Start()
