@@ -24,6 +24,5 @@ public class MilitaryOutpost : ABuilding
             else
                 res.troops = res.maximumTroops;
         }
-
     }
 }

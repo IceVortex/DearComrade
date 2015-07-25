@@ -466,49 +466,49 @@ public class AIManagement : MonoBehaviour {
     private void checkAndAddThresholds()
     {
 
-        if (thresholdReached<WTC>() && !res.buildingConsutructedCheck("World Trade Center"))
+        if (thresholdReached<WTC>() && !res.buildingConstructedCheck("World Trade Center"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new WTC());
         }
-        else if (thresholdReached<Laboratory>() && !res.buildingConsutructedCheck("Laboratory"))
+        else if (thresholdReached<Laboratory>() && !res.buildingConstructedCheck("Laboratory"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new Laboratory());
         }
-        else if (thresholdReached<MilitaryOutpost>() && !res.buildingConsutructedCheck("Military Outpost"))
+        else if (thresholdReached<MilitaryOutpost>() && !res.buildingConstructedCheck("Military Outpost"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new MilitaryOutpost());
         }
-        else if (thresholdReached<PublicSpace>() && !res.buildingConsutructedCheck("Public Space"))
+        else if (thresholdReached<PublicSpace>() && !res.buildingConstructedCheck("Public Space"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new PublicSpace());
         }
-        else if (thresholdReached<EducationalBuilding>() && !res.buildingConsutructedCheck("Educational Building"))
+        else if (thresholdReached<EducationalBuilding>() && !res.buildingConstructedCheck("Educational Building"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new EducationalBuilding());
         }
-        else if (thresholdReached<PoliceStation>() && !res.buildingConsutructedCheck("Police Station"))
+        else if (thresholdReached<PoliceStation>() && !res.buildingConstructedCheck("Police Station"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new PoliceStation());
         }
-        else if (thresholdReached<Workplace>() && !res.buildingConsutructedCheck("Workplace"))
+        else if (thresholdReached<Workplace>() && !res.buildingConstructedCheck("Workplace"))
         {
             savingUp = true;
             buildingsList.Clear();
             buildingsList.Push(new Workplace());
         }
-        else if (thresholdReached<Hospital>() && !res.buildingConsutructedCheck("Hospital"))
+        else if (thresholdReached<Hospital>() && !res.buildingConstructedCheck("Hospital"))
         {
             savingUp = true;
             buildingsList.Clear();

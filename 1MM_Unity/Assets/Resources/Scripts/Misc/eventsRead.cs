@@ -48,7 +48,7 @@ public class eventsRead : MonoBehaviour {
         }
         else if (thisEvent.required != "none")
         {
-            if (!resources.buildingConsutructedCheck(thisEvent.required))
+            if (!resources.buildingConstructedCheck(thisEvent.required))
                 getRandomEvent();
             else
             {

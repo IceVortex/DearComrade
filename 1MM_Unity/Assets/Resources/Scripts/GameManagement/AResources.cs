@@ -9,7 +9,7 @@ public class AResources : MonoBehaviour
     public float food, money, buildingMaterials;
     public float approval;
     public float citizens, maximumCitizens;
-    public float troops, maximumTroops;
+    public float troops, maximumTroops, attackingTroops;
     public float researchPoints;
 
     //Tax Rate
@@ -50,7 +50,9 @@ public class AResources : MonoBehaviour
     public int currentIndex = 0;
 
     private GameObject obj;
+    public GameObject manager;
 
+    #region Can Buy - Functions for checking if a building is available for buy
     public bool canBuy<building>() where building : ABuilding, new()
     {
         building x = new building();
@@ -77,9 +79,11 @@ public class AResources : MonoBehaviour
     {
         // Returns maximum number of buildings you can make of "building" type
         building x = new building();
-        return (int)System.Math.Min(food / x.foodCost, System.Math.Min(money/x.moneyCost, buildingMaterials/x.buildingMaterialsCost));
+        return (int)System.Math.Min(food / x.foodCost, System.Math.Min(money / x.moneyCost, buildingMaterials / x.buildingMaterialsCost));
     }
+    #endregion
 
+    #region Functions for counting and finding buildings
     public int findBuilding<building>() where building : ABuilding, new()
     {
         building x = new building();
@@ -89,24 +93,41 @@ public class AResources : MonoBehaviour
         return 0;
     }
 
-    public void createBuilding<building>(GameObject buildingPrefab, Vector3 position) where building : ABuilding, new()
+    public bool buildingConstructedCheck(string building)
     {
-        //Adding the buildings to the list
-        buildings.Add(new building());
-        buildings[currentIndex].Initialize(currentIndex, this);
-
-        //Creating the game object in the scene, for the visual representation
-        obj = (GameObject)GameObject.Instantiate(buildingPrefab, position, Quaternion.identity);
-        obj.name = buildings[currentIndex].name;
-        obj.GetComponent<IdManager>().buildingIndex = currentIndex;
-        obj.GetComponent<IdManager>().res = this;
-
-        //Adding the object in scene to the buildings list
-        buildings[currentIndex].sceneBuilding = (GameObject)obj;
-
-        currentIndex++;
+        foreach (ABuilding b in buildings)
+        {
+            if (b.name == building)
+                return true;
+        }
+        return false;
     }
 
+    public int numberOfBuildings<building>() where building : ABuilding
+    {
+        int x = 0;
+        foreach (ABuilding b in buildings)
+        {
+            if (b is building)
+                x++;
+        }
+        return x;
+    }
+
+    public int numberOfBuildingsLinkedTo<building>() where building : ABuilding
+    {
+        int x = 0;
+        foreach (ABuilding b in buildings)
+        {
+            if (buildings[b.comradeIndex] is building)
+                x++;
+        }
+        return x;
+    }
+
+    #endregion
+
+    #region Cost and Resources per turn functions
     public Vector3 cost<building>() where building : ABuilding, new()
     {
         Vector3 cost;
@@ -117,6 +138,52 @@ public class AResources : MonoBehaviour
         return cost;
     }
 
+    public float resourcePerTurn(string res)
+    {
+        float value = 0;
+        if (res == "food")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Farm")
+                {
+                    value += farmFoodT;
+                }
+            }
+            foreach (var entry in links)
+            {
+                if (buildings[entry.Key].GetType().ToString() == "Farm" ||
+                    buildings[entry.Value].GetType().ToString() == "Farm")
+                    value += 5;
+            }
+
+        }
+        if (res == "materials")
+        {
+            foreach (ABuilding b in buildings)
+            {
+                if (b.name == "Factory")
+                {
+                    value += factoryMaterialsT;
+                }
+            }
+            foreach (var entry in links)
+            {
+                if (buildings[entry.Key].GetType().ToString() == "Factory" ||
+                    buildings[entry.Value].GetType().ToString() == "Factory")
+                    value += 5;
+            }
+        }
+        if (res == "money")
+        {
+            value = goldPerTurn * citizens * (taxRate / 100);
+        }
+
+        return value;
+    }
+    #endregion
+
+    #region Linking functions
     public void linkBuildings(int indexStart, int indexDestination)
     {
         buildings[indexStart].comradeIndex = buildings[indexDestination].listIndex;
@@ -218,6 +285,9 @@ public class AResources : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Automated Linking
     public void automateLinkingFarmAndFactory()
     {
         int i, rand;
@@ -249,93 +319,44 @@ public class AResources : MonoBehaviour
         }
     }
 
-        public void automateLinkingHouse(GameObject building)
-        {
-            int targetIndex = building.GetComponent<IdManager>().buildingIndex;
-            foreach(ABuilding b in buildings)
-            {
-                if(b is House && isLinkable(b.listIndex) && canLink(b.listIndex, targetIndex))
-                {
-                    linkBuildings(b.listIndex, targetIndex);
-                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(building);
-                }
-            }
-        }
-
-    public bool buildingConsutructedCheck(string building)
+    public void automateLinkingHouse(GameObject building)
     {
-        foreach (ABuilding b in buildings)
-        {
-            if (b.name == building)
-                return true;
-        }
-        return false;
-    }
-
-    public int numberOfBuildings<building>() where building: ABuilding
-    {
-        int x = 0;
-        foreach (ABuilding b in buildings)
-        {
-            if (b is building)
-                x++;
-        }
-        return x;
-    }
-
-    public int numberOfBuildingsLinkedTo<building>() where building:ABuilding
-    {
-        int x = 0;
+        int targetIndex = building.GetComponent<IdManager>().buildingIndex;
         foreach(ABuilding b in buildings)
         {
-            if (buildings[b.comradeIndex] is building)
-                x++;
+            if(b is House && isLinkable(b.listIndex) && canLink(b.listIndex, targetIndex))
+            {
+                linkBuildings(b.listIndex, targetIndex);
+                b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(building);
+            }
         }
-        return x;
     }
+    #endregion
 
-    public float resourcePerTurn(string res)
+    public void createBuilding<building>(GameObject buildingPrefab, Vector3 position) where building : ABuilding, new()
     {
-        float value = 0;
-        if (res == "food")
-        {
-            foreach (ABuilding b in buildings)
-            {
-                if (b.name == "Farm")
-                {
-                    value += farmFoodT;
-                }
-            }
-            foreach (var entry in links)
-            {
-                if (buildings[entry.Key].GetType().ToString() == "Farm" ||
-                    buildings[entry.Value].GetType().ToString() == "Farm")
-                    value += 5;
-            }
+        //Adding the buildings to the list
+        buildings.Add(new building());
+        buildings[currentIndex].Initialize(currentIndex, this);
 
-        }
-        if (res == "materials")
-        {
-            foreach (ABuilding b in buildings)
-            {
-                if (b.name == "Factory")
-                {
-                    value += factoryMaterialsT;
-                }
-            }
-            foreach (var entry in links)
-            {
-                if (buildings[entry.Key].GetType().ToString() == "Factory" ||
-                    buildings[entry.Value].GetType().ToString() == "Factory")
-                    value += 5;
-            }
-        }
-        if (res == "money")
-        {
-            value = goldPerTurn * citizens * (taxRate / 100);
-        }
+        //Creating the game object in the scene, for the visual representation
+        obj = (GameObject)GameObject.Instantiate(buildingPrefab, position, Quaternion.identity);
+        obj.name = buildings[currentIndex].name;
+        obj.GetComponent<IdManager>().buildingIndex = currentIndex;
+        obj.GetComponent<IdManager>().res = this;
 
-        return value;
+        //Adding the object in scene to the buildings list
+        buildings[currentIndex].sceneBuilding = (GameObject)obj;
+
+        currentIndex++;
     }
 
+    public void convertToAttackingTroops(int numberOfTroopsToConvert)
+    {
+        if(numberOfTroopsToConvert <= troops)
+        {
+            troops -= numberOfTroopsToConvert;
+            attackingTroops += numberOfTroopsToConvert;
+        }
+    }
 }

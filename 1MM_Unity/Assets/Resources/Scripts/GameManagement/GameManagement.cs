@@ -42,7 +42,6 @@ public class GameManagement : MonoBehaviour {
         GetComponent<eventsRead>().getRandomEvent();
         d.updateDate();
         res.turnIndex++;
-
         ai.nextTurn();
 
         foreach (ABuilding building in res.buildings)
@@ -57,6 +56,41 @@ public class GameManagement : MonoBehaviour {
 
         GetComponent<eventsRead>().eventEffect();
 
+        conquerTerritories();
+        refreshResources();
+
+        loggingFrontEnd.updateValues();
+        stats.updateStatistics();
+    }
+
+    public void conquerTerritories()
+    {
+        if ((int)Random.Range(0f, 101f) < res.territoryConquerRate)
+        {
+            randNr = (int)Random.Range(0, 101);
+            if (randNr <= 33)
+            {
+                res.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
+                if (res is GameResources)
+                    LoggingSystem.Instance.territoryRecieved = 1;
+            }
+            else if (randNr <= 66)
+            {
+                res.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
+                if (res is GameResources)
+                    LoggingSystem.Instance.territoryRecieved = 2;
+            }
+            else if (randNr <= 100)
+            {
+                res.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
+                if (res is GameResources)
+                    LoggingSystem.Instance.territoryRecieved = 3;
+            }
+        }
+    }
+
+    public void refreshResources()
+    {
         if (res.food < 0)
             res.food = 0;
 
@@ -68,30 +102,6 @@ public class GameManagement : MonoBehaviour {
 
         if (res.citizens < 0)
             res.citizens = 0;
-
-        if((int)Random.Range(0f,101f) < res.territoryConquerRate)
-        {
-            randNr = (int)Random.Range(0, 101);
-            if (randNr <= 33)
-            {
-                res.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
-                LoggingSystem.Instance.territoryRecieved = 1;
-            }
-            else if (randNr <= 66)
-            {
-                res.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
-                LoggingSystem.Instance.territoryRecieved = 2;
-            }
-            else if (randNr <= 100)
-            {
-                res.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
-                LoggingSystem.Instance.territoryRecieved = 3;
-            }
-        }
-
-
-        loggingFrontEnd.updateValues();
-        stats.updateStatistics();
     }
 
 }
