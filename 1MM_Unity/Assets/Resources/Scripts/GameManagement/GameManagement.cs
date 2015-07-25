@@ -5,22 +5,23 @@ using System.Collections.Generic;
 public class GameManagement : MonoBehaviour {
     
     public GameObject prefab, foodTerritoryPrefab, materialsTerritoryPrefab, citizensTerritoryPrefab;
-    private GameObject obj;
     public AIManagement ai;
     public BuildingGeneration gen;
     public loggingFrontend loggingFrontEnd;
     public date d;
     public AResources res;
     public statistics stats;
-
+    public eventsRead playerEvents;
     public fadeToEndScreen lose, win;
-
     private int randNr;
+    private int playerTroopsLost, enemyTroopsLost;
+    private int resourcesAftermath, approvalAftermath;
 
     void Awake()
     {
         res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/Buildings/Executive Building"), new Vector3(0, 0, 0));
         gen.hub = GameObject.FindGameObjectWithTag("Executive");
+        playerEvents = GetComponent<eventsRead>();
     }
 
     void Update()
@@ -38,12 +39,24 @@ public class GameManagement : MonoBehaviour {
 
     public void nextTurn()
     {
+        // Reseting the logging screen
         LoggingSystem.Instance.reset();
-        GetComponent<eventsRead>().getRandomEvent();
+
+        // Getting a random event and using it
+        playerEvents.getRandomEvent();
+        playerEvents.eventEffect();
+
+        // Updating the current date and turn index
         d.updateDate();
         res.turnIndex++;
+
+        // Starting the AI's turn
         ai.nextTurn();
 
+        // Attacking the enemy
+        attack();
+
+        // Picking up the resources from the buildings and links
         foreach (ABuilding building in res.buildings)
         {
             building.Effect();
@@ -54,13 +67,166 @@ public class GameManagement : MonoBehaviour {
             res.linkEffectTurn(entry.Key, entry.Value);
         }
 
-        GetComponent<eventsRead>().eventEffect();
-
+        // Conquering territories
         conquerTerritories();
+
+        // Fixing resources if any discrepancy is detected
         refreshResources();
 
+        // Displaying the log
         loggingFrontEnd.updateValues();
+
+        //Updating the statistics
         stats.updateStatistics();
+    }
+
+    public void attack()
+    {
+        // I am attacking
+        if(res.attackingTroops > 0)
+        {
+            randNr = Random.Range(1, 101);
+
+            // I haz more troops
+            if(res.attackingTroops >= ai.res.troops)
+            {
+                // Troops lost for both players
+                playerTroopsLost = (int)((res.attackingTroops / 4) * Random.Range(50, 151) / 100);
+                enemyTroopsLost = (int)((ai.res.troops / 4) * Random.Range(100, 151) / 100);
+
+                if(randNr <= 80) // I win
+                {
+                    // Approval gained or lost for both players
+                    approvalAftermath = (int)((res.attackingTroops - ai.res.troops) / 50);
+
+                    // Resources gained or lost for both players
+                    resourcesAftermath = (int)(res.attackingTroops - ai.res.troops) / 5;
+
+                    // Updating the resources
+                    #region ...
+                    if (ai.res.food >= resourcesAftermath)
+                    {
+                        ai.res.food -= resourcesAftermath;
+                        res.food += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.food += ai.res.food;
+                        ai.res.food = 0;
+                    }
+
+                    if (ai.res.buildingMaterials >= resourcesAftermath)
+                    {
+                        ai.res.buildingMaterials -= resourcesAftermath;
+                        res.buildingMaterials += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.buildingMaterials += ai.res.buildingMaterials;
+                        ai.res.buildingMaterials = 0;
+                    }
+
+                    if (ai.res.money >= resourcesAftermath)
+                    {
+                        ai.res.money -= resourcesAftermath;
+                        res.money += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.food += ai.res.food;
+                        ai.res.food = 0;
+                    }
+                    #endregion
+                }
+
+                else // If I lose
+                {
+                    // Approval gained or lost for both players
+                    approvalAftermath = -1 * (int)((res.attackingTroops - ai.res.troops) / 100);
+
+                    // No resources lost / gained :(
+                }
+
+                // Updating the approval
+                res.approval = res.approval + approvalAftermath;
+                ai.res.approval = ai.res.approval - approvalAftermath;
+
+                // Updating the troops
+                res.troops = res.troops + res.attackingTroops - playerTroopsLost;
+                ai.res.troops = ai.res.troops - enemyTroopsLost;
+            }
+            else // He haz moar troops
+            {
+
+                randNr = Random.Range(1, 101);
+                // Troops lost for both players
+                playerTroopsLost = (int)((res.attackingTroops / 4) * Random.Range(100, 151) / 100);
+                enemyTroopsLost = (int)((ai.res.troops / 4) * Random.Range(50, 151) / 100);
+
+                // Approval gained or lost for both players
+                approvalAftermath = (int)((res.attackingTroops - ai.res.troops) / 100);
+
+                if (randNr <= 20) // I win
+                {
+                
+
+                    // Resources gained or lost for both players
+                    resourcesAftermath = (int)(res.attackingTroops - ai.res.troops) / 10;
+
+                    // Updating the resources
+                    #region ...
+                    if (ai.res.food >= resourcesAftermath)
+                    {
+                        ai.res.food -= resourcesAftermath;
+                        res.food += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.food += ai.res.food;
+                        ai.res.food = 0;
+                    }
+
+                    if (ai.res.buildingMaterials >= resourcesAftermath)
+                    {
+                        ai.res.buildingMaterials -= resourcesAftermath;
+                        res.buildingMaterials += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.buildingMaterials += ai.res.buildingMaterials;
+                        ai.res.buildingMaterials = 0;
+                    }
+
+                    if (ai.res.money >= resourcesAftermath)
+                    {
+                        ai.res.money -= resourcesAftermath;
+                        res.money += resourcesAftermath;
+                    }
+                    else
+                    {
+                        res.food += ai.res.food;
+                        ai.res.food = 0;
+                    }
+                    #endregion
+                }
+
+                else // If I lose
+                {
+                    // Approval gained or lost for both players
+                    approvalAftermath = -1 * approvalAftermath;
+
+                    // No resources lost / gained :(
+                }
+
+                // Updating the approval
+                res.approval = res.approval + approvalAftermath;
+                ai.res.approval = ai.res.approval -= approvalAftermath;
+
+                // Updating the troops
+                res.troops = res.troops + res.attackingTroops - playerTroopsLost;
+                ai.res.troops = ai.res.troops - enemyTroopsLost;
+            }
+        }
     }
 
     public void conquerTerritories()
