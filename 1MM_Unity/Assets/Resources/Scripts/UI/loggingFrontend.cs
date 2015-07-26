@@ -33,5 +33,35 @@ public class loggingFrontend : MonoBehaviour {
         {
             values.text += "Your army has conquered a Citizens Territory.";
         }
+
+        values.text += "\n";
+
+        if (LoggingSystem.Instance.attackResult == 0)
+        {
+            values.text += "You did not attack this turn.";
+        }
+        if (LoggingSystem.Instance.attackResult == 1)
+        {
+            values.text += "Your army won the battle against the enemy!";
+        }
+        if (LoggingSystem.Instance.attackResult == -1)
+        {
+            values.text += "Your army lost the battle against the enemy!";
+        }
+
+        values.text += "\n";
+
+        if (LoggingSystem.Instance.defenseResult == 0)
+        {
+            values.text += "You were not attacked this turn.";
+        }
+        if (LoggingSystem.Instance.defenseResult == 1)
+        {
+            values.text += "You managed to defend your territory!";
+        }
+        if (LoggingSystem.Instance.defenseResult == -1)
+        {
+            values.text += "You did not manage to defend your territory!";
+        }
     }
 }

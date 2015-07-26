@@ -10,8 +10,9 @@ public class GameManagement : MonoBehaviour {
     public loggingFrontend loggingFrontEnd;
     public date d;
     public AResources res;
+    public armyFrontEnd afe;
     public statistics stats;
-    public eventsRead playerEvents;
+    eventsRead playerEvents;
     public fadeToEndScreen lose, win;
     private int randNr;
     private int playerTroopsLost, enemyTroopsLost;
@@ -78,6 +79,11 @@ public class GameManagement : MonoBehaviour {
 
         //Updating the statistics
         stats.updateStatistics();
+
+        //Update Front End for the army
+        afe.reset();
+        afe.refreshDefensive();
+
     }
 
     public void attack()
@@ -137,6 +143,12 @@ public class GameManagement : MonoBehaviour {
                         ai.res.food = 0;
                     }
                     #endregion
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.attackResult = 1;
+                    LoggingSystem.Instance.foodGained += resourcesAftermath;
+                    LoggingSystem.Instance.materialsGained += resourcesAftermath;
+                    LoggingSystem.Instance.moneyGained += resourcesAftermath;
                 }
 
                 else // If I lose
@@ -145,15 +157,20 @@ public class GameManagement : MonoBehaviour {
                     approvalAftermath = -1 * (int)((res.attackingTroops - ai.res.troops) / 100);
 
                     // No resources lost / gained :(
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.attackResult = -1;
                 }
 
                 // Updating the approval
                 res.approval = res.approval + approvalAftermath;
                 ai.res.approval = ai.res.approval - approvalAftermath;
+                LoggingSystem.Instance.approvalGained += approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - playerTroopsLost;
                 ai.res.troops = ai.res.troops - enemyTroopsLost;
+                res.attackingTroops = 0;
             }
             else // He haz moar troops
             {
@@ -208,6 +225,12 @@ public class GameManagement : MonoBehaviour {
                         ai.res.food = 0;
                     }
                     #endregion
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.attackResult = 1;
+                    LoggingSystem.Instance.foodGained += resourcesAftermath;
+                    LoggingSystem.Instance.materialsGained += resourcesAftermath;
+                    LoggingSystem.Instance.moneyGained += resourcesAftermath;
                 }
 
                 else // If I lose
@@ -216,15 +239,20 @@ public class GameManagement : MonoBehaviour {
                     approvalAftermath = -1 * approvalAftermath;
 
                     // No resources lost / gained :(
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.attackResult = -1;
                 }
 
                 // Updating the approval
                 res.approval = res.approval + approvalAftermath;
                 ai.res.approval = ai.res.approval -= approvalAftermath;
+                LoggingSystem.Instance.approvalGained += approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - playerTroopsLost;
                 ai.res.troops = ai.res.troops - enemyTroopsLost;
+                res.attackingTroops = 0;
             }
         }
     }

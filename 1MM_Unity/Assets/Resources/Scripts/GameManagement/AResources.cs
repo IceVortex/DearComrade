@@ -353,7 +353,12 @@ public class AResources : MonoBehaviour
 
     public void convertToAttackingTroops(int numberOfTroopsToConvert)
     {
-        if(numberOfTroopsToConvert <= troops)
+        if(numberOfTroopsToConvert <= troops && numberOfTroopsToConvert>0)
+        {
+            troops -= numberOfTroopsToConvert;
+            attackingTroops += numberOfTroopsToConvert;
+        }
+        else if(-numberOfTroopsToConvert <=attackingTroops && numberOfTroopsToConvert < 0)
         {
             troops -= numberOfTroopsToConvert;
             attackingTroops += numberOfTroopsToConvert;

@@ -107,6 +107,7 @@
     <Compile Include="Assets\Resources\Scripts\UI\UIControl.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\UpdateApproval.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\approvalText.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\armyFrontEnd.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\currentTab.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\date.cs" />
     <Compile Include="Assets\Resources\Scripts\UI\fade.cs" />
