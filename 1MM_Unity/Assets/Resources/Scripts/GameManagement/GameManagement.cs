@@ -100,7 +100,7 @@ public class GameManagement : MonoBehaviour {
                 playerTroopsLost = (int)((res.attackingTroops / 4) * Random.Range(50, 151) / 100);
                 enemyTroopsLost = (int)((ai.res.troops / 4) * Random.Range(100, 151) / 100);
 
-                if(randNr <= 80) // I win
+                if(randNr <= 80 || ai.res.troops == 0) // I win
                 {
                     // Approval gained or lost for both players
                     approvalAftermath = (int)((res.attackingTroops - ai.res.troops) / 50);
@@ -246,7 +246,7 @@ public class GameManagement : MonoBehaviour {
 
                 // Updating the approval
                 res.approval = res.approval + approvalAftermath;
-                ai.res.approval = ai.res.approval -= approvalAftermath;
+                ai.res.approval = ai.res.approval - approvalAftermath;
                 LoggingSystem.Instance.approvalGained += approvalAftermath;
 
                 // Updating the troops

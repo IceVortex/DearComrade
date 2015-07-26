@@ -42,7 +42,6 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void increaseTroops(int mod)
     {
-        
         if (troopsToIncreaseBy + (100 * mod) <= res.troops && mod == 1)
             troopsToIncreaseBy += 100 * mod;
         else if (troopsToIncreaseBy + (100 * mod) > res.troops && mod == 1)
@@ -56,9 +55,9 @@ public class armyFrontEnd : MonoBehaviour {
 
     }
 
-    public void trainTroops()
-    { 
-        
+    public void trainTroopsButton()
+    {
+        res.trainTroops();
     }
 
 }

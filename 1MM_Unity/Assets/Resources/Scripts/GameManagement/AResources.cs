@@ -5,45 +5,48 @@ using System.Collections.Generic;
 public class AResources : MonoBehaviour 
 {
 
-    //Main Resources
+    // Main Resources
     public float food, money, buildingMaterials;
     public float approval;
     public float citizens, maximumCitizens;
     public float troops, maximumTroops, attackingTroops;
     public float researchPoints;
 
-    //Tax Rate
+    // Tax Rate
     public float taxRate = 100;
 
-    //Maximum number of homeless citizens you can have.
+    // Maximum number of homeless citizens you can have.
     public float maxHomelessCitizens = 200;
 
-    //Number of resources gained per turn or at initialization for farm, house and factories.
+    // Number of resources gained per turn or at initialization for farm, house and factories.
     public float farmFoodT = 10, houseCitizensT = 300, factoryMaterialsT = 10;
 
-    //Rates of building cost, buy/sell rate, gold gain and approval decay.
+    // Rates of building cost, buy/sell rate, gold gain and approval decay.
     public float buildingCostRate = 100, buyRate = 100, sellRate = 50;
     public float approvalDecayRate = 100, goldPerTurn = 0.01f;
     public float flatApproval = 1f;
     public float flatApprovalDecayIncreasePerTurn = 0.1f;
     public float territoryConquerRate = 0f;
 
-    //Rate of triggered event cost.
+    // Rate of triggered event cost.
     public float triggeredEventCostRate = 100;
 
-    //Approval gained from publich speech and festival.
+    // Approval gained from publich speech and festival.
     public float publichSpeechApproval = 25, festivalApproval = 25;
 
-    //Approval gained from trading food at exec. building
+    // Approval gained from trading food at exec. building
     public float foodRatioApproval = 0.1f;
 
-    //The current turn index
+    // The current turn index
     public int turnIndex = 0;
 
-    //Variables used for statistics
+    // Variables used for statistics
     public int researchesMade;
 
-    //The list of buildings, links and the index
+    // Troops training cost
+    public int troopsFoodCost = 30, troopsMaterialsCost = 30, troopsMoneyCost = 30;
+
+    // The list of buildings, links and the index
     public List<ABuilding> buildings = new List<ABuilding>();
     public Dictionary<int, int> links = new Dictionary<int, int>();
     public Dictionary<string, int> nrOfLinkedBuildings;
@@ -349,6 +352,17 @@ public class AResources : MonoBehaviour
         buildings[currentIndex].sceneBuilding = (GameObject)obj;
 
         currentIndex++;
+    }
+
+    public void trainTroops()
+    {
+        if(food >= troopsFoodCost && buildingMaterials >= troopsMaterialsCost && money >= troopsMoneyCost && troops + 100 <= maximumTroops)
+        {
+            food -= troopsFoodCost;
+            buildingMaterials -= troopsMaterialsCost;
+            money -= troopsMoneyCost;
+            troops += 100;
+        }
     }
 
     public void convertToAttackingTroops(int numberOfTroopsToConvert)
