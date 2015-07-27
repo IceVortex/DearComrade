@@ -13,7 +13,6 @@ public class achievement : MonoBehaviour {
 	void Start () {
         cg = GetComponent<CanvasGroup>();
         h = GetComponent<hide>();
-        achievementGet("Started the game!", "Ye did it!");
 	}
 
     public void achievementGet(string name, string desc)

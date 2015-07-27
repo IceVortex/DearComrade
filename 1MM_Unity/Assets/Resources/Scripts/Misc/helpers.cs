@@ -19,12 +19,13 @@ public class helpers : MonoBehaviour {
     public Text title, description;
 
 	void Start () {
+        if (!PlayerPrefs.HasKey("helpersShowed") || PlayerPrefs.GetInt("helpersShowed") == 0)
+        {
+            GetComponent<hide>().toggle();
+            PlayerPrefs.SetInt("helpersShowed", 1);
+        }
         title.text = titlesList[currentHelper];
         description.text = descriptionsList[currentHelper];
-	}
-	
-	void Update () {
-	
 	}
 
     public void next()
