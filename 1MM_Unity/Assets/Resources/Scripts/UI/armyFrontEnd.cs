@@ -7,7 +7,7 @@ public class armyFrontEnd : MonoBehaviour {
     public CanvasGroup armyButton;
     public Text defensive, offensive, increase;
 
-    public AResources res;
+    public AResources resources;
     public int troopsToIncreaseBy, offensiveI, defensiveI;
 
     public void toggleArmyButton()
@@ -18,7 +18,7 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void refreshDefensive()
     {
-        defensiveI = (int)res.troops;
+        defensiveI = (int)resources.troops;
         defensive.text = defensiveI.ToString();
     }
 
@@ -30,10 +30,10 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void confirm()
     {
-        res.convertToAttackingTroops(troopsToIncreaseBy);
+        resources.convertToAttackingTroops(troopsToIncreaseBy);
         increase.text = "0";
         offensiveI += troopsToIncreaseBy;
-        defensiveI = (int)res.troops;
+        defensiveI = (int)resources.troops;
         troopsToIncreaseBy = 0;
 
         defensive.text = defensiveI.ToString();
@@ -42,10 +42,10 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void increaseTroops(int mod)
     {
-        if (troopsToIncreaseBy + (100 * mod) <= res.troops && mod == 1)
+        if (troopsToIncreaseBy + (100 * mod) <= resources.troops && mod == 1)
             troopsToIncreaseBy += 100 * mod;
-        else if (troopsToIncreaseBy + (100 * mod) > res.troops && mod == 1)
-            troopsToIncreaseBy = (int)res.troops;
+        else if (troopsToIncreaseBy + (100 * mod) > resources.troops && mod == 1)
+            troopsToIncreaseBy = (int)resources.troops;
         else if (troopsToIncreaseBy + (100 * mod) + offensiveI < 0 && mod == -1)
             troopsToIncreaseBy = 0;
         else if (troopsToIncreaseBy + (100 * mod) + offensiveI >= 0 && mod == -1)
@@ -57,7 +57,7 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void trainTroopsButton()
     {
-        res.trainTroops();
+        resources.trainTroops();
     }
 
 }
