@@ -4,9 +4,11 @@ using System.Collections;
 public class fade : MonoBehaviour {
 
     public float t, wantedTime, startTime, endWantedTime;
-    public bool fadeTo1, fadeTo0, fadeAllTo0;
+    public bool fadeTo1, fadeTo0, fadeAllTo0, passedTurn;
     public CanvasGroup cg, textZone, loggingScreen;
-
+    public nextTurn n;
+    public date d;
+    public AResources res;
 
     public void end()
     {
@@ -27,10 +29,10 @@ public class fade : MonoBehaviour {
         textZone.alpha = 1;
         cg.interactable = false;
         cg.blocksRaycasts = false;
-        
         loggingScreen.alpha = 0;
         loggingScreen.interactable = false;
         loggingScreen.blocksRaycasts = false;
+        passedTurn = false;
     }
 
     public void setToAlpha0()
@@ -54,11 +56,17 @@ public class fade : MonoBehaviour {
             fadeTo1 = false;
             textZone.interactable = true;
             textZone.blocksRaycasts = true;
+            if(!passedTurn)
+                n.next();
         }
     }
 
     public void startFadeTo1()
     {
+        // Updating the current date and turn index
+        d.updateDate();
+        res.turnIndex++;
+
         startTime = Time.time;
         fadeTo1 = true;
         cg.interactable = true;
@@ -77,13 +85,15 @@ public class fade : MonoBehaviour {
             fadeTo1 = false;
             startTime = Time.time;
             fadeTo0 = true;
+            if(!passedTurn)
+                n.next();
             Invoke("interactable", wantedTime);
         }
     }
 
     void interactable()
     {
-        
+        passedTurn = true;
         textZone.interactable = false;
         textZone.blocksRaycasts = false;
         if (cg.alpha != 0)

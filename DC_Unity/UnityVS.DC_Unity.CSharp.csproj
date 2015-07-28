@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9CA09AC6-0D44-87F2-3668-E0B2E276D033}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace></RootNamespace>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityVersion>5.1.2f1</UnityVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_1_2;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_1_2;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\BuildingScripts\build.cs" />
+    <Compile Include="Assets\Resources\Scripts\BuildingScripts\buildingValues.cs" />
+    <Compile Include="Assets\Resources\Scripts\BuildingScripts\canBuild.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\ABuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\CitizensTerritory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\EducationalBuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\ExecutiveBuilding.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Factory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Farm.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\FoodTerritory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Hospital.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\House.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Laboratory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\MaterialsTerritory.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\MilitaryOutpost.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\PoliceStation.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\PublicSpace.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\WTC.cs" />
+    <Compile Include="Assets\Resources\Scripts\Buildings\Workplace.cs" />
+    <Compile Include="Assets\Resources\Scripts\CameraAndInput\CameraControl.cs" />
+    <Compile Include="Assets\Resources\Scripts\CameraAndInput\MouseInput.cs" />
+    <Compile Include="Assets\Resources\Scripts\CameraAndInput\keyboardInput.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement\AIManagement.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement\AIResources.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement\AResources.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement\GameManagement.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameManagement\GameResources.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\BuildingGeneration.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\IdManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\LoggingSystem.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\achievement.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\eventsRead.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\helpers.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\keybindManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\lineRendererFunctionality.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\nextTurn.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\organiseEventOverview.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\riggedBuild.cs" />
+    <Compile Include="Assets\Resources\Scripts\Misc\statistics.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\SettingsUI.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\UIControl.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\UpdateApproval.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\approvalText.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\armyFrontEnd.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\currentTab.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\date.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\fade.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\fadeToEndScreen.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\hide.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\loggingFrontend.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\researchFrontEnd.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\researchOverview.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\resourcesUI.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\taxesFrontEnd.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\tradingOverview.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\uiAlphaToggle.cs" />
+    <Compile Include="Assets\Resources\Scripts\UI\windowValues.cs" />
+    <Compile Include="Assets\fadeDisclaimer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Resources\TextAssets\events.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
+</Project>

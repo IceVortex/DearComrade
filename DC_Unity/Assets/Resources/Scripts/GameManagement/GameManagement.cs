@@ -47,10 +47,6 @@ public class GameManagement : MonoBehaviour {
         playerEvents.getRandomEvent();
         playerEvents.eventEffect();
 
-        // Updating the current date and turn index
-        d.updateDate();
-        res.turnIndex++;
-
         // Starting the AI's turn
         ai.nextTurn();
 
@@ -149,6 +145,7 @@ public class GameManagement : MonoBehaviour {
                     LoggingSystem.Instance.foodGained += resourcesAftermath;
                     LoggingSystem.Instance.materialsGained += resourcesAftermath;
                     LoggingSystem.Instance.moneyGained += resourcesAftermath;
+                    LoggingSystem.Instance.resourcesModAttack = resourcesAftermath;
                 }
 
                 else // If I lose
@@ -166,11 +163,14 @@ public class GameManagement : MonoBehaviour {
                 res.approval = res.approval + approvalAftermath;
                 ai.res.approval = ai.res.approval - approvalAftermath;
                 LoggingSystem.Instance.approvalGained += approvalAftermath;
+                LoggingSystem.Instance.approvalModAttack = approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - playerTroopsLost;
                 ai.res.troops = ai.res.troops - enemyTroopsLost;
                 res.attackingTroops = 0;
+                LoggingSystem.Instance.troopsLostAttack = playerTroopsLost;
+                LoggingSystem.Instance.enemyTroopsLostAttack = enemyTroopsLost;
             }
             else // He haz moar troops
             {
@@ -231,6 +231,7 @@ public class GameManagement : MonoBehaviour {
                     LoggingSystem.Instance.foodGained += resourcesAftermath;
                     LoggingSystem.Instance.materialsGained += resourcesAftermath;
                     LoggingSystem.Instance.moneyGained += resourcesAftermath;
+                    LoggingSystem.Instance.resourcesModAttack = resourcesAftermath;
                 }
 
                 else // If I lose
@@ -248,11 +249,14 @@ public class GameManagement : MonoBehaviour {
                 res.approval = res.approval + approvalAftermath;
                 ai.res.approval = ai.res.approval - approvalAftermath;
                 LoggingSystem.Instance.approvalGained += approvalAftermath;
+                LoggingSystem.Instance.approvalModAttack = approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - playerTroopsLost;
                 ai.res.troops = ai.res.troops - enemyTroopsLost;
                 res.attackingTroops = 0;
+                LoggingSystem.Instance.troopsLostAttack = playerTroopsLost;
+                LoggingSystem.Instance.enemyTroopsLostAttack = enemyTroopsLost;
             }
         }
     }
