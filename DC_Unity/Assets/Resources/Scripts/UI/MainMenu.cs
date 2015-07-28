@@ -186,7 +186,7 @@ public class MainMenu : MonoBehaviour {
 
     public void load()
     {
-        Application.LoadLevel("FirstLevel");
+        Application.LoadLevel("vs Ai Test Scene");
     }
 
     void Transition()
