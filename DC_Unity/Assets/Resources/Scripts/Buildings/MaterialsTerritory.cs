@@ -20,7 +20,7 @@ public class MaterialsTerritory : ABuilding
     public override void Effect()
     {
         res.buildingMaterials += territory;
-        if (res is GameResources)
+        if (res is PlayerResources)
             LoggingSystem.Instance.materialsGained += territory;
     }
 }

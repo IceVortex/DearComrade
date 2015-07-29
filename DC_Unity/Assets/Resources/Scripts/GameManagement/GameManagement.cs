@@ -269,19 +269,19 @@ public class GameManagement : MonoBehaviour {
             if (randNr <= 33)
             {
                 res.createBuilding<FoodTerritory>(foodTerritoryPrefab, gen.generate());
-                if (res is GameResources)
+                if (res is PlayerResources)
                     LoggingSystem.Instance.territoryRecieved = 1;
             }
             else if (randNr <= 66)
             {
                 res.createBuilding<MaterialsTerritory>(materialsTerritoryPrefab, gen.generate());
-                if (res is GameResources)
+                if (res is PlayerResources)
                     LoggingSystem.Instance.territoryRecieved = 2;
             }
             else if (randNr <= 100)
             {
                 res.createBuilding<CitizensTerritory>(citizensTerritoryPrefab, gen.generate());
-                if (res is GameResources)
+                if (res is PlayerResources)
                     LoggingSystem.Instance.territoryRecieved = 3;
             }
         }

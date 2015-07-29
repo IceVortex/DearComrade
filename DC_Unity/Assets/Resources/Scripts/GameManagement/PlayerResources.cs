@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameResources : AResources 
+public class PlayerResources : AResources 
 {
     
 }

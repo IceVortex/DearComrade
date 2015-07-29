@@ -7,6 +7,7 @@ public class AIManagement : MonoBehaviour {
     
     public BuildingGeneration gen;
     public AResources res;
+    public GameManagement player;
     public fadeToEndScreen lose, win;
     private Stack<ABuilding> buildingsList = new Stack<ABuilding>();
     private ABuilding nextBuilding;
@@ -15,6 +16,7 @@ public class AIManagement : MonoBehaviour {
     private int rand, researchCount = 1;
     private bool savingUp = false, linkedToUnique;
     private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex;
+    private int playerTroopsLost, aiTroopsLost, resourcesAftermath, approvalAftermath;
 
     void Awake()
     {
@@ -121,7 +123,7 @@ public class AIManagement : MonoBehaviour {
             }
         }
 
-        //Building stuff
+        // If I am not saving up, I am building stuff
         if (buildingsList.Count >= 1 && !savingUp)
         {
             building = true;
@@ -138,7 +140,7 @@ public class AIManagement : MonoBehaviour {
             }
         }
 
-        // Checking for buildings without a comrade and link them
+        // Linking buildings
         foreach (ABuilding b in res.buildings)
         {
             // Linking Farms and Factories to Houses.
@@ -215,6 +217,11 @@ public class AIManagement : MonoBehaviour {
 
             }
         }
+
+        // Buying Troops
+
+        // Attacking
+        attack();
 
         // End Turn - Carpe diem
         foreach (ABuilding building in res.buildings)
@@ -445,8 +452,9 @@ public class AIManagement : MonoBehaviour {
 
         if (x is Laboratory || x is WTC)
         {
-            if (res.resourcePerTurn("food") >= x.foodCost / 3 &&
-                   res.resourcePerTurn("materials") >= x.buildingMaterialsCost / 3)
+            if ((res.resourcePerTurn("food") >= x.foodCost / 3 &&
+                   res.resourcePerTurn("materials") >= x.buildingMaterialsCost / 3) ||
+                (res.food >= x.foodCost && res.buildingMaterials >= x.buildingMaterialsCost))
                 return true;
         }
         
@@ -592,5 +600,164 @@ public class AIManagement : MonoBehaviour {
         }
         return;
     }
+    #endregion
+
+    #region Attack
+
+    public void attack()
+    {
+        // More than 0 troops => I am attacking
+        if (res.attackingTroops > 0)
+        {
+            // I haz more troops
+            if (res.attackingTroops >= player.res.troops)
+            {
+                rand = UnityEngine.Random.Range(1, 101);
+
+                if (rand <= 80 || player.res.troops == 0) // I win
+                {
+                    // Troops lost for both players
+                    aiTroopsLost = (int)((res.attackingTroops / 4) * UnityEngine.Random.Range(50, 151) / 100);
+                    playerTroopsLost = (int)((player.res.troops / 4) * UnityEngine.Random.Range(100, 151) / 100);
+
+                    // Approval gained or lost for both players
+                    approvalAftermath = (int)((res.attackingTroops - player.res.troops) / 50);
+
+                    // Resources gained or lost for both players
+                    resourcesAftermath = (int)(res.attackingTroops - player.res.troops) / 5;
+                }
+
+                else // If I lose
+                {
+                    // Troops lost for both players
+                    aiTroopsLost = (int)((res.attackingTroops / 4) * UnityEngine.Random.Range(100, 151) / 100);
+                    playerTroopsLost = (int)((player.res.troops / 4) * UnityEngine.Random.Range(50, 151) / 100);
+
+                    // Approval gained or lost for both players
+                    approvalAftermath = -1 * (int)((res.attackingTroops - player.res.troops) / 100);
+
+                    // No resources lost / gained :(
+                    resourcesAftermath = 0;
+                }
+
+                // Updating the resources
+                #region ...
+                if (player.res.food >= resourcesAftermath)
+                {
+                    player.res.food -= resourcesAftermath;
+                    res.food += resourcesAftermath;
+                }
+                else
+                {
+                    res.food += player.res.food;
+                    player.res.food = 0;
+                }
+
+                if (player.res.buildingMaterials >= resourcesAftermath)
+                {
+                    player.res.buildingMaterials -= resourcesAftermath;
+                    res.buildingMaterials += resourcesAftermath;
+                }
+                else
+                {
+                    res.buildingMaterials += player.res.buildingMaterials;
+                    player.res.buildingMaterials = 0;
+                }
+
+                if (player.res.money >= resourcesAftermath)
+                {
+                    player.res.money -= resourcesAftermath;
+                    res.money += resourcesAftermath;
+                }
+                else
+                {
+                    res.food += player.res.food;
+                    player.res.food = 0;
+                }
+                #endregion
+
+                // Updating the approval
+                res.approval = res.approval + approvalAftermath;
+                player.res.approval = player.res.approval - approvalAftermath;
+
+                // Updating the troops
+                res.troops = res.troops + res.attackingTroops - aiTroopsLost;
+                player.res.troops = player.res.troops - playerTroopsLost;
+                res.attackingTroops = 0;
+            }
+            else // He haz moar troops
+            {
+                rand = UnityEngine.Random.Range(1, 101);
+
+                if (rand <= 20) // I win
+                {
+                    // Troops lost for both players
+                    aiTroopsLost = (int)((res.troops / 4) * UnityEngine.Random.Range(50, 151) / 100);
+                    playerTroopsLost = (int)((player.res.attackingTroops / 4) * UnityEngine.Random.Range(100, 151) / 100);
+
+                    // Approval gained or lost for both players
+                    approvalAftermath = (int)((player.res.troops - res.attackingTroops) / 100);
+
+                    // Resources gained or lost for both players
+                    resourcesAftermath = (int)(player.res.troops - res.attackingTroops) / 10;
+                }
+                else // If I lose
+                {
+                    // Approval gained or lost for both players
+                    approvalAftermath = -1 * (int)((player.res.troops - res.attackingTroops) / 100);
+
+                    // No resources lost / gained :(
+                    resourcesAftermath = 0;
+                }
+
+                // Updating the resources
+                #region ...
+                if (player.res.food >= resourcesAftermath)
+                {
+                    player.res.food -= resourcesAftermath;
+                    res.food += resourcesAftermath;
+                }
+                else
+                {
+                    res.food += player.res.food;
+                    player.res.food = 0;
+                }
+
+                if (player.res.buildingMaterials >= resourcesAftermath)
+                {
+                    player.res.buildingMaterials -= resourcesAftermath;
+                    res.buildingMaterials += resourcesAftermath;
+                }
+                else
+                {
+                    res.buildingMaterials += player.res.buildingMaterials;
+                    player.res.buildingMaterials = 0;
+                }
+
+                if (player.res.money >= resourcesAftermath)
+                {
+                    player.res.money -= resourcesAftermath;
+                    res.money += resourcesAftermath;
+                }
+                else
+                {
+                    res.food += player.res.food;
+                    player.res.food = 0;
+                }
+                #endregion
+
+                // Updating the approval
+                res.approval = res.approval + approvalAftermath;
+                player.res.approval = player.res.approval - approvalAftermath;
+
+                // Updating the troops
+                res.troops = res.troops + res.attackingTroops - playerTroopsLost;
+                player.res.troops = player.res.troops - aiTroopsLost;
+                res.attackingTroops = 0;
+
+            }
+        }
+    }
+
     #endregion
 }

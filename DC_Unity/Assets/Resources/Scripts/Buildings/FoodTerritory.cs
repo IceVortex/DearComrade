@@ -20,7 +20,7 @@ public class FoodTerritory : ABuilding
     public override void Effect()
     {
         res.food += territory;
-        if(res is GameResources)
+        if (res is PlayerResources)
             LoggingSystem.Instance.foodGained += territory;
     }
 }
