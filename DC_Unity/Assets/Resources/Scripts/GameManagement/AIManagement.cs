@@ -66,9 +66,7 @@ public class AIManagement : MonoBehaviour {
         // Checking for researches
         if(res.researchPoints == 1)
         {
-            Debug.Log("current ciz: " + res.maximumCitizens);
             buyResearch();
-            Debug.Log("after research ciz: " + res.maximumCitizens);
         }
 
         if (res.currentIndex == 1) // First turn
@@ -647,12 +645,12 @@ public class AIManagement : MonoBehaviour {
             {
                 rand = UnityEngine.Random.Range(1, 101);
 
+                // Troops lost for both players
+                aiTroopsLost = (int)((res.attackingTroops / 4) * UnityEngine.Random.Range(50, 151) / 100);
+                playerTroopsLost = (int)((player.res.troops / 4) * UnityEngine.Random.Range(100, 151) / 100);
+
                 if (rand <= 80 || player.res.troops == 0) // I win
                 {
-                    // Troops lost for both players
-                    aiTroopsLost = (int)((res.attackingTroops / 4) * UnityEngine.Random.Range(50, 151) / 100);
-                    playerTroopsLost = (int)((player.res.troops / 4) * UnityEngine.Random.Range(100, 151) / 100);
-
                     // Approval gained or lost for both players
                     approvalAftermath = (int)((res.attackingTroops - player.res.troops) / 50);
 
@@ -662,10 +660,6 @@ public class AIManagement : MonoBehaviour {
 
                 else // If I lose
                 {
-                    // Troops lost for both players
-                    aiTroopsLost = (int)((res.attackingTroops / 4) * UnityEngine.Random.Range(100, 151) / 100);
-                    playerTroopsLost = (int)((player.res.troops / 4) * UnityEngine.Random.Range(50, 151) / 100);
-
                     // Approval gained or lost for both players
                     approvalAftermath = -1 * (int)((res.attackingTroops - player.res.troops) / 100);
 
@@ -722,12 +716,12 @@ public class AIManagement : MonoBehaviour {
             {
                 rand = UnityEngine.Random.Range(1, 101);
 
+                // Troops lost for both players
+                aiTroopsLost = (int)((res.troops / 4) * UnityEngine.Random.Range(50, 151) / 100);
+                playerTroopsLost = (int)((player.res.attackingTroops / 4) * UnityEngine.Random.Range(100, 151) / 100);
+                
                 if (rand <= 20) // I win
                 {
-                    // Troops lost for both players
-                    aiTroopsLost = (int)((res.troops / 4) * UnityEngine.Random.Range(50, 151) / 100);
-                    playerTroopsLost = (int)((player.res.attackingTroops / 4) * UnityEngine.Random.Range(100, 151) / 100);
-
                     // Approval gained or lost for both players
                     approvalAftermath = (int)((player.res.troops - res.attackingTroops) / 100);
 

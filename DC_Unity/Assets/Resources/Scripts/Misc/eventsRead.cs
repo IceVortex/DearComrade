@@ -13,6 +13,7 @@ public class eventsRead : MonoBehaviour {
     public int eventNumber;
     public bool trigger;
     public AResources resources;
+    public int numberOfEvents;
 
     public Text title, description, effect;
 
@@ -39,7 +40,7 @@ public class eventsRead : MonoBehaviour {
     public void getRandomEvent()
     {
         reader = XmlReader.Create(new StringReader(text.text), settings);
-        int x = Random.Range(1, 21);
+        int x = Random.Range(1, numberOfEvents + 1);
         getToEvent(x);
         
         if (lastEvent.type == thisEvent.type)

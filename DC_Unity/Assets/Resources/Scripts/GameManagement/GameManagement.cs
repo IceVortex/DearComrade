@@ -159,6 +159,9 @@ public class GameManagement : MonoBehaviour {
                     approvalAftermath = -1 * (int)((res.attackingTroops - ai.res.troops) / 100);
 
                     // No resources lost / gained :(
+                    foodAftermath = 0;
+                    materialsAftermath = 0;
+                    moneyAftermath = 0;
 
                     //Adding result to logging system
                     LoggingSystem.Instance.attackResult = -1;
