@@ -357,7 +357,7 @@ public class AResources : MonoBehaviour
 
     public void trainTroops()
     {
-        if(food >= troopsFoodCost && buildingMaterials >= troopsMaterialsCost && money >= troopsMoneyCost && troops + 100 <= maximumTroops)
+        if(food >= troopsFoodCost && buildingMaterials >= troopsMaterialsCost && money >= troopsMoneyCost && troops + 100 + attackingTroops <= maximumTroops)
         {
             food -= troopsFoodCost;
             buildingMaterials -= troopsMaterialsCost;

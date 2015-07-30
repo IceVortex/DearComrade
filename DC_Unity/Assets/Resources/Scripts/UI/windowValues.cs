@@ -138,7 +138,7 @@ public class windowValues : MonoBehaviour {
         if (n == "Military Outpost")
         {
             bIcon.sprite = icons[11];
-            changeButtonSet(buttonSet[4]);
+            changeButtonSet(buttonSet[5]);
             bMax.text = "Maximum amount: 1";
         }
         if (n == "Food Territory")

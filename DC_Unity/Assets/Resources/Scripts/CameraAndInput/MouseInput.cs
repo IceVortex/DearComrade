@@ -61,6 +61,7 @@ public class MouseInput : MonoBehaviour {
 
     public void moveBuilding()
     {
+
         if (!winMove && !winComradery)
         {
             if (move)
@@ -101,6 +102,16 @@ public class MouseInput : MonoBehaviour {
         if (Input.GetKeyDown(keybindManager.instance.startMove))
         {
             moveBuilding();
+        }
+
+        if (Input.GetKeyDown(keybindManager.instance.automatedLinking))
+        {
+            resources.automateLinkingFarmAndFactory();
+        }
+
+        if (Input.GetKeyDown(keybindManager.instance.linkHouses))
+        {
+            automatedHouseLinkingTarget();
         }
 
         if (!comradery && !move && !winMove && !winComradery && !houseLinking)
@@ -155,12 +166,14 @@ public class MouseInput : MonoBehaviour {
                 if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
                 {
                     clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
+                    if(clickedOn.gameObject.GetComponent<IdManager>().res is PlayerResources)
+                    { 
+                        if(comrade1 && !comrade2)
+                            comrade2 = clickedOn.gameObject;
 
-                    if(comrade1 && !comrade2)
-                        comrade2 = clickedOn.gameObject;
-
-                    if (!comrade1)
-                        comrade1 = clickedOn.gameObject;
+                        if (!comrade1)
+                            comrade1 = clickedOn.gameObject;
+                    }
                 }
                 else
                 {
@@ -223,10 +236,11 @@ public class MouseInput : MonoBehaviour {
             {
                 if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
                 {
-                    clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
 
-                    if (comrade1 && !comrade2)
-                        comrade2 = clickedOn.gameObject;
+                    clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
+                    if (clickedOn.gameObject.GetComponent<IdManager>().res is PlayerResources)
+                        if (comrade1 && !comrade2)
+                            comrade2 = clickedOn.gameObject;
                 }
                 else
                 {
@@ -289,7 +303,8 @@ public class MouseInput : MonoBehaviour {
                     if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
                     {
                         clickedOn = Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition));
-                        buildingToMove = clickedOn.gameObject;
+                        if (clickedOn.gameObject.GetComponent<IdManager>().res is PlayerResources)
+                            buildingToMove = clickedOn.gameObject;
                     }
                     else
                     {

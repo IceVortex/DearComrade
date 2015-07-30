@@ -15,7 +15,7 @@ public class keybindManager : MonoBehaviour {
         }
     }
 
-    public KeyCode returnToEB, goToEnemyEB ,startComradery, startMove;
+    public KeyCode returnToEB, goToEnemyEB ,startComradery, startMove, automatedLinking, linkHouses;
 
     void Awake()
     {
@@ -28,6 +28,8 @@ public class keybindManager : MonoBehaviour {
         goToEnemyEB = KeyCode.W;
         startComradery = KeyCode.E;
         startMove = KeyCode.R;
+        automatedLinking = KeyCode.S;
+        linkHouses = KeyCode.D;
     }
 
    

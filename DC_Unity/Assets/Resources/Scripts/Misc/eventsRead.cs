@@ -140,24 +140,47 @@ public class eventsRead : MonoBehaviour {
     {
         if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "food")
         {
-            resources.food -= LoggingSystem.Instance.foodGained;
-            LoggingSystem.Instance.foodGained = 0;
+            if (resources is PlayerResources)
+            {
+                resources.food -= LoggingSystem.Instance.foodGained;
+                LoggingSystem.Instance.foodGained = 0;
+            }
+            else
+            {
+                resources.food -= resources.resourcePerTurn("food");
+            }
         }
 
         if (GetComponent<eventsRead>().thisEvent.type == "stalemate" && GetComponent<eventsRead>().thisEvent.resource == "all")
         {
-            resources.food -= LoggingSystem.Instance.foodGained;
-            resources.buildingMaterials -= LoggingSystem.Instance.materialsGained;
-            resources.money -= LoggingSystem.Instance.moneyGained;
-            LoggingSystem.Instance.foodGained = 0;
-            LoggingSystem.Instance.materialsGained = 0;
-            LoggingSystem.Instance.moneyGained = 0;
+            if (resources is PlayerResources)
+            {
+                resources.food -= LoggingSystem.Instance.foodGained;
+                resources.buildingMaterials -= LoggingSystem.Instance.materialsGained;
+                resources.money -= LoggingSystem.Instance.moneyGained;
+                LoggingSystem.Instance.foodGained = 0;
+                LoggingSystem.Instance.materialsGained = 0;
+                LoggingSystem.Instance.moneyGained = 0;
+            }
+            else
+            {
+                resources.food -= resources.resourcePerTurn("food");
+                resources.buildingMaterials -= resources.resourcePerTurn("materials");
+                resources.money -= resources.resourcePerTurn("money");
+            }
         }
 
         if (GetComponent<eventsRead>().thisEvent.type == "halved")
         {
-            resources.food -= LoggingSystem.Instance.foodGained / 2;
-            LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained / 2;
+            if (resources is PlayerResources)
+            {
+                resources.food -= LoggingSystem.Instance.foodGained / 2;
+                LoggingSystem.Instance.foodGained = LoggingSystem.Instance.foodGained / 2;
+            }
+            else
+            {
+                resources.food -= resources.resourcePerTurn("food") / 2;
+            }
         }
     }
 
