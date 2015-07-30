@@ -17,7 +17,7 @@ public class AIManagement : MonoBehaviour {
     private int rand, researchCount = 1;
     private bool savingUp = false, linkedToUnique, linkToMilitaryOutpost;
     private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex, militaryIndex;
-    private int playerTroopsLost, aiTroopsLost, resourcesAftermath, approvalAftermath;
+    private int playerTroopsLost, aiTroopsLost, foodAftermath, materialsAftermath, moneyAftermath, approvalAftermath;
     private int attackingCD;
     private int numberOfTroopsToConvert;
 
@@ -655,7 +655,52 @@ public class AIManagement : MonoBehaviour {
                     approvalAftermath = (int)((res.attackingTroops - player.res.troops) / 50);
 
                     // Resources gained or lost for both players
-                    resourcesAftermath = (int)(res.attackingTroops - player.res.troops) / 5;
+                    foodAftermath = (int)(res.attackingTroops - player.res.troops) / 5;
+                    materialsAftermath = (int)(res.attackingTroops - player.res.troops) / 5;
+                    moneyAftermath = (int)(res.attackingTroops - player.res.troops) / 5;
+
+                    // Updating the resources
+                    #region ...
+                    if (player.res.food >= foodAftermath)
+                    {
+                        player.res.food -= foodAftermath;
+                        res.food += foodAftermath;
+                    }
+                    else
+                    {
+                        res.food += player.res.food;
+                        player.res.food = 0;
+                    }
+
+                    if (player.res.buildingMaterials >= materialsAftermath)
+                    {
+                        player.res.buildingMaterials -= materialsAftermath;
+                        res.buildingMaterials += materialsAftermath;
+                    }
+                    else
+                    {
+                        res.buildingMaterials += player.res.buildingMaterials;
+                        player.res.buildingMaterials = 0;
+                    }
+
+                    if (player.res.money >= moneyAftermath)
+                    {
+                        player.res.money -= moneyAftermath;
+                        res.money += moneyAftermath;
+                    }
+                    else
+                    {
+                        res.food += player.res.food;
+                        player.res.food = 0;
+                    }
+                    #endregion
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.foodModDefense = foodAftermath;
+                    LoggingSystem.Instance.moneyModDefense = moneyAftermath;
+                    LoggingSystem.Instance.materialsModDefense = materialsAftermath;
+                    LoggingSystem.Instance.defenseResult = -1;
+
                 }
 
                 else // If I lose
@@ -664,53 +709,27 @@ public class AIManagement : MonoBehaviour {
                     approvalAftermath = -1 * (int)((res.attackingTroops - player.res.troops) / 100);
 
                     // No resources lost / gained :(
-                    resourcesAftermath = 0;
+                    foodAftermath = materialsAftermath = moneyAftermath = 0;
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.foodModDefense = foodAftermath;
+                    LoggingSystem.Instance.moneyModDefense = moneyAftermath;
+                    LoggingSystem.Instance.materialsModDefense = materialsAftermath;
+                    LoggingSystem.Instance.defenseResult = 1;
                 }
 
-                // Updating the resources
-                #region ...
-                if (player.res.food >= resourcesAftermath)
-                {
-                    player.res.food -= resourcesAftermath;
-                    res.food += resourcesAftermath;
-                }
-                else
-                {
-                    res.food += player.res.food;
-                    player.res.food = 0;
-                }
-
-                if (player.res.buildingMaterials >= resourcesAftermath)
-                {
-                    player.res.buildingMaterials -= resourcesAftermath;
-                    res.buildingMaterials += resourcesAftermath;
-                }
-                else
-                {
-                    res.buildingMaterials += player.res.buildingMaterials;
-                    player.res.buildingMaterials = 0;
-                }
-
-                if (player.res.money >= resourcesAftermath)
-                {
-                    player.res.money -= resourcesAftermath;
-                    res.money += resourcesAftermath;
-                }
-                else
-                {
-                    res.food += player.res.food;
-                    player.res.food = 0;
-                }
-                #endregion
 
                 // Updating the approval
                 res.approval = res.approval + approvalAftermath;
                 player.res.approval = player.res.approval - approvalAftermath;
+                LoggingSystem.Instance.approvalModDefense = approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - aiTroopsLost;
                 player.res.troops = player.res.troops - playerTroopsLost;
                 res.attackingTroops = 0;
+                LoggingSystem.Instance.troopsLostDefense = playerTroopsLost;
+                LoggingSystem.Instance.enemyTroopsLostDefense = aiTroopsLost;
             }
             else // He haz moar troops
             {
@@ -726,7 +745,56 @@ public class AIManagement : MonoBehaviour {
                     approvalAftermath = (int)((player.res.troops - res.attackingTroops) / 100);
 
                     // Resources gained or lost for both players
-                    resourcesAftermath = (int)(player.res.troops - res.attackingTroops) / 10;
+                    foodAftermath = (int)(player.res.troops - res.attackingTroops) / 10;
+                    materialsAftermath = (int)(player.res.troops - res.attackingTroops) / 10;
+                    moneyAftermath = (int)(player.res.troops - res.attackingTroops) / 10;
+
+
+                    // Updating the resources
+                    #region ...
+                    if (player.res.food >= foodAftermath)
+                    {
+                        player.res.food -= foodAftermath;
+                        res.food += foodAftermath;
+                    }
+                    else
+                    {
+                        res.food += player.res.food;
+                        foodAftermath = (int)player.res.food;
+                        player.res.food = 0;
+                    }
+
+                    if (player.res.buildingMaterials >= materialsAftermath)
+                    {
+                        player.res.buildingMaterials -= materialsAftermath;
+                        res.buildingMaterials += materialsAftermath;
+                    }
+                    else
+                    {
+                        res.buildingMaterials += player.res.buildingMaterials;
+                        materialsAftermath = (int)player.res.buildingMaterials;
+                        player.res.buildingMaterials = 0;
+                    }
+
+                    if (player.res.money >= moneyAftermath)
+                    {
+                        player.res.money -= moneyAftermath;
+                        res.money += moneyAftermath;
+                    }
+                    else
+                    {
+                        res.food += player.res.money;
+                        moneyAftermath = (int)player.res.money;
+                        player.res.money = 0;
+                    }
+                    #endregion
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.foodModDefense = foodAftermath;
+                    LoggingSystem.Instance.moneyModDefense = moneyAftermath;
+                    LoggingSystem.Instance.materialsModDefense = materialsAftermath;
+                    LoggingSystem.Instance.defenseResult = -1;
+
                 }
                 else // If I lose
                 {
@@ -734,53 +802,29 @@ public class AIManagement : MonoBehaviour {
                     approvalAftermath = -1 * (int)((player.res.troops - res.attackingTroops) / 100);
 
                     // No resources lost / gained :(
-                    resourcesAftermath = 0;
+                    foodAftermath = materialsAftermath = moneyAftermath = 0;
+
+
+                    //Adding result to logging system
+                    LoggingSystem.Instance.foodModDefense = foodAftermath;
+                    LoggingSystem.Instance.moneyModDefense = moneyAftermath;
+                    LoggingSystem.Instance.materialsModDefense = materialsAftermath;
+                    LoggingSystem.Instance.defenseResult = 1;
                 }
 
-                // Updating the resources
-                #region ...
-                if (player.res.food >= resourcesAftermath)
-                {
-                    player.res.food -= resourcesAftermath;
-                    res.food += resourcesAftermath;
-                }
-                else
-                {
-                    res.food += player.res.food;
-                    player.res.food = 0;
-                }
 
-                if (player.res.buildingMaterials >= resourcesAftermath)
-                {
-                    player.res.buildingMaterials -= resourcesAftermath;
-                    res.buildingMaterials += resourcesAftermath;
-                }
-                else
-                {
-                    res.buildingMaterials += player.res.buildingMaterials;
-                    player.res.buildingMaterials = 0;
-                }
-
-                if (player.res.money >= resourcesAftermath)
-                {
-                    player.res.money -= resourcesAftermath;
-                    res.money += resourcesAftermath;
-                }
-                else
-                {
-                    res.food += player.res.food;
-                    player.res.food = 0;
-                }
-                #endregion
 
                 // Updating the approval
                 res.approval = res.approval + approvalAftermath;
                 player.res.approval = player.res.approval - approvalAftermath;
+                LoggingSystem.Instance.approvalModDefense = approvalAftermath;
 
                 // Updating the troops
                 res.troops = res.troops + res.attackingTroops - playerTroopsLost;
                 player.res.troops = player.res.troops - aiTroopsLost;
                 res.attackingTroops = 0;
+                LoggingSystem.Instance.troopsLostDefense = playerTroopsLost;
+                LoggingSystem.Instance.enemyTroopsLostDefense = aiTroopsLost;
 
             }
         }

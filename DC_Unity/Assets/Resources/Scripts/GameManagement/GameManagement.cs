@@ -139,9 +139,9 @@ public class GameManagement : MonoBehaviour {
                     }
                     else
                     {
-                        res.food += ai.res.food;
+                        res.money += ai.res.money;
                         moneyAftermath = (int)ai.res.money;
-                        ai.res.food = 0;
+                        ai.res.money = 0;
                     }
                     #endregion
 
@@ -150,7 +150,9 @@ public class GameManagement : MonoBehaviour {
                     LoggingSystem.Instance.foodGained += foodAftermath;
                     LoggingSystem.Instance.materialsGained += materialsAftermath;
                     LoggingSystem.Instance.moneyGained += moneyAftermath;
-                    LoggingSystem.Instance.resourcesModAttack = foodAftermath; // TO MODIFY!!!
+                    LoggingSystem.Instance.foodModAttack = foodAftermath;
+                    LoggingSystem.Instance.moneyModAttack = moneyAftermath;
+                    LoggingSystem.Instance.materialsModAttack = materialsAftermath;
                 }
 
                 else // If I lose
@@ -244,7 +246,9 @@ public class GameManagement : MonoBehaviour {
                     LoggingSystem.Instance.foodGained += foodAftermath;
                     LoggingSystem.Instance.materialsGained += materialsAftermath;
                     LoggingSystem.Instance.moneyGained += moneyAftermath;
-                    LoggingSystem.Instance.resourcesModAttack = foodAftermath; // TO MODIFY!!!
+                    LoggingSystem.Instance.foodModAttack = foodAftermath;
+                    LoggingSystem.Instance.moneyModAttack = moneyAftermath;
+                    LoggingSystem.Instance.materialsModAttack = materialsAftermath;
                 }
 
                 else // If I lose

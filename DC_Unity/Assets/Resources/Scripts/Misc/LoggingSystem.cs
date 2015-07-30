@@ -7,7 +7,8 @@ public class LoggingSystem : MonoBehaviour
     private static LoggingSystem instance;
     public float foodGained, materialsGained, moneyGained, citizensGained, baseApprovalLost, approvalGained;
     public int territoryRecieved, approvalModAttack, approvalModDefense;
-    public int attackResult, defenseResult, troopsLostAttack, troopsLostDefense, enemyTroopsLostAttack, enemyTroopsLostDefense, resourcesModAttack, resourcesModDefense;
+    public int attackResult, defenseResult, troopsLostAttack, troopsLostDefense, enemyTroopsLostAttack,
+        enemyTroopsLostDefense, foodModAttack, materialsModAttack, moneyModAttack, foodModDefense, moneyModDefense, materialsModDefense;
 
     public static LoggingSystem Instance
     {
@@ -31,7 +32,11 @@ public class LoggingSystem : MonoBehaviour
         troopsLostDefense = 0;
         enemyTroopsLostAttack = 0;
         enemyTroopsLostDefense = 0;
-        resourcesModAttack = 0;
-        resourcesModDefense = 0;
+        foodModAttack = 0;
+        moneyModAttack = 0;
+        materialsModAttack = 0;
+        foodModDefense = 0;
+        materialsModDefense = 0;
+        moneyModDefense = 0;
     }
 }

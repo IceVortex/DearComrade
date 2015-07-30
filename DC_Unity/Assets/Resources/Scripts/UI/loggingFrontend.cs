@@ -38,13 +38,15 @@ public class loggingFrontend : MonoBehaviour {
 
         if (LoggingSystem.Instance.attackResult == 0)
         {
-            ArmyValues.text += "You did not attack this turn.";
+            ArmyValues.text += "You have not attacked this turn.";
         }
         if (LoggingSystem.Instance.attackResult == 1)
         {
             ArmyValues.text += "Your army attacked the enemy and won the battle. While you lost " + LoggingSystem.Instance.troopsLostAttack + " troops in the attack, ";
             ArmyValues.text += "your enemy also lost " + LoggingSystem.Instance.enemyTroopsLostAttack + " troops." + "\n";
-            ArmyValues.text += "You take " + LoggingSystem.Instance.resourcesModAttack + " resources from your enemy, and you gain " + LoggingSystem.Instance.approvalModAttack + " approval as well." + '\n';
+            ArmyValues.text += "You take " + LoggingSystem.Instance.foodModAttack + " food, " 
+                + LoggingSystem.Instance.materialsModAttack + " materials and " 
+                + LoggingSystem.Instance.moneyModAttack + " money from your enemy, and you gain " + LoggingSystem.Instance.approvalModAttack + " approval while the enemy loses the same amount." + '\n';
 
         }
         if (LoggingSystem.Instance.attackResult == -1)
@@ -58,15 +60,22 @@ public class loggingFrontend : MonoBehaviour {
 
         if (LoggingSystem.Instance.defenseResult == 0)
         {
-            ArmyValues.text += "You were not attacked this turn.";
+            ArmyValues.text += "You have not been attacked this turn.";
         }
         if (LoggingSystem.Instance.defenseResult == 1)
         {
-            ArmyValues.text += "You managed to defend your territory!";
+            ArmyValues.text += "You were attacked by the enemy army and won the battle. You lost " + LoggingSystem.Instance.troopsLostDefense + " troops in the fight, ";
+            ArmyValues.text += "but enemy also lost " + LoggingSystem.Instance.enemyTroopsLostDefense + " troops." + "\n";
+            ArmyValues.text += "You gain " + LoggingSystem.Instance.approvalModDefense + " approval while the enemy loses the same amount." + '\n';
         }
         if (LoggingSystem.Instance.defenseResult == -1)
         {
-            ArmyValues.text += "You did not manage to defend your territory!";
+
+            ArmyValues.text += "Your territory was attacked by the enemy and you lost the battle. You lost " + LoggingSystem.Instance.troopsLostDefense + " troops in the fight, ";
+            ArmyValues.text += "while your enemy lost " + LoggingSystem.Instance.enemyTroopsLostDefense + " troops." + "\n";
+            ArmyValues.text += "You lose " + LoggingSystem.Instance.foodModDefense + " food, "
+                + LoggingSystem.Instance.materialsModDefense + " materials and "
+                + LoggingSystem.Instance.moneyModDefense + " money while your enemy gains " + LoggingSystem.Instance.approvalModDefense + " approval as well and you lose the same amount." + '\n';
         }
     }
 }
