@@ -19,6 +19,7 @@ public class AIManagement : MonoBehaviour {
     private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex, militaryIndex;
     private int playerTroopsLost, aiTroopsLost, resourcesAftermath, approvalAftermath;
     private int attackingCD;
+    private int numberOfTroopsToConvert;
 
     void Awake()
     {
@@ -174,14 +175,6 @@ public class AIManagement : MonoBehaviour {
                 rand = UnityEngine.Random.Range(1, res.numberOfBuildings<Farm>() + res.numberOfBuildings<Factory>() + 1);
                 i = 1;
 
-                // Ideally, number of max troops should be (turnIndex * 100) - 1000 
-                // [Only for turns >= 20]
-                // If this is not true and I can't link the house to an unique building
-                // I will link it to the military outpost, if available
-                linkToMilitaryOutpost = false;
-                if (res.maximumTroops <= (res.turnIndex * 100) - 1000 && res.turnIndex >= 20)
-                    linkToMilitaryOutpost = true;
-
                 // Looking for WTC, Educational Building, and Workplace
                 if (wtcIndex == 0)
                     wtcIndex = res.findBuilding<WTC>();
@@ -194,6 +187,13 @@ public class AIManagement : MonoBehaviour {
 
                 if (militaryIndex == 0)
                     militaryIndex = res.findBuilding<MilitaryOutpost>();
+
+                // Ideally, number of max troops should be (turnIndex * 100) - 1000 
+                // If this is not true and I can't link the house to an unique building
+                // I will link it to the military outpost, if available
+                linkToMilitaryOutpost = false;
+                if (res.maximumTroops <= (res.turnIndex * 100) - 1000 && militaryIndex != 0)
+                    linkToMilitaryOutpost = true;
 
                 // When I link a house to an unique building, this gets set to true.
                 linkedToUnique = false;
@@ -244,9 +244,13 @@ public class AIManagement : MonoBehaviour {
         res.trainTroops();
 
         // Attacking
-        if (attackingCD == 0)
-            attack();
-        else
+        if (attackingCD == 0 && res.troops > 100)
+        {
+            numberOfTroopsToConvert = (int)(res.troops / 200) * 100;
+            res.convertToAttackingTroops(numberOfTroopsToConvert);
+            attack(); 
+        }
+        else if(attackingCD > 0)
             attackingCD--;
 
         // End Turn - Carpe diem
