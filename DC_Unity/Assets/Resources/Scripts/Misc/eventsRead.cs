@@ -188,64 +188,73 @@ public class eventsRead : MonoBehaviour {
     {
         thisEvent.nr = eventNumber;
         float x = new float();
-        title.text = thisEvent.n;
-        description.text = thisEvent.description;
+        if (resources is PlayerResources)
+        {
+            title.text = thisEvent.n;
+            description.text = thisEvent.description;
+        }
         if (thisEvent.type == "stalemate")
         {
-            if (thisEvent.resource == "all")
+            if (thisEvent.resource == "all" && resources is PlayerResources)
                 effect.text = "Effect: You don't gain any resources this turn.";
-            if (thisEvent.resource == "food")
+            if (thisEvent.resource == "food" && resources is PlayerResources)
                 effect.text = "Effect: You don't gain food this turn.";
             x = 0;
         }
         else if (thisEvent.type == "negative")
         {
-            if (thisEvent.resource != "all")
+            if (thisEvent.resource != "all" && resources is PlayerResources)
                 effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " " + thisEvent.resource + ".";
-            else
+            else if (resources is PlayerResources)
                 effect.text = "Effect: You lose " + thisEvent.modifier.ToString() + " of all resources.";
             x = -1;
         }
         else if (thisEvent.type == "positive")
         {
-            if(thisEvent.resource != "all")
+            if (thisEvent.resource != "all" && resources is PlayerResources)
                 effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " " + thisEvent.resource + ".";
-            else
+            else if (resources is PlayerResources)
                 effect.text = "Effect: You gain " + thisEvent.modifier.ToString() + " of all resources.";
             x = 1;
         }
         else if (thisEvent.type == "halved")
         {
             x = 0.5f;
-            effect.text = "Effect: You gain only half of your normal food income.";
+            if (resources is PlayerResources)
+                effect.text = "Effect: You gain only half of your normal food income.";
         }
 
         if (thisEvent.resource == "approval")
         {
-            LoggingSystem.Instance.approvalGained += x * thisEvent.modifier;
+            if (resources is PlayerResources)
+                LoggingSystem.Instance.approvalGained += x * thisEvent.modifier;
             resources.approval += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "food" || thisEvent.resource == "all")
         {
-            LoggingSystem.Instance.foodGained += x * thisEvent.modifier;
+            if (resources is PlayerResources)
+                LoggingSystem.Instance.foodGained += x * thisEvent.modifier;
             resources.food += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "money" || thisEvent.resource == "all")
         {
-            LoggingSystem.Instance.moneyGained += x * thisEvent.modifier;
+             if (resources is PlayerResources)
+                LoggingSystem.Instance.moneyGained += x * thisEvent.modifier;
             resources.money += x * thisEvent.modifier;
         }
 
         if (thisEvent.resource == "materials" || thisEvent.resource == "all")
         {
-            LoggingSystem.Instance.materialsGained += x * thisEvent.modifier;
+             if (resources is PlayerResources)
+                LoggingSystem.Instance.materialsGained += x * thisEvent.modifier;
             resources.buildingMaterials += x * thisEvent.modifier;
         }
         if (thisEvent.resource == "citizens")
         {
-            LoggingSystem.Instance.citizensGained += x * thisEvent.modifier;
+            if (resources is PlayerResources)
+                LoggingSystem.Instance.citizensGained += x * thisEvent.modifier;
             resources.citizens += x * thisEvent.modifier;
         }
 
