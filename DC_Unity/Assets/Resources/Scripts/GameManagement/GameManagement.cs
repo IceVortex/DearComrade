@@ -12,11 +12,11 @@ public class GameManagement : MonoBehaviour {
     public AResources res;
     public armyFrontEnd afe;
     public statistics stats;
-    eventsRead playerEvents;
+    public eventsRead playerEvents;
     public fadeToEndScreen lose, win;
     private int randNr;
     private int playerTroopsLost, enemyTroopsLost;
-    private int resourcesAftermath, approvalAftermath;
+    private int foodAftermath, materialsAftermath, moneyAftermath, approvalAftermath;
 
     void Awake()
     {
@@ -98,59 +98,64 @@ public class GameManagement : MonoBehaviour {
 
                 if(randNr <= 80 || ai.res.troops == 0) // I win
                 {
-                    // Approval gained or lost for both players
+                    // Approval gained by player and lost by Ai
                     approvalAftermath = (int)((res.attackingTroops - ai.res.troops) / 50);
 
-                    // Resources gained or lost for both players
-                    resourcesAftermath = (int)(res.attackingTroops - ai.res.troops) / 5;
+                    // Resources gained by player and lost by Ai
+                    foodAftermath = (int)(res.attackingTroops - ai.res.troops) / 5;
+                    materialsAftermath = (int)(res.attackingTroops - ai.res.troops) / 5;
+                    moneyAftermath = (int)(res.attackingTroops - ai.res.troops) / 5;
 
                     // Updating the resources
                     #region ...
-                    if (ai.res.food >= resourcesAftermath)
+                    if (ai.res.food >= foodAftermath)
                     {
-                        ai.res.food -= resourcesAftermath;
-                        res.food += resourcesAftermath;
+                        ai.res.food -= foodAftermath;
+                        res.food += foodAftermath;
                     }
                     else
                     {
                         res.food += ai.res.food;
+                        foodAftermath = (int)ai.res.food;
                         ai.res.food = 0;
                     }
 
-                    if (ai.res.buildingMaterials >= resourcesAftermath)
+                    if (ai.res.buildingMaterials >= materialsAftermath)
                     {
-                        ai.res.buildingMaterials -= resourcesAftermath;
-                        res.buildingMaterials += resourcesAftermath;
+                        ai.res.buildingMaterials -= materialsAftermath;
+                        res.buildingMaterials += materialsAftermath;
                     }
                     else
                     {
                         res.buildingMaterials += ai.res.buildingMaterials;
+                        materialsAftermath = (int)ai.res.buildingMaterials;
                         ai.res.buildingMaterials = 0;
                     }
 
-                    if (ai.res.money >= resourcesAftermath)
+                    if (ai.res.money >= moneyAftermath)
                     {
-                        ai.res.money -= resourcesAftermath;
-                        res.money += resourcesAftermath;
+                        ai.res.money -= moneyAftermath;
+                        res.money += moneyAftermath;
                     }
                     else
                     {
                         res.food += ai.res.food;
+                        moneyAftermath = (int)ai.res.money;
                         ai.res.food = 0;
                     }
                     #endregion
 
                     //Adding result to logging system
                     LoggingSystem.Instance.attackResult = 1;
-                    LoggingSystem.Instance.foodGained += resourcesAftermath;
-                    LoggingSystem.Instance.materialsGained += resourcesAftermath;
-                    LoggingSystem.Instance.moneyGained += resourcesAftermath;
-                    LoggingSystem.Instance.resourcesModAttack = resourcesAftermath;
+                    LoggingSystem.Instance.foodGained += foodAftermath;
+                    LoggingSystem.Instance.materialsGained += materialsAftermath;
+                    LoggingSystem.Instance.moneyGained += moneyAftermath;
+                    LoggingSystem.Instance.resourcesModAttack = foodAftermath; // TO MODIFY!!!
                 }
 
                 else // If I lose
                 {
-                    // Approval gained or lost for both players
+                    // Approval lost by player and gained by Ai
                     approvalAftermath = -1 * (int)((res.attackingTroops - ai.res.troops) / 100);
 
                     // No resources lost / gained :(
@@ -176,68 +181,73 @@ public class GameManagement : MonoBehaviour {
             {
 
                 randNr = Random.Range(1, 101);
+
                 // Troops lost for both players
                 playerTroopsLost = (int)((res.attackingTroops / 4) * Random.Range(100, 151) / 100);
                 enemyTroopsLost = (int)((ai.res.troops / 4) * Random.Range(50, 151) / 100);
 
-                // Approval gained or lost for both players
-                approvalAftermath = (int)((res.attackingTroops - ai.res.troops) / 100);
 
                 if (randNr <= 20) // I win
                 {
-                
+                    // Approval gained by player and lost by AI
+                    approvalAftermath = (int)((ai.res.troops - res.attackingTroops) / 100);
 
                     // Resources gained or lost for both players
-                    resourcesAftermath = (int)(res.attackingTroops - ai.res.troops) / 10;
+                    foodAftermath = (int)(ai.res.troops - res.attackingTroops) / 10;
+                    materialsAftermath = (int)(ai.res.troops - res.attackingTroops) / 10;
+                    moneyAftermath = (int)(ai.res.troops - res.attackingTroops) / 10;
 
                     // Updating the resources
                     #region ...
-                    if (ai.res.food >= resourcesAftermath)
+                    if (ai.res.food >= foodAftermath)
                     {
-                        ai.res.food -= resourcesAftermath;
-                        res.food += resourcesAftermath;
+                        ai.res.food -= foodAftermath;
+                        res.food += foodAftermath;
                     }
                     else
                     {
                         res.food += ai.res.food;
+                        foodAftermath = (int)ai.res.food;
                         ai.res.food = 0;
                     }
 
-                    if (ai.res.buildingMaterials >= resourcesAftermath)
+                    if (ai.res.buildingMaterials >= materialsAftermath)
                     {
-                        ai.res.buildingMaterials -= resourcesAftermath;
-                        res.buildingMaterials += resourcesAftermath;
+                        ai.res.buildingMaterials -= materialsAftermath;
+                        res.buildingMaterials += materialsAftermath;
                     }
                     else
                     {
                         res.buildingMaterials += ai.res.buildingMaterials;
+                        materialsAftermath = (int)ai.res.buildingMaterials;
                         ai.res.buildingMaterials = 0;
                     }
 
-                    if (ai.res.money >= resourcesAftermath)
+                    if (ai.res.money >= moneyAftermath)
                     {
-                        ai.res.money -= resourcesAftermath;
-                        res.money += resourcesAftermath;
+                        ai.res.money -= moneyAftermath;
+                        res.money += moneyAftermath;
                     }
                     else
                     {
                         res.food += ai.res.food;
+                        moneyAftermath = (int)ai.res.money;
                         ai.res.food = 0;
                     }
                     #endregion
 
                     //Adding result to logging system
                     LoggingSystem.Instance.attackResult = 1;
-                    LoggingSystem.Instance.foodGained += resourcesAftermath;
-                    LoggingSystem.Instance.materialsGained += resourcesAftermath;
-                    LoggingSystem.Instance.moneyGained += resourcesAftermath;
-                    LoggingSystem.Instance.resourcesModAttack = resourcesAftermath;
+                    LoggingSystem.Instance.foodGained += foodAftermath;
+                    LoggingSystem.Instance.materialsGained += materialsAftermath;
+                    LoggingSystem.Instance.moneyGained += moneyAftermath;
+                    LoggingSystem.Instance.resourcesModAttack = foodAftermath; // TO MODIFY!!!
                 }
 
                 else // If I lose
                 {
-                    // Approval gained or lost for both players
-                    approvalAftermath = -1 * approvalAftermath;
+                    // Approval gained by AI and lost by player
+                    approvalAftermath = -1 * (int)((ai.res.troops - res.attackingTroops) / 100);
 
                     // No resources lost / gained :(
 

@@ -8,7 +8,7 @@ public class fade : MonoBehaviour {
     public CanvasGroup cg, textZone, loggingScreen;
     public nextTurn n;
     public date d;
-    public AResources res;
+    public AResources res, aiRes;
 
     public void end()
     {
@@ -66,6 +66,7 @@ public class fade : MonoBehaviour {
         // Updating the current date and turn index
         d.updateDate();
         res.turnIndex++;
+        aiRes.turnIndex++;
 
         startTime = Time.time;
         fadeTo1 = true;

@@ -22,7 +22,7 @@ public class Laboratory : ABuilding
                                     "Each turn you receive a bonus of 0.01 gold per villager.",
                                     "The resources cost of buildings is reduced by 20%.",
                                     "The selling rate of resources at the World Trade Center is increased by 20%.", 
-                                    "The maximum number of homeless citizens is increased to 300.",
+                                    "The number of citizens you generate each turn is increased by 100.",
                                     "The cost of organised events is reduced by 20%.",
                                     "The maximum approval gained from triggered events (Public speech and Festival) is increased by 7.",
                                     "The approval gained from the “Increased food ratio” is increased by 0.025 per food exchanged."};
@@ -33,7 +33,7 @@ public class Laboratory : ABuilding
     {
         name = "Laboratory";
         shortDescription = "Laboratories let you make researches. They provide points which you can assign to a particular research.";
-        longDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " months, which you can assign to a particular research.";
+        longDescription = "Laboratories let you make researches. They provide 1 research point every " + researchPointInterval + " turns, which you can assign to a particular research.";
         flavorText = "Jet fuel can't melt steel beams.";
         foodCost = 0;
         moneyCost = 75;
@@ -138,7 +138,7 @@ public class Laboratory : ABuilding
     public void researchShelters()
     {
         res.researchPoints--;
-        res.maxHomelessCitizens += 200;
+        res.numberOfCitizensPerTurn += 100;
         res.researchesMade++;
     }
 

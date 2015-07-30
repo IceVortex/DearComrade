@@ -170,7 +170,7 @@ public class eventsRead : MonoBehaviour {
         if (thisEvent.type == "stalemate")
         {
             if (thisEvent.resource == "all")
-               effect.text = "Effect: You don't gain any resources this turn.";
+                effect.text = "Effect: You don't gain any resources this turn.";
             if (thisEvent.resource == "food")
                 effect.text = "Effect: You don't gain food this turn.";
             x = 0;

@@ -9,20 +9,22 @@ public class AIManagement : MonoBehaviour {
     public AResources res;
     public GameManagement player;
     public fadeToEndScreen lose, win;
+    public eventsRead aiEvents;
     private Stack<ABuilding> buildingsList = new Stack<ABuilding>();
     private ABuilding nextBuilding;
     private bool building;
     private int i, savingUpCD, savingUpCD_Constant = 2;
     private int rand, researchCount = 1;
-    private bool savingUp = false, linkedToUnique;
-    private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex;
+    private bool savingUp = false, linkedToUnique, linkToMilitaryOutpost;
+    private int wtcIndex, laboratoryIndex, educationalBuildingIndex, workplaceIndex, militaryIndex;
     private int playerTroopsLost, aiTroopsLost, resourcesAftermath, approvalAftermath;
+    private int attackingCD;
 
     void Awake()
     {
         res.createBuilding<ExecutiveBuilding>((GameObject)Resources.Load("Prefabs/AI Buildings/Executive Building"), new Vector3(20, 20, 0));
         gen.hub = GameObject.FindGameObjectWithTag("AIExecutive");
-
+        aiEvents = GetComponent<eventsRead>();
     }
 
     void Update()
@@ -40,6 +42,10 @@ public class AIManagement : MonoBehaviour {
 
     public void nextTurn()
     {
+
+        // Getting a random event and using it
+        aiEvents.getRandomEvent();
+        aiEvents.eventEffect();
 
         // If I am not saving up, I will look for something to save up for, therefore, I will check dem thresholds
         if (!savingUp && savingUpCD == 0)
@@ -168,6 +174,14 @@ public class AIManagement : MonoBehaviour {
                 rand = UnityEngine.Random.Range(1, res.numberOfBuildings<Farm>() + res.numberOfBuildings<Factory>() + 1);
                 i = 1;
 
+                // Ideally, number of max troops should be (turnIndex * 100) - 1000 
+                // [Only for turns >= 20]
+                // If this is not true and I can't link the house to an unique building
+                // I will link it to the military outpost, if available
+                linkToMilitaryOutpost = false;
+                if (res.maximumTroops <= (res.turnIndex * 100) - 1000 && res.turnIndex >= 20)
+                    linkToMilitaryOutpost = true;
+
                 // Looking for WTC, Educational Building, and Workplace
                 if (wtcIndex == 0)
                     wtcIndex = res.findBuilding<WTC>();
@@ -177,6 +191,9 @@ public class AIManagement : MonoBehaviour {
 
                 if (workplaceIndex == 0)
                     workplaceIndex = res.findBuilding<Workplace>();
+
+                if (militaryIndex == 0)
+                    militaryIndex = res.findBuilding<MilitaryOutpost>();
 
                 // When I link a house to an unique building, this gets set to true.
                 linkedToUnique = false;
@@ -200,7 +217,12 @@ public class AIManagement : MonoBehaviour {
                     res.linkBuildings(b.listIndex, workplaceIndex);
                     b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(res.buildings[workplaceIndex].sceneBuilding);
                 }
-                else if(!linkedToUnique)
+                else if(!linkedToUnique && linkToMilitaryOutpost)
+                {
+                    res.linkBuildings(b.listIndex, militaryIndex);
+                    b.sceneBuilding.GetComponent<lineRendererFunctionality>().updateTarget(res.buildings[militaryIndex].sceneBuilding);
+                }
+                else if(!linkedToUnique && !linkToMilitaryOutpost)
                     foreach (ABuilding build in res.buildings)
                     {
                         if ((build is Farm || build is Factory) && i == rand)
@@ -219,9 +241,13 @@ public class AIManagement : MonoBehaviour {
         }
 
         // Buying Troops
+        res.trainTroops();
 
         // Attacking
-        attack();
+        if (attackingCD == 0)
+            attack();
+        else
+            attackingCD--;
 
         // End Turn - Carpe diem
         foreach (ABuilding building in res.buildings)
@@ -552,52 +578,53 @@ public class AIManagement : MonoBehaviour {
 
         if (researchCount == 4)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchSpaceConservation();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchShelters();
             researchCount++;
             return;
         }
 
         if (researchCount == 5)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchFertility();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchSpaceConservation();
             researchCount++;
             return;
         }
 
         if (researchCount == 6)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchIndustrialRevolution();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchFertility();
             researchCount++;
             return;
         }
 
         if (researchCount == 7)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchSocialGatherings();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchIndustrialRevolution();
             researchCount++;
             return;
         }
 
         if (researchCount == 8)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchOratory();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchSocialGatherings();
             researchCount++;
             return;
         }
 
         if (researchCount == 9)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchFoodFeast();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchOratory();
             researchCount++;
             return;
         }
 
         if (researchCount == 10)
         {
-            ((Laboratory)res.buildings[laboratoryIndex]).researchShelters();
+            ((Laboratory)res.buildings[laboratoryIndex]).researchFoodFeast();
             researchCount++;
             return;
         }
+
         return;
     }
     #endregion
@@ -609,6 +636,8 @@ public class AIManagement : MonoBehaviour {
         // More than 0 troops => I am attacking
         if (res.attackingTroops > 0)
         {
+            attackingCD = (int)UnityEngine.Random.Range(3, 6);  
+            
             // I haz more troops
             if (res.attackingTroops >= player.res.troops)
             {

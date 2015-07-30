@@ -35,10 +35,13 @@ public class ExecutiveBuilding : ABuilding
             cdFoodRatio--;
 
         res.money += res.goldPerTurn * res.citizens * (res.taxRate / 100);
+
         if(res is PlayerResources)
-        LoggingSystem.Instance.moneyGained += res.goldPerTurn * res.citizens * (res.taxRate / 100);
+            LoggingSystem.Instance.moneyGained += res.goldPerTurn * res.citizens * (res.taxRate / 100);
+
         if (res.citizens - res.maximumCitizens < res.maxHomelessCitizens)
-            res.citizens += 100;
+            res.citizens += res.numberOfCitizensPerTurn;
+
         res.approval -= res.flatApproval * (res.approvalDecayRate / 100);
 
         //Log the citizens, money and approval gained/lost

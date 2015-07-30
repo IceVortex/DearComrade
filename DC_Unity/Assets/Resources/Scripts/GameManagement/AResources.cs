@@ -15,8 +15,9 @@ public class AResources : MonoBehaviour
     // Tax Rate
     public float taxRate = 100;
 
-    // Maximum number of homeless citizens you can have.
+    // Maximum number of homeless citizens you can have and the number of citizens you generate each turn.
     public float maxHomelessCitizens = 200;
+    public float numberOfCitizensPerTurn = 100;
 
     // Number of resources gained per turn or at initialization for farm, house and factories.
     public float farmFoodT = 10, houseCitizensT = 300, factoryMaterialsT = 10;
