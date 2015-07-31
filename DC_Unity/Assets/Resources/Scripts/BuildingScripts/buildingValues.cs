@@ -125,6 +125,8 @@ public class buildingValues
         if(building == "House")
         {
             House x = new House();
+            x.res = resources;
+            x.updateDescriptions();
             return x.shortDescription;
         }
 
@@ -226,6 +228,8 @@ public class buildingValues
         if (building == "House")
         {
             House x = new House();
+            x.res = resources;
+            x.updateDescriptions();
             return x.longDescription;
         }
 

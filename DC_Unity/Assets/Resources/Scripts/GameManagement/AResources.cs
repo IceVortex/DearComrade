@@ -394,6 +394,10 @@ public class AResources : MonoBehaviour
                 {
                     ((Factory)b).updateDescriptions();
                 }
+                if (b.name == "House")
+                {
+                    ((House)b).updateDescriptions();
+                }
             }
         }
 

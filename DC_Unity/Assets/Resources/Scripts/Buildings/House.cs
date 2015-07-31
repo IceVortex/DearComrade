@@ -22,10 +22,18 @@ public class House : ABuilding {
         base.Initialize(i, resource);
         housePower = res.houseCitizensT;
         res.maximumCitizens += housePower;
+        shortDescription = "Houses increase the maximum number of citizens you can have by " + res.houseCitizensT + ".";
+        longDescription = "Houses increase the maximum number of citizens you can have by " + res.houseCitizensT + ". Houses can also be linked to other houses for an additional 150 Citizens.";
     }
 
     public override void Effect()
     {
 
+    }
+
+    public void updateDescriptions()
+    {
+        shortDescription = "Houses increase the maximum number of citizens you can have by " + res.houseCitizensT + ".";
+        longDescription = "Houses increase the maximum number of citizens you can have by " + res.houseCitizensT + ". Houses can also be linked to other houses for an additional 150 Citizens.";
     }
 }
