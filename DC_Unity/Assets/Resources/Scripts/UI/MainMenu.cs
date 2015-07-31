@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour {
     public bool windowed, fade0, fade1, clickedStart;
     public float wantedTime, currentT, f0Start,f1Start;
 
-    public CanvasGroup introduction1, introduction2, button;
+    public CanvasGroup introduction1, introduction2, buttonSingle, buttonVSAI;
 
     public void Awake()
     {
@@ -79,14 +79,23 @@ public class MainMenu : MonoBehaviour {
         }
 	}
 
-    public void showButton()
+    public void showButton(int scene)
     {
-        button.alpha = 1;
-        button.interactable = true;
-        button.blocksRaycasts = true;
+        if (scene == 1)
+        {
+            buttonSingle.alpha = 1;
+            buttonSingle.interactable = true;
+            buttonSingle.blocksRaycasts = true;
+        }
+        if (scene == 2)
+        {
+            buttonVSAI.alpha = 1;
+            buttonVSAI.interactable = true;
+            buttonVSAI.blocksRaycasts = true;
+        }
     }
 
-    public void OnClickStart()
+    public void OnClickStart(string mode)
     {
         clickedStart = true;
         fadeToAlpha0(Time.time, mainMenu);
@@ -96,7 +105,10 @@ public class MainMenu : MonoBehaviour {
         mainMenu.gameObject.GetComponent<hide>().toggle();
         Invoke("showIntroduction", 3.0F);
 
-        showButton();
+        if (mode == "single")
+            showButton(1);
+        else
+            showButton(2);
     }
 
     public void showIntroduction()
@@ -184,9 +196,9 @@ public class MainMenu : MonoBehaviour {
         fade1 = true;
     }
 
-    public void load()
+    public void load(string sceneName)
     {
-        Application.LoadLevel("vs Ai Test Scene");
+        Application.LoadLevel(sceneName);
     }
 
     void Transition()

@@ -50,6 +50,18 @@ public class fadeDisclaimer : MonoBehaviour {
 
     }
 
+    public void skip()
+    {
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
+        fadeTo0 = false;
+        fadeTo1 = false;
+        cg.alpha = 0;
+        mm.alpha = 1;
+        toggleInteractable();
+        this.enabled = false;
+    }
+
     public void toggleInteractable()
     {
         mm.interactable = true;
@@ -57,6 +69,9 @@ public class fadeDisclaimer : MonoBehaviour {
     }
 
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
+            skip();
 
         t = (Time.time - startTime) / wantedTime;
 
