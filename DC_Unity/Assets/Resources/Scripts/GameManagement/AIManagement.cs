@@ -30,15 +30,7 @@ public class AIManagement : MonoBehaviour {
 
     void Update()
     {
-        if (res.approval >= 100f && res.troops >= 3000 && !win.fadeTo1)
-        {
-            lose.startFadeTo1();
 
-        }
-        if (res.approval <= -100 && !lose.fadeTo1)
-        {
-            win.startFadeTo1();
-        }
     }
 
     public void nextTurn()

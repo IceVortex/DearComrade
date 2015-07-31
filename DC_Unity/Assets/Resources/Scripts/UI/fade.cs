@@ -66,7 +66,8 @@ public class fade : MonoBehaviour {
         // Updating the current date and turn index
         d.updateDate();
         res.turnIndex++;
-        aiRes.turnIndex++;
+        if(aiRes)
+            aiRes.turnIndex++;
 
         startTime = Time.time;
         fadeTo1 = true;
