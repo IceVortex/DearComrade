@@ -85,7 +85,10 @@ public class MouseInput : MonoBehaviour {
 
     public void automatedHouseLinkingTarget()
     {
-        houseLinking = true;
+        if (!houseLinking)
+            houseLinking = true;
+        else
+            houseLinking = false;
 
         stopMoving();
         stopComradery();

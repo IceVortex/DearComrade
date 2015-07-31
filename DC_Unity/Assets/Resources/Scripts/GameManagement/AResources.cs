@@ -220,7 +220,7 @@ public class AResources : MonoBehaviour
             return true;
         else if (typeStart == "House" && typeDestination == "Workplace" && numberOfBuildingsLinkedTo<Workplace>() < 2)
             return true;
-        else if (typeStart == "House" && typeDestination == "PublicSpace" && numberOfBuildingsLinkedTo<PoliceStation>() < 2)
+        else if (typeStart == "House" && typeDestination == "PublicSpace" && numberOfBuildingsLinkedTo<PublicSpace>() < 2)
             return true;
         else if (typeStart == "House" && typeDestination == "MilitaryOutpost")
             return true;

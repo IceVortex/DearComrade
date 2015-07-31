@@ -131,12 +131,16 @@ public class buildingValues
         else if(building == "Farm")
         {
             Farm x = new Farm();
+            x.res = resources;
+            x.updateDescriptions();
             return x.shortDescription;
         }
 
         else if(building == "Factory")
         {
             Factory x = new Factory();
+            x.res = resources;
+            x.updateDescriptions();
             return x.shortDescription;
         }
 
@@ -228,12 +232,16 @@ public class buildingValues
         else if (building == "Farm")
         {
             Farm x = new Farm();
+            x.res = resources;
+            x.updateDescriptions();
             return x.longDescription;
         }
 
         else if (building == "Factory")
         {
             Factory x = new Factory();
+            x.res = resources;
+            x.updateDescriptions();
             return x.longDescription;
         }
 
