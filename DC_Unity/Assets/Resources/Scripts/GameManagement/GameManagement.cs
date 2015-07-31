@@ -27,14 +27,27 @@ public class GameManagement : MonoBehaviour {
 
     void Update()
     {
-        if (res.approval >= 100f && res.troops >= 3000 && !win.fadeTo1)
+        if(ai)
         {
-            win.startFadeTo1();
-
+            if ((res.approval >= 100f || ai.res.approval <= -100) && !win.fadeTo1)
+            {
+                win.startFadeTo1();
+            }
+            if ((res.approval <= -100 || ai.res.approval >= 100) && !lose.fadeTo1)
+            {
+                lose.startFadeTo1();
+            }
         }
-        if (res.approval <= -100 && !lose.fadeTo1)
+        else
         {
-            lose.startFadeTo1();
+            if (res.approval >= 100f && res.troops >= 3000 && !win.fadeTo1)
+            {
+                win.startFadeTo1();
+            }
+            if (res.approval <= -100 && !lose.fadeTo1)
+            {
+                lose.startFadeTo1();
+            }
         }
     }
 
@@ -48,7 +61,8 @@ public class GameManagement : MonoBehaviour {
         playerEvents.eventEffect();
 
         // Starting the AI's turn
-        ai.nextTurn();
+        if(ai)
+            ai.nextTurn();
 
         // Attacking the enemy
         attack();
