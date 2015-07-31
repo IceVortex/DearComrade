@@ -56,17 +56,6 @@ public class GameManagement : MonoBehaviour {
         // Reseting the logging screen
         LoggingSystem.Instance.reset();
 
-        // Getting a random event and using it
-        playerEvents.getRandomEvent();
-        playerEvents.eventEffect();
-
-        // Starting the AI's turn
-        if(ai)
-            ai.nextTurn();
-
-        // Attacking the enemy
-        attack();
-
         // Picking up the resources from the buildings and links
         foreach (ABuilding building in res.buildings)
         {
@@ -81,8 +70,19 @@ public class GameManagement : MonoBehaviour {
         // Conquering territories
         conquerTerritories();
 
+        // Getting a random event and using it
+        playerEvents.getRandomEvent();
+        playerEvents.eventEffect();
+
+        // Attacking the enemy
+        attack();
+
         // Fixing resources if any discrepancy is detected
         refreshResources();
+
+        // Starting the AI's turn
+        if (ai)
+            ai.nextTurn();
 
         // Displaying the log
         loggingFrontEnd.updateValues();
