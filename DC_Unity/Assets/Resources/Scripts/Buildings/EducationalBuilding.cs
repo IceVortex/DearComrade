@@ -8,7 +8,7 @@ public class EducationalBuilding : ABuilding
     {
         name = "Educational Building";
         shortDescription = "Educational Buildings increase your approval by 10 and decrease your approval decay rate by 10%.";
-        longDescription = "Educational Buildings are vital to the development of your country since they educate the children. These increase your approval by 10 and decrease your approval decay rate by 10%. Linking a house to the educational buildings reduces the cost of constructing buildings by 15%. You can only link 2 houses to this building.";
+        longDescription = "Educational Buildings are used to train the future workforce of the country. They increase your approval by 10 and decrease your approval decay rate by 10%. Linking a house to them reduces building costs by 15%. You can only link 2 houses to this building.";
         flavorText = "You need to educate yourself so you won’t hate yourself, ‘cause being a fool is bad for yo’ health.";
         foodCost = 0;
         moneyCost = 140;

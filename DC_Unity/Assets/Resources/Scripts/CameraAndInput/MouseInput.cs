@@ -375,7 +375,10 @@ public class MouseInput : MonoBehaviour {
         }
         else if(houseLinking)
         {
+            resultCG.alpha = 1;
+
             result.text = "Click on the building you want to link your houses to.";
+
             if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
                 if (Physics2D.OverlapPoint(cam.ScreenToWorldPoint(Input.mousePosition)))
@@ -385,6 +388,8 @@ public class MouseInput : MonoBehaviour {
                     {
                         resources.automateLinkingHouse(clickedOn.gameObject);
                         houseLinking = false;
+                        if (resultCG.alpha != 0)
+                            Invoke("hideResult", 1.5F);
                     }
                 }
 
@@ -422,7 +427,7 @@ public class MouseInput : MonoBehaviour {
 
     void hideResult()
     {
-        if(!comradery && !move)
+        if(!comradery && !move && !houseLinking)
         { 
             result.text = "";
             resultCG.alpha = 0;

@@ -21,6 +21,8 @@ public class Farm : ABuilding
     {
         base.Initialize(i, resource);
         farmPower = res.farmFoodT;
+        shortDescription = "Food farms are used to generate" + res.farmFoodT + " food each turn.";
+        longDescription = "Food farms are used to generate " + res.farmFoodT + " food each turn. You can also link a house to a food farm and you will gain an additional 5 food each turn. This effect also applies if you link a food farm to a house.";
     }
 
     public override void Effect()
@@ -28,5 +30,11 @@ public class Farm : ABuilding
         res.food += farmPower;
         if (res is PlayerResources)
         LoggingSystem.Instance.foodGained += farmPower;
+    }
+
+    public void updateDescriptions()
+    {
+        shortDescription = "Food farms are used to generate" + res.farmFoodT + " food each turn.";
+        longDescription = "Food farms are used to generate " + res.farmFoodT + " food each turn. You can also link a house to a food farm and you will gain an additional 5 food each turn. This effect also applies if you link a food farm to a house.";
     }
 }

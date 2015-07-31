@@ -86,6 +86,7 @@ public class Laboratory : ABuilding
         }
         res.farmFoodT += 5;
         res.researchesMade++;
+        res.updateDescriptions("Farm");
     }
 
     public void researchIndustrialRevolution()
@@ -99,6 +100,7 @@ public class Laboratory : ABuilding
         }
         res.factoryMaterialsT += 5;
         res.researchesMade++;
+        res.updateDescriptions("Factory");
     }
 
     public void researchSpaceConservation()

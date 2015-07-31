@@ -12,8 +12,11 @@ public class armyFrontEnd : MonoBehaviour {
 
     public void toggleArmyButton()
     {
-        armyButton.interactable = true;
-        armyButton.blocksRaycasts = true;
+        if(Application.loadedLevelName == "VersusAI")
+        { 
+            armyButton.interactable = true;
+            armyButton.blocksRaycasts = true;
+        }
     }
 
     public void refreshDefensive()

@@ -379,4 +379,24 @@ public class AResources : MonoBehaviour
             attackingTroops += numberOfTroopsToConvert;
         }
     }
+
+    public void updateDescriptions(string building)
+    {
+        foreach (ABuilding b in buildings)
+        {
+            if (b.name == building)
+            {
+                if (b.name == "Farm")
+                {
+                    ((Farm)b).updateDescriptions();
+                }
+                else if (b.name == "Factory")
+                {
+                    ((Factory)b).updateDescriptions();
+                }
+            }
+        }
+
+    }
+
 }

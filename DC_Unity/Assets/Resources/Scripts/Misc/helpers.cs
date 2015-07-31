@@ -19,6 +19,10 @@ public class helpers : MonoBehaviour {
     public Text title, description;
 
 	void Start () {
+
+        if (Application.loadedLevelName == "VersusAI")
+            descriptionsList[0] = "Greetings! In the versus AI mode, your goal is to either get to 100 approval or make your enemy reach -100 approval. You should also make sure your approval doesn't reach -100 or your enemy's approval reaches 100, as you will lose instantly.";
+
         if (!PlayerPrefs.HasKey("helpersShowed") || PlayerPrefs.GetInt("helpersShowed") == 0)
         {
             GetComponent<hide>().toggle();

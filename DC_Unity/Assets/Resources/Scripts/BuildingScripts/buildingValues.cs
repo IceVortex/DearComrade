@@ -7,10 +7,6 @@ public class buildingValues
 {
     public AResources resources;
 
-    public buildingValues()
-    {
-    }
-
     public void res(AResources resource)
     {
         resources = resource;

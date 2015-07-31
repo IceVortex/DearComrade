@@ -21,6 +21,8 @@ public class Factory : ABuilding
     {
         base.Initialize(i, resource);
         factoryPower = res.factoryMaterialsT;
+        shortDescription = "Factories are used to generate" + res.factoryMaterialsT + " materials each turn.";
+        longDescription = "Factories are used to generate" + res.factoryMaterialsT + " materials each turn. You can also link a house to a factory and you will gain an additional 5 materials each turn. The effect also applies if you link a factory to a house.";
     }
 
     public override void Effect()
@@ -28,5 +30,11 @@ public class Factory : ABuilding
         res.buildingMaterials += factoryPower;
         if (res is PlayerResources)
         LoggingSystem.Instance.materialsGained += factoryPower;
+    }
+
+    public void updateDescriptions()
+    {
+        shortDescription = "Factories are used to generate" + res.factoryMaterialsT + " materials each turn.";
+        longDescription = "Factories are used to generate" + res.factoryMaterialsT + " materials each turn. You can also link a house to a factory and you will gain an additional 5 materials each turn. The effect also applies if you link a factory to a house.";
     }
 }
