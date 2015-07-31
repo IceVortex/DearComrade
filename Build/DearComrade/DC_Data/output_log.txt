@@ -1,0 +1,88 @@
+Initialize engine version: 5.1.2f1 (afd2369b692a)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: ATI Mobility Radeon HD 4500/5100 Series (ID=0x9553)
+    Vendor:   ATI
+    VRAM:     505 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.083 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1366x768 60Hz; virtual: 2732x768 at 0,0
+<RI> Initialized touch support.
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\IceVortex\Desktop\DearComrade\DC_Data\Managed\System.Xml.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: e50 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.468593 ms
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 2484.
+Total: 2.752094 ms (FindLiveObjects: 0.248239 ms CreateObjectMapping: 0.087256 ms MarkObjects: 2.334940 ms  DeleteObjects: 0.054593 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraControl.goToEnemyEB () [0x00000] in <filename unknown>:0 
+  at CameraControl.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 16.659550 ms
+
+Unloading 228 unused Assets to reduce memory usage. Loaded Objects now: 555.
+Total: 1.079280 ms (FindLiveObjects: 0.174513 ms CreateObjectMapping: 0.052260 ms MarkObjects: 0.691523 ms  DeleteObjects: 0.153516 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.848217 ms
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 2553.
+Total: 5.858349 ms (FindLiveObjects: 0.265503 ms CreateObjectMapping: 0.132518 ms MarkObjects: 5.390801 ms  DeleteObjects: 0.061593 ms)
+
